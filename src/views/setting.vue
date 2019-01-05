@@ -1,0 +1,15 @@
+<template>
+    <div>
+        setting view
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'setting'
+    }
+</script>
+
+<style lang="scss" scoped>
+
+</style>

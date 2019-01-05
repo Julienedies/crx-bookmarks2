@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "bookmarks2",
+  "description": "A chrome extension for managing bookmarks.",
+  "version": "0.1.0",
+  "options_page": "dist/index.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+  "permissions": [
+  	"tabs",
+  	"contextMenus",
+  	"downloads",  
+  	"storage",
+  	"bookmarks",
+  	"chrome://favicon/",
+    "\u003Call_urls\u003E",
+    "http://*/*",
+    "https://*/*",
+    "file:///*/*"
+  ],
+  
+  "background": {
+    "page": "background.html"
+  },
+  
+   "icons": {
+          "16": "assets/img/icon-bitty.png",
+          "48": "assets/img/icon-small.png",
+          "128": "assets/img/icon-large.png"
+  },
+  
+  "browser_action": {
+    "default_icon": "assets/img/icon-large.png",
+    "default_popup": "popup.html",
+    "default_title": "我的书签管理器"
+  }
+}

@@ -1,0 +1,31 @@
+# 系统创建文件
+Thumbs.db
+.DS_Store
+
+# IDE创建
+.idea/
+.settings/
+.project
+
+# 临时文件
+!.gitkeep
+.rbenv-version
+.rvmrc
+.tmp_*~
+*.log
+
+# 外部类库
+bower_components/
+node_modules/
+
+# 私有配置文件
+config.json
+
+# 通过源码构建生成
+dist/
+
+# 临时
+src/basic/
+src/vendor/
+assets/
+
