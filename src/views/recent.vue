@@ -1,6 +1,6 @@
 <template>
     <div>
-        <list v-bind:list="bookmarksArray"></list>
+        <list :bookmarkArray="bookmarksArray"></list>
     </div>
 </template>
 
@@ -13,7 +13,7 @@
     export default {
         name: 'recent',
         components: {
-            list
+            list,
         },
         data() {
             return {
@@ -26,16 +26,13 @@
         },
         methods: {
             async getData() {
-                let that = this
-                 const data = await bookmarks.getRecent(this.count)
+                this.bookmarksArray = await bookmarks.getRecent(this.count)
                     .then(data => {
                         console.log(data)
                         return data
-                        //that.bookmarks = data
                     }).catch(err => {
                     console.error(err)
                 })
-                this.bookmarksArray = data
             }
         }
     }

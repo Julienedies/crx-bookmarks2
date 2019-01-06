@@ -7,16 +7,19 @@ const api = {}
 
 const bookmarks = chrome.bookmarks
 
-for(let prop in bookmarks) {
+for (let prop in bookmarks) {
 
-    api[prop] = ( (prop => {
+    api[prop] = ((prop => {
 
-        return function(){
+        return function () {
 
             let args = Array.prototype.slice.call(arguments, 0)
 
-            return new Promise( (resolve, reject ) => {
-                let call = (data) => resolve(data)
+            return new Promise((resolve, reject) => {
+                let call = (data) => {
+                    console.log('chromeAPI => ', prop, data)
+                    resolve(data)
+                }
                 args.push(call)
                 bookmarks[prop].apply(bookmarks, args)
             })

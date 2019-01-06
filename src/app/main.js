@@ -14,13 +14,13 @@ import VueRouter from 'vue-router'
 Vue.use(Vuex)
 Vue.use(VueRouter)
 
-/*import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+/*import 'element-ui/lib/theme-chalk/index.css'
+import ElementUI from 'element-ui'
 Vue.use(ElementUI)*/
 
+/*import 'vuetify/dist/vuetify.min.css'
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-Vue.use(Vuetify)
+Vue.use(Vuetify)*/
 
 import { getFavicon } from '../filters/index'
 
@@ -29,7 +29,10 @@ import routes from './routes'
 import App from './App'
 
 const router = new VueRouter({
-    routes
+    routes,
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
 })
 
 Vue.filter('getFavicon', getFavicon)

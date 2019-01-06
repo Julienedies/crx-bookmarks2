@@ -11,35 +11,54 @@ import trash from '../views/trash'
 
 const node = () => import('../views/node')
 const setting = () => import('../views/setting')
+const search = () => import('../views/search')
 
 export default [
     {
+        name: '首页',
         path: '/home',
         component: home
     },
     {
+        name: '最近',
         path: '/recent',
         component: recent
     },
     {
-        path: '/node',
+        name: '目录',
+        path: '/node/:id',
+        _path: '/node/38',
         component: node
     },
     {
+        name: '回收站',
+        path: '/trash',
+        component: trash
+    },
+    {
+        name: '设置',
         path: '/setting',
         component: setting
     },
     {
-        path: '/trash',
-        component: trash
+        name: 'search',
+        path: '/search/:query',
+        component: search
+    },
+    {
+        path: '*',
+        redirect: {
+            path: '/node/38'
+        }
     }
 
 ]
 
+/*
 export const paths = [
-    'home',
-    'node',
-    'recent',
-    'trash',
-    'setting'
-]
+    ['/home', '首页'],
+    ['/node/1', '目录'],
+    ['/recent', '最近'],
+    ['/trash', '回收站'],
+    ['/setting', '设置']
+]*/

@@ -34,14 +34,14 @@ const output = {
 }
 
 const entry = {
-    'app': ['./app/main.js']
+    'main': ['./app/main.js']
 }
 
 const plugins = [
     new HtmlPlugin({
         template: 'app/index.html',
         filename: 'index.html',
-        chunks: ['runtime', 'vendors', 'common', 'app']
+        chunks: ['runtime', 'vendors', 'common', 'main']
     }),
 
     new VueLoaderPlugin(),
@@ -73,14 +73,14 @@ if (isProd) {  // 产品环境
 } else {
 
     // 添加热模块替换client端脚本
-    for(let i in entry){
+/*    for (let i in entry) {
         let arr = entry[i]
         arr = Array.isArray(arr) ? arr : [arr]
         arr.push('webpack-hot-middleware/client')
         entry[i] = arr
     }
 
-    plugins.push(new webpack.HotModuleReplacementPlugin())
+    plugins.push(new webpack.HotModuleReplacementPlugin())*/
 
     cssLoader = {
         loader: 'style-loader',

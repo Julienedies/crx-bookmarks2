@@ -21,18 +21,18 @@
   ],
   
   "background": {
-    "page": "background.html"
+    "page": "src/background.html"
   },
   
    "icons": {
-          "16": "assets/img/icon-bitty.png",
-          "48": "assets/img/icon-small.png",
-          "128": "assets/img/icon-large.png"
+          "16": "assets/img/bookmarks2.png",
+          "48": "assets/img/bookmarks2.png",
+          "128": "assets/img/bookmarks2.png"
   },
   
   "browser_action": {
-    "default_icon": "assets/img/icon-large.png",
-    "default_popup": "popup.html",
-    "default_title": "我的书签管理器"
+    "default_icon": "assets/img/bookmarks2.png",
+    "default_popup": "src/popup.html",
+    "default_title": "书签管理器"
   }
 }
