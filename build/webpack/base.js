@@ -52,25 +52,8 @@ module.exports = {
                     }
                 ]
             },
-/*            {
-                test: /\.html?$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {}
-                    },
-                    {
-                        loader: 'extract-loader',
-                        options: {}
-                    },
-                    {
-                        loader: 'html-loader',
-                        options: {}
-                    }
-                ]
-            },*/
             {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpg|gif|svg|woff2?|eot|ttf)$/,
                 use: [
                     {
                         loader: "file-loader",
@@ -83,7 +66,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(sa|sc)ss$/,
+                test: /\.(sa|sc|c)ss$/,
                 use: [
                     config.cssLoader,
                     {
@@ -95,19 +78,6 @@ module.exports = {
                         options: {
                             includePaths: ['']
                         }
-                    }
-                ]
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: 'style-loader',
-                        options: {}
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {}
                     }
                 ]
             }
