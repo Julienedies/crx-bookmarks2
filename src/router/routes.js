@@ -9,6 +9,7 @@ import home from '../views/home'
 import recent from '../views/recent'
 import trash from '../views/trash'
 
+const hot = () => import('../views/hot')
 const node = () => import('../views/node')
 const setting = () => import('../views/setting')
 const search = () => import('../views/search')
@@ -23,6 +24,11 @@ export default [
         name: '最近',
         path: '/recent',
         component: recent
+    },
+    {
+        name: '常用',
+        path: '/hot',
+        component: hot
     },
     {
         name: '目录',

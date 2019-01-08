@@ -1,10 +1,10 @@
 <template>
     <div class="field has-addons">
         <div class="control">
-            <input class="input" type="text" placeholder="" v-model.trim="query" @keyup.enter="search()">
+            <input class="input" type="text" placeholder="" v-model.trim="query" @keyup.enter="search()"/>
         </div>
         <div class="control">
-            <a class="button is-info" :click="search()">
+            <a class="button is-info" @click="search()">
                 Search
             </a>
         </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     export default {
         name: 'searchBar',
         data() {
@@ -19,16 +20,21 @@
                 query: ''
             }
         },
-        created() {
-            this.$nextTick( function() {
-                this.query = this.$route.params.query
-            })
+        mounted() {
+            console.log(this, this.$route.params.query)
+            this.query = this.$route.params.query
         },
         methods: {
             search() {
                 let query = this.query
                 query && this.$router.push({name: 'search', params: {query}})
             }
+        },
+        computed: {
+            // 使用对象展开运算符将此对象混入到外部对象中
+            ...mapState({
+
+            })
         }
     }
 </script>

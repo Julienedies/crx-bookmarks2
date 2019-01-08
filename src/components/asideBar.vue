@@ -1,7 +1,7 @@
 <template>
-    <div style="white-space: pre;">
+    <aside>
         <tree :tree="tree"></tree>
-    </div>
+    </aside>
 </template>
 
 <script>
@@ -46,6 +46,11 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    @import "../basic/src/basic.scss";
+
+    aside{
+        padding: 0 $gap $gap 0;
+    }
 
 </style>

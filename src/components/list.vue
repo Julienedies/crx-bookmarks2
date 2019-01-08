@@ -24,6 +24,8 @@
         data() {
             return {
                 options: [
+                    {text: '选择排序方式, 默认使用频率', value: ''},
+                    {text: '使用频率, 默认', value: 'hot'},
                     {text: 'title', value: 'title'},
                     {text: 'url', value: 'url'},
                     {text: '文件夹优先', value: 'children'},
@@ -41,5 +43,9 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "../basic/src/basic.scss";
 
+    ul{
+        padding: $gap 0;
+    }
 </style>

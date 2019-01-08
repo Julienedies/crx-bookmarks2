@@ -4,15 +4,13 @@
 
 import 'babel-polyfill'
 
+import '@fortawesome/fontawesome-free/css/all.css'
+
 import '../vendor/bulma/bulma.sass'
+import '../vendor/hover/scss/hover.scss'
 import './style.scss'
 
 import Vue from 'vue'
-import Vuex from 'vuex'
-import VueRouter from 'vue-router'
-
-Vue.use(Vuex)
-Vue.use(VueRouter)
 
 /*import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
@@ -22,27 +20,22 @@ Vue.use(ElementUI)*/
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)*/
 
+import router from '../router/index'
+import store from '../vuex/index'
+
 import { getFavicon } from '../filters/index'
 
-import routes from './routes'
+Vue.filter('getFavicon', getFavicon)
 
 import App from './App'
-
-const router = new VueRouter({
-    routes,
-    scrollBehavior (to, from, savedPosition) {
-        return { x: 0, y: 0 }
-    }
-})
-
-Vue.filter('getFavicon', getFavicon)
 
 console.log(process.env)
 
 new Vue({
     el: '#app',
-    render: h => h(App),
-    router
+    router,
+    store,
+    render: h => h(App)
 })
 
 

@@ -1,14 +1,20 @@
 <template>
     <div id="tool-bar">
-        <div v-if="paths">
-            <router-link v-for="path of paths" :to="`/node/${path.id}`" :key="path.id"> {{ path.title }} / </router-link>
+        <div class="a">
+
+            <div v-if="paths" id="paths">
+                <router-link v-for="path of paths" :to="`/node/${path.id}`" :key="path.id"> {{ path.title }} / </router-link>
+            </div>
+
+            <div class="select is-small">
+                <select>
+                    <option v-for="option of options" :value="option.value">{{option.text}}</option>
+                </select>
+            </div>
+
         </div>
-        <div class="select is-small is-rounded">
-            <select>
-                <option v-for="option of options" :value="option.value">{{option.text}}</option>
-            </select>
-        </div>
-        <span> 共{{ count }}项</span>
+
+        <div class="counter"> 共 {{ count }} 项</div>
     </div>
 </template>
 
@@ -29,9 +35,17 @@
 
     #tool-bar {
         @include flex-middle;
-        @include flex-right;
-        padding: 0 20px 10px 10px;
-        margin-bottom: 10px;
-        border-bottom: solid 1px #f0f0f0;
+        justify-content: space-between;
+        padding: 0 $gap2 $gap2 $gap2;
+        background: $baseColor2;
+        .a{
+            @include flex-middle;
+        }
+        #paths{
+            margin: 0 10*$gap 0 0;
+        }
+        .counter{
+            margin:0 5*$gap 0 0;
+        }
     }
 </style>

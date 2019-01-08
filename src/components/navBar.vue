@@ -1,18 +1,14 @@
 <template>
 
-
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <img src="../img/bookmarks2.png" width="30">
-            </a>
 
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
 
-                <router-link v-for="route of routes"  :to="route._path || route.path" :key="route.path" class="navbar-item">
+                <router-link v-for="route of routes" v-if="route.name!='search'"  :to="route._path || route.path" :key="route.path" class="navbar-item">
                     <span > {{ route.name }}</span>
                 </router-link>
 
@@ -29,7 +25,7 @@
 </template>
 
 <script>
-    import routes from '../app/routes'
+    import routes from '../router/routes'
     import searchBar from '../components/searchBar'
 
     export default {
