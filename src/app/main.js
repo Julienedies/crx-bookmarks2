@@ -23,9 +23,11 @@ Vue.use(Vuetify)*/
 import router from '../router/index'
 import store from '../vuex/index'
 
-import { getFavicon } from '../filters/index'
+import * as filters from '../filters/index'
+import * as directives from '../directives/index'
 
-Vue.filter('getFavicon', getFavicon)
+Vue.filter('getFavicon', filters.getFavicon)
+Vue.directive('toggle', directives.toggle)
 
 import App from './App'
 

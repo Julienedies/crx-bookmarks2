@@ -1,25 +1,17 @@
 <template>
 
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
+    <nav>
 
+        <div class="a">
+            <router-link v-for="route of routes" v-if="route.name!='search'"  :to="route._path || route.path" :key="route.path">
+                <span > {{ route.name }}</span>
+            </router-link>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-
-                <router-link v-for="route of routes" v-if="route.name!='search'"  :to="route._path || route.path" :key="route.path" class="navbar-item">
-                    <span > {{ route.name }}</span>
-                </router-link>
-
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <search-bar></search-bar>
-                </div>
-            </div>
+        <div class="b">
+            <search-bar></search-bar>
         </div>
+
     </nav>
 
 </template>
@@ -42,5 +34,20 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "../basic/src/basic";
+
+    nav{
+        @include flex-middle;
+        padding: 3*$gap  4*$gap;
+        background: #fff;
+        border-bottom: solid 1px #dfdddd;
+
+        .a{
+            @include flex-1;
+            @include flex-middle;
+            justify-content: space-around;
+        }
+
+    }
 
 </style>

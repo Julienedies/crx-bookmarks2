@@ -1,7 +1,7 @@
 <template>
     <div id="tool-bar">
-        <div class="a">
 
+        <div class="a">
             <div v-if="paths" id="paths">
                 <router-link v-for="path of paths" :to="`/node/${path.id}`" :key="path.id"> {{ path.title }} / </router-link>
             </div>
@@ -11,10 +11,10 @@
                     <option v-for="option of options" :value="option.value">{{option.text}}</option>
                 </select>
             </div>
-
         </div>
 
         <div class="counter"> 共 {{ count }} 项</div>
+
     </div>
 </template>
 
@@ -36,7 +36,8 @@
     #tool-bar {
         @include flex-middle;
         justify-content: space-between;
-        padding: 0 $gap2 $gap2 $gap2;
+        padding: $gap $gap2 $gap $gap2;
+        margin: 0 $gap2 0 0;
         background: $baseColor2;
         .a{
             @include flex-middle;

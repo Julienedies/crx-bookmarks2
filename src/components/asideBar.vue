@@ -50,7 +50,7 @@
     @import "../basic/src/basic.scss";
 
     aside{
-        padding: 0 $gap $gap 0;
+        padding: $gap2 $gap $gap 0;
     }
 
 </style>

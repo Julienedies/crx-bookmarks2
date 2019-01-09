@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <div id="app">
         <nav-bar></nav-bar>
-        <div id="view-container">
-            <aside-bar></aside-bar>
-            <main>
-                <router-view></router-view>
-            </main>
+        <div id="view">
+            <div id="main">
+                <aside-bar></aside-bar>
+                <div id="content">
+                    <router-view></router-view>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -25,14 +27,28 @@
 
 <style lang="scss" scoped>
     @import "../basic/src/basic.scss";
-
-    #view-container{
-        @include flex;
-        margin: $gap*2 0 0 0;
-    }
-    main{
-        @include flex-1;
+    
+    #app{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         overflow: hidden;
+    }
+
+    #view{
+        padding-bottom: 4 * $gap;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        flex-grow: 1;
+    }
+    #main{
+        @include flex;
+        min-height: 100%;
+    }
+    #content{
+        @include flex-1;
         background: #fff;
+        padding:$gap2;
+        overflow-x: hidden;
     }
 </style>

@@ -3,7 +3,10 @@
         <!-- 书签 -->
         <a v-if="bookmark.url" :href="bookmark.url" target="_blank">
             <img :src="bookmark.url | getFavicon" class="favicon">
-            <span>{{bookmark.title}}</span>
+            <span>
+                <span class="tit">{{bookmark.title}}</span>
+                <span class="url">{{bookmark.url}}</span>
+            </span>
         </a>
 
         <!-- 文件夹 -->
@@ -14,9 +17,9 @@
 
         <!-- 上下文菜单 -->
         <div class="contextmenu">
-            <button>修改</button>
-            <button>删除</button>
-            <button>新建文件夹</button>
+            <button><i class="fas fa-folder-open"></i> </button>
+            <button><i class="fas fa-edit"></i></button>
+            <button><i class="far fa-trash-alt"></i></button>
         </div>
     </li>
 </template>
@@ -35,7 +38,7 @@
 
     li {
         @include flex-middle;
-        min-height: 2.2em;
+        min-height: 2.6em;
         padding: $gap/2;
 
         &:hover {
@@ -50,7 +53,13 @@
             white-space: nowrap;
 
             button {
-
+                cursor: pointer;
+                color: #9abad4;
+                font-size:1.4em;
+                padding: 0 $gap2;
+                border: none;
+                font: inherit;
+                background: none;
             }
         }
 
@@ -58,17 +67,30 @@
             @extend .flex-middle;
             flex-grow: 1;
             padding-left: $gap;
+            white-space: nowrap;
             overflow: hidden;
 
+            &:hover{
+                .url{
+                    visibility: visible;
+                }
+
+            }
+
             .favicon {
-                width: 1.2em;
+                width: 16px!important;
                 margin-right: $gap;
             }
 
-            span {
-                white-space: nowrap;
+            span{
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+
+            .url{
+                visibility: hidden;
+                margin-left:2em;
+                color: $baseColor3;
             }
         }
     }
