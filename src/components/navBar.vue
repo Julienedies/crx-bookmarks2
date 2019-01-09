@@ -38,7 +38,7 @@
 
     nav{
         @include flex-middle;
-        padding: 3*$gap  4*$gap;
+        padding: 1.5*$gap  4*$gap;
         background: #fff;
         border-bottom: solid 1px #dfdddd;
 

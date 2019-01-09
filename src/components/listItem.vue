@@ -72,9 +72,8 @@
 
             &:hover{
                 .url{
-                    visibility: visible;
+                    display: inline;
                 }
-
             }
 
             .favicon {
@@ -82,13 +81,13 @@
                 margin-right: $gap;
             }
 
-            span{
+            >span{
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
 
             .url{
-                visibility: hidden;
+                display:none;
                 margin-left:2em;
                 color: $baseColor3;
             }

@@ -29,26 +29,42 @@
     @import "../basic/src/basic.scss";
     
     #app{
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
         display: flex;
         flex-direction: column;
-        height: 100%;
-        overflow: hidden;
     }
 
     #view{
-        padding-bottom: 4 * $gap;
-        overflow-y: scroll;
+        position: relative;
+        overflow-y: auto;
         overflow-x: hidden;
-        flex-grow: 1;
+        display: flex;
+        flex: 1;
     }
+
     #main{
         @include flex;
-        min-height: 100%;
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
     }
+
     #content{
-        @include flex-1;
+        flex:1;
+        position:relative;
         background: #fff;
-        padding:$gap2;
-        overflow-x: hidden;
+        >div{
+            position: absolute;
+            left:0;
+            right:0;
+            padding:$gap2;
+            background: #fff;
+        }
     }
 </style>

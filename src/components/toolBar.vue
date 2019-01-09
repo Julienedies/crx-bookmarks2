@@ -36,8 +36,7 @@
     #tool-bar {
         @include flex-middle;
         justify-content: space-between;
-        padding: $gap $gap2 $gap $gap2;
-        margin: 0 $gap2 0 0;
+        padding: $gap 0 $gap $gap2;
         background: $baseColor2;
         .a{
             @include flex-middle;
