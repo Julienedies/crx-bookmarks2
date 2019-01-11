@@ -31,12 +31,31 @@ Vue.directive('toggle', directives.toggle)
 
 import App from './App'
 
+import {bookmarks} from '../libs/chrome/index'
+
+import ui from '../ui/index'
+Vue.use(ui)
+
+
 console.log(process.env)
 
-new Vue({
+window.v = new Vue({
     el: '#app',
     router,
     store,
+    data: {
+        event: {
+            name: '',
+            args: ''
+        }
+    },
+    mounted() {
+        let that = this;
+        bookmarks.on(function (eventName) {
+            let args = [].slice.call(arguments, 0)
+            that.event = {name: eventName, args: args}
+        });
+    },
     render: h => h(App)
 })
 

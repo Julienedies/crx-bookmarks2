@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+        hot view.
     </div>
 </template>
 

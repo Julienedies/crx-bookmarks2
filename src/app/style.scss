@@ -17,3 +17,9 @@ html, body{
   //background-color: $primaryColor3;
 }
 
+a{
+  color: inherit;
+  &:hover{
+    color: inherit;
+  }
+}

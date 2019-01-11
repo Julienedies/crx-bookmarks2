@@ -21,25 +21,26 @@
             }
         },
         created() {
-            console.log('created')
             this.getData()
         },
         watch: {
             '$route'(to, from) {
                 console.log('watch $route', to, from)
                 this.getData()
+            },
+            '$root.event'(newValue){
+                console.info('========', newValue)
+                this.getData()
             }
         },
         methods: {
             async getData() {
                 this.id = this.$route.params.id || this.id
-                this.getBookmarks(this.id)
-                this.paths = await this.getPaths(this.id).then(data => data)
+                this.bookmarkArray = await this.getBookmarksForNode(this.id)
+                this.paths = await this.getPaths(this.id)
             },
-            async getBookmarks(id) {
-                const bookmarkArray = await bookmarks.getChildren(id).then(data => data)
-                console.log(bookmarkArray)
-                this.bookmarkArray = bookmarkArray
+            async getBookmarksForNode(id) {
+                return await bookmarks.getChildren(id).then(data => data)
             },
             async getPaths(id) {
                 const paths = []
@@ -49,7 +50,6 @@
                     paths.unshift(node)
                     id = node.parentId
                 } while (id)
-                console.log(paths)
                 return paths
             }
         }

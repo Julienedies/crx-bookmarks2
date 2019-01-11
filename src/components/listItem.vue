@@ -17,18 +17,28 @@
 
         <!-- 上下文菜单 -->
         <div class="contextmenu">
-            <button><i class="fas fa-folder-open"></i> </button>
-            <button><i class="fas fa-edit"></i></button>
-            <button><i class="far fa-trash-alt"></i></button>
+            <!--<button @click=""><i class="fas fa-folder-open"></i> </button>-->
+            <button @click="edit()"><i class="fas fa-edit"></i></button>
+            <button @click="remove()"><i class="far fa-trash-alt"></i></button>
         </div>
     </li>
 </template>
 
 <script>
+
     export default {
         name: 'listItem',
         props: {
             bookmark: Object
+        },
+        methods: {
+            edit() {
+                //console.log(arguments)
+                this.$emit('edit')
+            },
+            remove() {
+
+            }
         }
     }
 </script>
@@ -55,7 +65,6 @@
             button {
                 cursor: pointer;
                 color: #9abad4;
-                font-size:1.4em;
                 padding: 0 $gap2;
                 border: none;
                 font: inherit;

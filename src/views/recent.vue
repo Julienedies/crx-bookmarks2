@@ -24,11 +24,16 @@
         created() {
             this.getData()
         },
+        mounted() {
+            let that = this;
+            bookmarks.on( () => {
+                that.getData()
+            })
+        },
         methods: {
             async getData() {
                 this.bookmarksArray = await bookmarks.getRecent(this.count)
                     .then(data => {
-                        console.log(data)
                         return data
                     }).catch(err => {
                     console.error(err)

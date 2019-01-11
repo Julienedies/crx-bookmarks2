@@ -39,13 +39,17 @@
     nav{
         @include flex-middle;
         padding: 1.5*$gap  4*$gap;
-        background: #fff;
+        color: #fff;
+        background: #027ebe;
         border-bottom: solid 1px #dfdddd;
 
         .a{
             @include flex-1;
             @include flex-middle;
-            justify-content: space-around;
+            a{
+                padding: 0 3*$gap;
+                font-size:1.2em;
+            }
         }
 
     }

@@ -21,14 +21,14 @@ export default [
         component: home
     },
     {
-        name: '最近',
-        path: '/recent',
-        component: recent
-    },
-    {
         name: '常用',
         path: '/hot',
         component: hot
+    },
+    {
+        name: '最近',
+        path: '/recent',
+        component: recent
     },
     {
         name: '目录',
@@ -54,17 +54,10 @@ export default [
     {
         path: '*',
         redirect: {
-            path: '/node/38'
+            path: '/recent'
         }
     }
 
 ]
 
-/*
-export const paths = [
-    ['/home', '首页'],
-    ['/node/1', '目录'],
-    ['/recent', '最近'],
-    ['/trash', '回收站'],
-    ['/setting', '设置']
-]*/
+
