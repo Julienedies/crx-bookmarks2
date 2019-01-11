@@ -34,14 +34,20 @@ const output = {
 }
 
 const entry = {
-    'main': ['./app/main.js']
+    'app': ['./app/main.js'],
+    'popup': ['./popup/main.js']
 }
 
 const plugins = [
     new HtmlPlugin({
         template: 'app/index.html',
-        filename: 'index.html',
-        chunks: ['runtime', 'vendors', 'common', 'main']
+        filename: 'app.html',
+        chunks: ['runtime', 'vendors', 'common', 'app']
+    }),
+    new HtmlPlugin({
+        template: 'popup/index.html',
+        filename: 'popup.html',
+        chunks: ['runtime', 'vendors', 'common', 'popup']
     }),
 
     new VueLoaderPlugin(),
