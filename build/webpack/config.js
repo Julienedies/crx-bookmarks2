@@ -35,7 +35,8 @@ const output = {
 
 const entry = {
     'app': ['./app/main.js'],
-    'popup': ['./popup/main.js']
+    'popup': ['./popup/main.js'],
+    'background': ['./app/background.js']
 }
 
 const plugins = [
@@ -48,6 +49,11 @@ const plugins = [
         template: 'popup/index.html',
         filename: 'popup.html',
         chunks: ['runtime', 'vendors', 'common', 'popup']
+    }),
+    new HtmlPlugin({
+        template: 'app/background.html',
+        filename: 'background.html',
+        chunks: ['runtime', 'vendors', 'common', 'background']
     }),
 
     new VueLoaderPlugin(),
