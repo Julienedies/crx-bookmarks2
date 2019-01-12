@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import * as chromeApi from '../libs/chrome/index'
+    import { bookmarks } from '../libs/chrome/index'
     import list from '../components/list'
 
     export default {
@@ -13,23 +13,23 @@
         components: {
             list
         },
-        data() {
+        data () {
             return {
                 bookmarkArray: []
             }
         },
         watch: {
-            '$route'(to, from) {
+            '$route' (to, from) {
                 this.getData()
             }
         },
-        created() {
+        created () {
             this.getData()
         },
         methods: {
-            async getData() {
+            async getData () {
                 let query = this.$route.params.query
-                this.bookmarkArray = await chromeApi.bookmarks.search(query)
+                this.bookmarkArray = await bookmarks.search(query)
             }
         }
     }

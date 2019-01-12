@@ -17,10 +17,13 @@
 
         <!-- 上下文菜单 -->
         <div class="contextmenu">
-            <!--<button @click=""><i class="fas fa-folder-open"></i> </button>-->
-            <button @click="edit()"><i class="fas fa-edit"></i></button>
-            <button @click="remove()"><i class="far fa-trash-alt"></i></button>
+            <slot name="contextmenu">
+                <!--<button @click=""><i class="fas fa-folder-open"></i> </button>-->
+                <button @click="edit()"><i class="fas fa-edit"></i></button>
+                <button @click="remove()"><i class="far fa-trash-alt"></i></button>
+            </slot>
         </div>
+
     </li>
 </template>
 
@@ -32,11 +35,11 @@
             bookmark: Object
         },
         methods: {
-            edit() {
+            edit () {
                 //console.log(arguments)
                 this.$emit('edit')
             },
-            remove() {
+            remove () {
 
             }
         }
@@ -53,6 +56,7 @@
 
         &:hover {
             background: rgba(180, 180, 180, 0.1);
+
             .contextmenu {
                 display: inherit;
             }
@@ -79,25 +83,25 @@
             white-space: nowrap;
             overflow: hidden;
 
-            &:hover{
-                .url{
+            &:hover {
+                .url {
                     display: inline;
                 }
             }
 
             .favicon {
-                width: 16px!important;
+                width: 16px !important;
                 margin-right: $gap;
             }
 
-            >span{
+            > span {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
 
-            .url{
-                display:none;
-                margin-left:2em;
+            .url {
+                display: none;
+                margin-left: 2em;
                 color: $baseColor3;
             }
         }

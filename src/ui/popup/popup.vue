@@ -1,8 +1,8 @@
 <template>
-    <div class="popup-wrap" v-show="value" @close="close">
+    <div class="popup-wrap" v-show="visible">
         <div class="mask" @click="close"></div>
         <div class="popup">
-            <slot>xxxxxx</slot>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -13,7 +13,7 @@
         props: {
             value: {
                 type: Boolean,
-                default: false
+                default: true
             }
         },
         data(){
@@ -23,7 +23,6 @@
         },
         methods: {
             close() {
-                console.log(arguments)
                 this.visible = false
                 this.$emit('input', false);
             },
@@ -31,14 +30,14 @@
 
             },
             cancel() {
-                this.close()
+                this.closePopup()
                 this.$emit('cancel')
             }
         },
         watch: {
             value : function (val) {
                 console.log(val)
-                //this.visible = val
+                this.visible = val
             }
         }
     }

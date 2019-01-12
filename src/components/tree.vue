@@ -2,7 +2,7 @@
     <ul>
         <li v-for="node of tree" :node="node" :key="node.id">
             <button class="arrow" v-if="node.children && node.children.length" @click="toggle(node)"
-                    :class="{'extend': node.extend}"> ▼
+                    :class="{'extend': !node.extend}"> ▼
             </button>
             <router-link :to="`/node/${node.id}`" @click="select(node)">{{node.title || 'root'}}</router-link>
             <tree v-if="node.children" :tree="node.children"></tree>
@@ -14,12 +14,7 @@
     export default {
         name: 'tree',
         data() {
-            return {
-                v: {
-                    toggle: [],
-                    selected: []
-                }
-            }
+            return {}
         },
         props: {
             tree: Array

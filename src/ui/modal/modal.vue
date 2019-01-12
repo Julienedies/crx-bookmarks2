@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-wrap" @close="close">
+    <div class="modal-wrap" @close="close" v-show="value">
         <div class="mask" @click="close"></div>
         <div class="modal-box">
             <slot></slot>
@@ -52,7 +52,7 @@
             position: absolute;
             top: 50%;
             left:50%;
-            transform: translate(-50%, 60%);
+            transform: translate(-50%, -60%);
             background: #fff;
             min-width: 40%;
             min-height:40px;

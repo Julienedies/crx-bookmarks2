@@ -6,7 +6,7 @@
                     <router-link v-for="path of paths" v-if="path.title" :to="`/node/${path.id}`" :key="path.id"> &nbsp;  {{ path.title }}  &nbsp; > </router-link>
                 </div>
                 <div class="select is-small">
-                    <select>
+                    <select v-model="sortBy">
                         <option v-for="option of options" :value="option.value">{{option.text}}</option>
                     </select>
                 </div>
@@ -40,16 +40,17 @@
         data() {
             return {
                 options: [
-                    {text: '选择排序方式, 默认使用频率', value: ''},
+                    {text: '选择排序方式', value: ''},
                     {text: '使用频率, 默认', value: 'hot'},
                     {text: 'title', value: 'title'},
                     {text: 'url', value: 'url'},
                     {text: '文件夹优先', value: 'children'},
                     {text: '添加时间', value: 'dateAdded'},
-                    {text: '实际顺序, 可拖动排序', value: ''}
+                    {text: '实际顺序, 可拖动排序', value: 'index'}
                 ],
-                bookmark: {},
-                editing: false
+                sortBy: '',   // 排序方式
+                bookmark: {},   // 要操作的目标书签
+                editing: false  // 书签编辑模式
             }
         },
         computed: {

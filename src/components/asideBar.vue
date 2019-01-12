@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import * as chromeApi from '../libs/chrome/index'
+    import { bookmarks } from '../libs/chrome/index'
     import Tree from './tree'
 
     export default {
@@ -13,26 +13,26 @@
         components: {
             Tree,
         },
-        data() {
+        data () {
             return {
                 tree: []
             }
         },
-        created() {
+        created () {
             this.getData()
         },
         methods: {
-            async getData() {
-                const tree = await chromeApi.bookmarks.getTree()  // 数据结构见: /doc/tree.js
+            async getData () {
+                const tree = await bookmarks.getTree()  // 数据结构见: /doc/tree.js
 
-                function f(tree) {
+                function f (tree) {
                     let len = tree.length
                     while (len--) {
                         let node = tree[len]
                         if (node.children) {
                             f(node.children)
                         } else {
-                            tree.splice(len, 1)
+                            tree.splice(len, 1)  // 删除具体书签
                         }
                     }
                 }
@@ -49,7 +49,7 @@
 <style lang="scss" scoped>
     @import "../basic/src/basic.scss";
 
-    aside{
+    aside {
         padding: $gap2 $gap $gap 0;
     }
 

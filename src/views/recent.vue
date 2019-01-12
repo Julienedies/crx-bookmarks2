@@ -5,10 +5,8 @@
 </template>
 
 <script>
-    import {bookmarks} from '../libs/chrome/index'
+    import { bookmarks } from '../libs/chrome/index'
     import list from '../components/list'
-
-    console.log(bookmarks)
 
     export default {
         name: 'recent',
@@ -26,7 +24,7 @@
         },
         mounted() {
             let that = this;
-            bookmarks.on( () => {
+            bookmarks.on(() => {
                 that.getData()
             })
         },
@@ -36,8 +34,8 @@
                     .then(data => {
                         return data
                     }).catch(err => {
-                    console.error(err)
-                })
+                        console.error(err)
+                    })
             }
         }
     }

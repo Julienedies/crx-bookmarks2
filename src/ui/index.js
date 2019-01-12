@@ -2,7 +2,7 @@
  * 
  * Created by j on 2019-01-11.
  */
-import popup from './pupup/popup'
+import popup from './popup/popup'
 import modal from './modal/modal.vue'
 import $modal from './modal/index.js'
 

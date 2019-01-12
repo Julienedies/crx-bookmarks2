@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import { bookmarks, Bookmark } from '../libs/chrome/index'
+    import { bookmarks } from '../libs/chrome/index'
 
     export default {
         name: 'editBookmark',
@@ -42,7 +42,7 @@
                 this.$emit('close')
             },
             save() {
-                new Bookmark(this.bookmark).update().then(data => {
+                bookmarks.update(this.bookmark).then(data => {
                     console.log('update', data)
                     this.close()
                 })
