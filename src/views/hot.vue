@@ -45,6 +45,9 @@
                 this.fetchData()
             })
         },
+        beforeDestroy (){
+            visitDb.off('change')
+        },
         methods: {
             async fetchData(){
                 let obj = await visitDb.get()

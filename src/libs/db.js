@@ -3,11 +3,11 @@
  * Created by j on 2019-01-12.
  */
 
-import EvEmitter from 'events'
+import EventEmitter from 'events'
 
 import { storage } from './chrome/index'
 
-const emitter = new EvEmitter()
+const emitter = new EventEmitter()
 
 class Db {
     static getAll () {
@@ -26,17 +26,21 @@ class Db {
     constructor (namespace) {
         this.namespace = namespace
         this.separator = '.'
-
+        // 后续优化, 重复添加了事件监听
         window.addEventListener('storage', (e) => {
             console.log('window.storage event', +new Date, e)
             this.emit('change', e)
         })
-
     }
 
     on (eventName, listener) {
         eventName = this.prefix(eventName)
         emitter.on(eventName, listener)
+    }
+
+    off (eventName, listener) {
+        eventName = this.prefix(eventName)
+        emitter.removeListener(eventName, listener)
     }
 
     emit (eventName, ...args) {
