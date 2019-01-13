@@ -47,12 +47,12 @@ tabs.on('onCreated', (tab, event)=> {
     f(tab)
 })
 
-/*tabs.on('onUpdated', function (tabId, changeInfe, tab, event) {
+tabs.on('onUpdated', function (tabId, changeInfe, tab, event) {
     console.log(tab.status)
     tab.status === 'complete' && f(tab)
 })
 
-tabs.on('onReplaced', function (addedTabId, removedTabId, event) {
+/*tabs.on('onReplaced', function (addedTabId, removedTabId, event) {
     tabs.get(addedTabId).then(tab => {
         f(tab)
     })

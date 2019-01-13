@@ -35,7 +35,7 @@ export default function wrapApi (api, wrapper = {}) {
 
                     return new Promise((resolve, reject) => {
                         let call = (data) => {
-                            console.log(`Invoking  => `, prop, data)
+                            console.log(`Invoking => ${prop}`, ' return => ', data)
                             resolve(data)
                         }
                         args.push(call)

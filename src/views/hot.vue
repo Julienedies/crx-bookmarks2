@@ -1,13 +1,12 @@
 <template>
     <div>
-        <ul>
-            <list-item v-for="bookmark of bookmarkArray" :bookmark="bookmark" :key="bookmark.id">
-                <template slot="contextmenu">
-                    <button @click="edit(bookmark)"><i class="fas fa-edit"></i></button>
-                    <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
-                </template>
-            </list-item>
-        </ul>
+        <tool-bar :count="count"></tool-bar>
+        <list :bookmark-array="bookmarkArray">
+            <template slot-scope="{bookmark}">
+                <button @click="edit(bookmark)"><i class="fas fa-edit"></i></button>
+                <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
+            </template>
+        </list>
     </div>
 </template>
 
@@ -15,21 +14,29 @@
     import Vue from 'vue'
     import {bookmarks} from '../libs/chrome/index'
     import getDb from '../libs/db'
-    import listItem from '../components/listItem'
-    import popup from '../ui/popup/popup'
-    import editBookmark from '../components/editBookmark'
+    import list from '../components/list'
+    import toolBar from '../components/tool-bar'
+    import popup from '../vueex/popup/popup'
+    import bookmarkEditor from '../components/bookmarkEditor'
 
     const visitDb = getDb('visit')
 
     export default {
         name: 'hot',
         components: {
-            listItem
+            toolBar,
+            list,
+            bookmarkEditor
         },
         data(){
           return {
-              bookmarkArray: Array
+              bookmarkArray: []
           }
+        },
+        computed: {
+            count(){
+                return this.bookmarkArray.length
+            }
         },
         mounted(){
             this.fetchData()
@@ -42,7 +49,10 @@
             async fetchData(){
                 let obj = await visitDb.get()
                 let idArray = Object.keys(obj)
-                this.bookmarkArray = await bookmarks.get(idArray)
+                console.log(idArray)
+                if(idArray.length ){
+                    this.bookmarkArray = await bookmarks.get(idArray)
+                }
             },
             remove(){
 
@@ -57,7 +67,7 @@
                        visible: true
                     },
                     render(h){
-                        let child = h(editBookmark, {slot:'default', props:{
+                        let child = h(bookmarkEditor, {slot:'default', props:{
                             bookmark: bookmark
                             },
                             on: {

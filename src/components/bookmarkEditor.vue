@@ -32,7 +32,7 @@
     import { bookmarks } from '../libs/chrome/index'
 
     export default {
-        name: 'editBookmark',
+        name: 'bookmarkEditor',
         props: {
             bookmark: Object
         },

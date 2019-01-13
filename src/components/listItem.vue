@@ -17,10 +17,10 @@
 
         <!-- 上下文菜单 -->
         <div class="contextmenu">
-            <slot name="contextmenu">
+            <slot>
+                <button @click="edit"><i class="fas fa-edit"></i></button>
+                <button @click="remove"><i class="far fa-trash-alt"></i></button>
                 <!--<button @click=""><i class="fas fa-folder-open"></i> </button>-->
-                <button @click="edit()"><i class="fas fa-edit"></i></button>
-                <button @click="remove()"><i class="far fa-trash-alt"></i></button>
             </slot>
         </div>
 
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-
     export default {
         name: 'listItem',
         props: {
@@ -36,11 +35,10 @@
         },
         methods: {
             edit () {
-                //console.log(arguments)
-                this.$emit('edit')
+                this.$emit('contextmenu', 'edit', this.bookmark)
             },
             remove () {
-
+                this.$emit('contextmenu', 'remove', this.bookmark)
             }
         }
     }

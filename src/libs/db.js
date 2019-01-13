@@ -10,6 +10,19 @@ import { storage } from './chrome/index'
 const emitter = new EvEmitter()
 
 class Db {
+    static getAll () {
+        return JSON.parse(JSON.stringify(localStorage))
+    }
+
+    static init (data) {
+        Object.entries(data).forEach(arr => {
+            let key = arr[0]
+            let val = arr[1]
+            console.log(key, val)
+            localStorage.setItem(arr[0], arr[1])
+        })
+    }
+
     constructor (namespace) {
         this.namespace = namespace
         this.separator = '.'
@@ -35,6 +48,7 @@ class Db {
         return `${ this.namespace }${ this.separator }${ val }`
     }
 }
+
 
 const methods = {
 
@@ -94,7 +108,7 @@ Object.keys(methods).forEach(key => {
         const method = methods[key]
         return new Promise(function (resolve, reject) {
             let result = method.apply(that, args)
-            console.log(`Db ${that.namespace} exec db.${key}, return => `, result)
+            console.log(`Db ${ that.namespace } exec db.${ key }, return => `, result)
 
             if (/set|remove|clear/.test(key)) {
                 console.log(`emit ${ that.namespace } change.`);
@@ -107,7 +121,8 @@ Object.keys(methods).forEach(key => {
 })
 
 
-
 export default function getDb (namespace) {
     return new Db(namespace)
 }
+
+export { Db }

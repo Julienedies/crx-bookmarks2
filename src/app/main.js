@@ -33,8 +33,8 @@ import App from './App'
 
 import {bookmarks} from '../libs/chrome/index'
 
-import ui from '../ui/index'
-Vue.use(ui)
+import vueex from '../vueex/index'
+Vue.use(vueex)
 
 
 console.log(process.env)

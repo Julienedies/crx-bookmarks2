@@ -1,19 +1,18 @@
 <template>
-
     <nav>
 
-        <div class="a">
-            <router-link v-for="route of routes" v-if="route.name!='search'"  :to="route._path || route.path" :key="route.path">
+        <div class="search-box">
+            <search-bar></search-bar>
+        </div>
+
+        <div class="nav-items">
+            <router-link class="nav-item hvr-underline-from-center" v-for="route of routes" v-if="route.name!='search'"  :to="route._path || route.path" :key="route.path">
                 <span > {{ route.name }}</span>
             </router-link>
         </div>
 
-        <div class="b">
-            <search-bar></search-bar>
-        </div>
 
     </nav>
-
 </template>
 
 <script>
@@ -38,17 +37,51 @@
 
     nav{
         @include flex-middle;
-        padding: 1.5*$gap  4*$gap;
+        padding: 0  4*$gap;
         color: #fff;
-        background: #027ebe;
-        border-bottom: solid 1px #dfdddd;
+        background: $activeColor;
+        border-bottom: solid 0px #dfdddd;
 
-        .a{
+        >div{
             @include flex-1;
-            @include flex-middle;
-            a{
-                padding: 0 3*$gap;
+        }
+
+        .search-box{
+            padding-left:18%;
+        }
+
+        .nav-items{
+            @include flex-1;
+            @extend .flex-mr;
+            .nav-item{
+                padding: $gap 3*$gap;
                 font-size:1.2em;
+                /*&:before{
+                    content: "";
+                    position: absolute;
+                    z-index: -1;
+                    left: 51%;
+                    right: 51%;
+                    bottom: 0;
+                    background: #fff;
+                    height: 4px;
+                    -webkit-transition-property: left, right;
+                    transition-property: left, right;
+                    -webkit-transition-duration: 0.3s;
+                    transition-duration: 0.3s;
+                    -webkit-transition-timing-function: ease-out;
+                    transition-timing-function: ease-out;
+                }*/
+
+                &.router-link-active{
+                    background: #fff;
+                    color: $activeColor;
+                    font-weight:bold;
+                    &:before{
+                        left:0;
+                        right:0;
+                    }
+                }
             }
         }
 

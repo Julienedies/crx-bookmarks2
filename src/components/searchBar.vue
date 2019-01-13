@@ -1,6 +1,6 @@
 <template>
-    <div class="field has-addons">
-        <div class="control">
+    <div class="field has-addons" style="flex:1;">
+        <div class="control" style="width:100%;">
             <input class="input" type="text" placeholder="" v-model.trim="query" @keyup.enter="search()"/>
         </div>
         <div class="control">
