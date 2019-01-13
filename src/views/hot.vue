@@ -47,10 +47,12 @@
             })
         },
         beforeDestroy (){
-            visitDb.off('change')
         },
         watch: {
-            '$root.event': 'fetchData'
+            '$root.event'(newVal) {
+                console.log('$root.event watcher => ', newVal)
+                this.fetchData()
+            }
         },
         methods: {
             async fetchData(){
