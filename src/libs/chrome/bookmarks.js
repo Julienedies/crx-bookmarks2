@@ -3,67 +3,15 @@
  * Created by j on 2019-01-05.
  */
 
-const promise = {}
-
-const bookmarks = chrome.bookmarks
+import wrapApi from './util'
 
 const events = ['onCreated', 'onRemoved', 'onChanged', 'onMoved', 'onChildrenReordered', 'onImportBegan', 'onImportEnded']
 
-let {entries} = Object
-
-
-for (let [prop, value] of entries(bookmarks)) {
-
-    // wrap methods of chrome.bookmarks as promise
-    if (typeof value === 'function') {
-
-        promise[prop] = ((prop => {
-
-            return function (...args) {
-
-                //let args = [].slice.call(arguments, 0)
-
-                return new Promise((resolve, reject) => {
-                    let call = (data) => {
-                        console.log('chromeAPI => ', prop, data)
-                        resolve(data)
-                    }
-                    args.push(call)
-                    bookmarks[prop].apply(bookmarks, args)
-                })
-
-            }
-
-        }))(prop)
-    }
-
-}
-
+const promise = wrapApi(chrome.bookmarks)
 
 const api = {
-    // wrap addListener for chrome.bookmarks
-    on (event, callback) {
-        let args = [].slice.call(arguments, 0);
-        event = args[0]
-        callback = args[1]
-        callback = callback || event
-
-        if (events.includes(event)) {
-            // 监听单个事件
-            bookmarks[event].addListener(callback)
-        } else {
-            // 监听所有事件, 所以填充一个事件类型在回调函数里
-            for (let event of events) {
-                bookmarks[event].addListener(((event) => {
-                    return function () {
-                        //console.log(event, arguments)
-                        let args = [].slice.call(arguments, 0)
-                        args.unshift(event)
-                        callback.apply(null, args)
-                    }
-                })(event))
-            }
-        }
+    on (eventName, listener){
+        return promise.on(eventName, listener)
     },
     get (id) {
         return promise.get(id);
@@ -129,10 +77,7 @@ api.on(function (...args) {
 })
 
 
-
-
 export default api
 
-export { promise }
 
 

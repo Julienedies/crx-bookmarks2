@@ -23,6 +23,9 @@ bookmarks.on( 'onRemoved', function(id,  changeInfo) {
 
     trashDb.set(obj)
 
+    // 一个书签被删除后, 需要删除其它相关数据
+    visitDb.remove(id)
+
 })
 
 const f = function(tab){

@@ -5,6 +5,7 @@
             <template slot-scope="{bookmark}">
                 <button @click="edit(bookmark)"><i class="fas fa-edit"></i></button>
                 <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
+                <button>{{ bookmark.visit.count }}</button>
             </template>
         </list>
     </div>
@@ -36,7 +37,7 @@
         computed: {
             count(){
                 return this.bookmarkArray.length
-            }
+            },
         },
         mounted(){
             this.fetchData()
@@ -50,11 +51,25 @@
         },
         methods: {
             async fetchData(){
-                let obj = await visitDb.get()
-                let idArray = Object.keys(obj)
+                let visitObj = await visitDb.get()
+                let idArray = Object.keys(visitObj)
                 console.log(idArray)
                 if(idArray.length ){
-                    this.bookmarkArray = await bookmarks.get(idArray)
+                    /* 无效数据清洗
+                    for(let id of idArray){
+                        let b = await bookmarks.get(id)
+                        if(!b){
+                            console.log(id)
+                            visitDb.remove(id)
+                        }else{
+                            this.bookmarkArray.push(b[0])
+                        }
+                    }*/
+                    let bookmarkArray = await bookmarks.get(idArray)
+                    bookmarkArray.forEach(bookmark => {
+                        bookmark.visit = visitObj[bookmark.id]
+                    })
+                    this.bookmarkArray = bookmarkArray
                 }
             },
             remove(){

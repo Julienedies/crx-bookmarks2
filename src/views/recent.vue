@@ -41,8 +41,9 @@
         },
         mounted () {
             let that = this;
-            bookmarks.on(() => {
-                that.getData()
+            bookmarks.on((...args) => {
+                console.log(args)
+                this.getData()
             })
         },
         methods: {
