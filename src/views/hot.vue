@@ -49,6 +49,9 @@
         beforeDestroy (){
             visitDb.off('change')
         },
+        watch: {
+            '$root.event': 'fetchData'
+        },
         methods: {
             async fetchData(){
                 let visitObj = await visitDb.get()
@@ -86,7 +89,7 @@
                     },
                     render(h){
                         let child = h(bookmarkEditor, {slot:'default', props:{
-                            bookmark: bookmark
+                            bookmark: this.$clone(bookmark)
                             },
                             on: {
                                 'close': (...args) => {
