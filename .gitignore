@@ -27,5 +27,5 @@ dist/
 # 临时
 src/basic/
 src/vendor/
-assets/
-
+assets/img/*
+!assets/img/bookmarks2.png
