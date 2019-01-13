@@ -1,6 +1,6 @@
 {
   "name": "crx-bookmarks2",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "一个书签管理器的chrome扩展",
   "main": "null",
   "scripts": {
