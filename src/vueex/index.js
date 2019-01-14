@@ -4,10 +4,14 @@
  */
 import popup from './popup/popup'
 import modal from './modal/modal.vue'
+import dragResizeBar from './drag-resize-bar/index.vue'
+
+
 import func from './func'
 
 
 const components = {
+    dragResizeBar,
     popup,
     modal
 }
