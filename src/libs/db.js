@@ -23,12 +23,16 @@ class Db {
         })
     }
 
+    static initListener(){
+
+    }
+
     constructor (namespace) {
         this.namespace = namespace
         this.separator = '.'
         // 后续优化, 重复添加了事件监听
         window.addEventListener('storage', (e) => {
-            console.log('window.storage event', +new Date, e)
+            console.log('window.storage event', +new Date, this, e)
             this.emit('change', e)
         })
     }

@@ -51,6 +51,9 @@
 
     aside {
         padding: $gap2 $gap $gap 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        white-space: nowrap;
     }
 
 </style>

@@ -3,8 +3,9 @@
         <nav-bar></nav-bar>
         <div id="view">
             <div id="main">
-                <aside-bar></aside-bar>
-                <div id="content">
+                <aside-bar ref="aside"></aside-bar>
+                <drag-resize-bar @resize="onResize"></drag-resize-bar>
+                <div id="content" ref="content">
                     <router-view></router-view>
                 </div>
             </div>
@@ -14,13 +15,22 @@
 
 <script>
     import navBar from '../components/navBar'
-    import AsideBar from "../components/asideBar"
+    import AsideBar from '../components/asideBar'
 
     export default {
         name: "App",
         components: {
             AsideBar,
             navBar
+        },
+        methods: {
+            onResize(arg){
+                let asideDom = this.$refs.aside.$el
+                let width = asideDom.offsetWidth
+                width += arg.moveX
+                console.log(asideDom, width, arg)
+                asideDom.style.width = `${width}px`
+            }
         }
     }
 </script>
@@ -40,8 +50,7 @@
 
     #view{
         position: relative;
-        overflow-y: auto;
-        overflow-x: hidden;
+        overflow: hidden;
         display: flex;
         flex: 1;
     }
@@ -52,16 +61,17 @@
         left:0;
         right:0;
         top:0;
+        bottom: 0;
+        overflow: hidden;
     }
 
     #content{
+        overflow-x: hidden;
+        overflow-y: auto;
         flex:1;
         position:relative;
         background: #fff;
         >div{
-            position: absolute;
-            left:0;
-            right:0;
             padding:$gap2;
             background: #fff;
         }
