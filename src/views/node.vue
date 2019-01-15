@@ -86,6 +86,7 @@
                 this.editing = true
             },
             remove(bookmark){
+                bookmark.remove(bookmark)
                 console.log('remove ', bookmark)
             },
             close(){

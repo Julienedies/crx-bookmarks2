@@ -13,7 +13,7 @@
 
 <script>
     import Vue from 'vue'
-    import {bookmarks} from '../libs/chrome/index'
+    import { bookmarks } from '../libs/chrome/index'
     import getDb from '../libs/db'
     import list from '../components/list'
     import toolBar from '../components/tool-bar'
@@ -29,37 +29,37 @@
             list,
             bookmarkEditor
         },
-        data(){
-          return {
-              bookmarkArray: []
-          }
+        data () {
+            return {
+                bookmarkArray: []
+            }
         },
         computed: {
-            count(){
+            count () {
                 return this.bookmarkArray.length
             },
         },
-        mounted(){
+        mounted () {
             this.fetchData()
             visitDb.on('change', (args) => {
                 let StorageEvent = args[0]
                 this.fetchData()
             })
         },
-        beforeDestroy (){
+        beforeDestroy () {
         },
         watch: {
-            '$root.event'(newVal) {
+            '$root.event' (newVal) {
                 console.log('$root.event watcher => ', newVal)
                 this.fetchData()
             }
         },
         methods: {
-            async fetchData(){
+            async fetchData () {
                 let visitObj = await visitDb.get()
                 let idArray = Object.keys(visitObj)
                 console.log(idArray)
-                if(idArray.length ){
+                if (idArray.length) {
                     /* 无效数据清洗
                     for(let id of idArray){
                         let b = await bookmarks.get(id)
@@ -77,21 +77,22 @@
                     this.bookmarkArray = bookmarkArray
                 }
             },
-            remove(){
-
+            remove (bookmark) {
+                bookmarks.recover(bookmark)
             },
-            edit(bookmark){
+            edit (bookmark) {
 
                 const vm = new Vue({
                     components: {
                         popup
                     },
                     data: {
-                       visible: true
+                        visible: true
                     },
-                    render(h){
-                        let child = h(bookmarkEditor, {slot:'default', props:{
-                            bookmark: this.$clone(bookmark)
+                    render (h) {
+                        let child = h(bookmarkEditor, {
+                            slot: 'default', props: {
+                                bookmark: this.$clone(bookmark)
                             },
                             on: {
                                 'close': (...args) => {
@@ -100,7 +101,7 @@
                             }
                         })
                         let popupOptions = {
-                            props:{
+                            props: {
                                 value: this.visible
                             },
                         }

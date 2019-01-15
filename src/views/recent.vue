@@ -65,6 +65,7 @@
                 this.goalBookmark = this.$clone(bookmark)
             },
             remove (bookmark) {
+                bookmarks.recover(bookmark)
                 console.log('recent.remove', bookmark)
             },
             close () {
