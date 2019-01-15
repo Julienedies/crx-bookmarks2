@@ -2,7 +2,7 @@
     <div>
         <tool-bar :count="count"></tool-bar>
 
-        <list :bookmarkArray="bookmarksArray" @contextmenu="onContextmenu">
+        <list :bookmarkArray="bookmarksArray">
             <template slot-scope="{ bookmark }">
                 <button @click="edit(bookmark)">修改</button>
                 <button @click="remove(bookmark)">删除</button>
@@ -55,18 +55,12 @@
                         console.error(err)
                     })
             },
-            onContextmenu (menu, bookmark) {
-                console.log(menu, bookmark)
-                this.edit(bookmark)
-            },
             edit (bookmark) {
-                console.log('recent.edit', bookmark)
                 this.editing = true
                 this.goalBookmark = this.$clone(bookmark)
             },
             remove (bookmark) {
-                bookmarks.recover(bookmark)
-                console.log('recent.remove', bookmark)
+                bookmarks.remove(bookmark)
             },
             close () {
                 this.editing = false

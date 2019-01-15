@@ -58,7 +58,6 @@
             async fetchData () {
                 let visitObj = await visitDb.get()
                 let idArray = Object.keys(visitObj)
-                console.log(idArray)
                 if (idArray.length) {
                     /* 无效数据清洗
                     for(let id of idArray){
@@ -78,7 +77,7 @@
                 }
             },
             remove (bookmark) {
-                bookmarks.recover(bookmark)
+                bookmarks.remove(bookmark)
             },
             edit (bookmark) {
 

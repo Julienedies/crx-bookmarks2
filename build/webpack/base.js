@@ -83,17 +83,24 @@ module.exports = {
             }
         ]
     },
-    optimization:{
+    optimization: {
         runtimeChunk: 'single',
         splitChunks: {
             chunks: 'all',  // async initial all
             minSize: 30000,  // 30k  chunk最小30k以上, 才会分离提取
             minChunks: 1,    // 最少有两次重复引用, 才会分离提取
-            maxAsyncRequests: 15,
-            maxInitialRequests: 13,
+            maxAsyncRequests: 10,
+            maxInitialRequests: 5,
             automaticNameDelimiter: '~',
             name: 'common',
             cacheGroups: {
+                styles: {
+                    name: 'styles',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true,
+                    priority: 20,
+                },
                 vendors: {
                     name: 'vendors',
                     test: /[\\/]node_modules[\\/]/,
@@ -114,6 +121,6 @@ module.exports = {
             }
         }
     },
-    plugins : config.plugins
+    plugins: config.plugins
 
 }

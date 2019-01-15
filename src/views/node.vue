@@ -78,18 +78,17 @@
                 } while (id)
                 return paths
             },
-            onContextmenu(menu, bookmark){
-                    this[menu] && this[menu](bookmark)
+            onContextmenu (menu, bookmark) {
+                this[menu] && this[menu](bookmark)
             },
-            edit(bookmark){
+            edit (bookmark) {
                 this.goalBookmark = this.$clone(bookmark)
                 this.editing = true
             },
-            remove(bookmark){
-                bookmark.remove(bookmark)
-                console.log('remove ', bookmark)
+            remove (bookmark) {
+                bookmarks.remove(bookmark)
             },
-            close(){
+            close () {
                 this.goalBookmark = null
                 this.editing = false
             }
