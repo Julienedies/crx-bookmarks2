@@ -67,7 +67,7 @@
 
     #content{
         overflow-x: hidden;
-        overflow-y: auto;
+        overflow-y: scroll;
         flex:1;
         position:relative;
         background: #fff;

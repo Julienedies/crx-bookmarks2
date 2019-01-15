@@ -58,7 +58,7 @@ module.exports = {
                     {
                         loader: "file-loader",
                         options: {
-                            name: '[path][hash].[ext]',
+                            name: '[hash].[ext]',
                             outputPath: './img',
                             publicPath: config.publicPath + 'img/'
                         }
@@ -88,11 +88,11 @@ module.exports = {
         splitChunks: {
             chunks: 'all',  // async initial all
             minSize: 30000,  // 30k  chunk最小30k以上, 才会分离提取
-            minChunks: 2,    // 最少有两次重复引用, 才会分离提取
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
+            minChunks: 1,    // 最少有两次重复引用, 才会分离提取
+            maxAsyncRequests: 15,
+            maxInitialRequests: 13,
             automaticNameDelimiter: '~',
-            name: true,
+            name: 'common',
             cacheGroups: {
                 vendors: {
                     name: 'vendors',
@@ -104,9 +104,9 @@ module.exports = {
                 },
                 common: {
                     name: 'all',
-                    test: /\.vue/,
+                    test: /\.zzz/,
                     minChunks: 2,
-                    chunks: 'initial',
+                    chunks: 'async',
                     priority: 10,
                     minSize: 30000,
                     reuseExistingChunk: true // 表示是否使用已有的 chunk，如果为 true 则表示如果当前的 chunk 包含的模块已经被抽取出去了，那么将不会重新生成新的。

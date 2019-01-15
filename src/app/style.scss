@@ -1,25 +1,3 @@
 @import "../basic/src/basic.scss";
 @import "../basic/src/reset.css";
 
-html, body{
-  font: 14px/2 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif!important;
-  font-family: Helvetica Neue,Verdana,Arial,Hiragino Sans GB,WenQuanYi Micro Hei,Heiti SC,STHeiti,Microsoft Yahei,SimSun,sans-serif!important;
-  background: $baseColor2;
-  overflow: hidden;
-  height: 100%;
-}
-
-.far, .fas{
-  font-weight:100;
-  font-size:1.4em;
-  vertical-align: middle;
-  color:#459de3;
-  //background-color: $primaryColor3;
-}
-
-a{
-  color: inherit;
-  &:hover{
-    color: inherit;
-  }
-}

@@ -52,7 +52,7 @@
     aside {
         padding: $gap2 $gap $gap 0;
         overflow-x: hidden;
-        overflow-y: auto;
+        overflow-y: scroll;
         white-space: nowrap;
     }
 

@@ -9,10 +9,10 @@ import home from '../views/home'
 import recent from '../views/recent'
 import trash from '../views/trash'
 
-const hot = () => import('../views/hot')
-const node = () => import('../views/node')
-const setting = () => import('../views/setting')
-const search = () => import('../views/search')
+const hot = () => import(/* webpackChunkName: "view-hot" */'../views/hot')
+const node = () => import(/* webpackChunkName: "view-node" */'../views/node')
+const setting = () => import(/* webpackChunkName: "view-setting" */'../views/setting')
+const search = () => import(/* webpackChunkName: "view-search" */'../views/search')
 
 export default [
     {

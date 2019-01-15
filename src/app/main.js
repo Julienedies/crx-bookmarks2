@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 import '../vendor/bulma/bulma.sass'
 import '../vendor/hover/scss/hover.scss'
+import '../css/common.scss'
 import './style.scss'
 
 import Vue from 'vue'
