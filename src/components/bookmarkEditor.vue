@@ -1,5 +1,5 @@
 <template>
-    <div class="edit-box">
+    <div class="bookmarkEditor">
         <h3>修改书签</h3>
         <section>
             <div class="field">
@@ -18,10 +18,14 @@
 
             <div class="field is-grouped is-grouped-centered">
                 <p class="control">
-                    <button class="button is-light" @click="cancel"> 取消 </button>
+                    <button class="button is-light" @click="cancel"> 取消</button>
                 </p>
                 <p class="control">
-                    <button class="button is-primary" @click="save"> 保存 </button>
+                    <button class="button is-primary" @click="save" v-if="bookmark.id"> 保存</button>
+                    <button class="button is-primary" @click="create" v-else> 新建</button>
+                </p>
+                <p class="help">
+                    {{ msg }}
                 </p>
             </div>
         </section>
@@ -34,21 +38,30 @@
     export default {
         name: 'bookmarkEditor',
         props: {
-            bookmark: Object
+            bookmark: Object,
         },
-         methods: {
-            close() {
-                console.log('emit close', arguments)
-                this.$emit('close')
-            },
-            save() {
+        data () {
+            return {
+                msg: ''
+            }
+        },
+        methods: {
+            save () {
                 bookmarks.update(this.bookmark).then(data => {
                     console.log('update', data)
                     this.close()
                 })
             },
-            cancel() {
+            create () {
+                bookmarks.add(this.bookmark).then(data => {
+                })
+            },
+            cancel () {
                 this.close()
+            },
+            close () {
+                console.log('emit close', arguments)
+                this.$emit('close')
             }
         }
     }
@@ -57,7 +70,7 @@
 <style lang="scss" scoped>
     @import "../basic/src/basic.scss";
 
-        .edit-box{
-            padding: $gap2;
-        }
+    .bookmarkEditor {
+        padding: $gap2;
+    }
 </style>

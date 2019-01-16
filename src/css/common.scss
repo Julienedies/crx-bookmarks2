@@ -9,8 +9,7 @@ html, body{
   height: 100%;
 }
 
-.far, .fas{
-  font-weight:100;
+.fa, .far, .fas{
   font-size:1.4em;
   vertical-align: middle;
   color:#459de3;
@@ -22,4 +21,8 @@ a{
   &:hover{
     color: inherit;
   }
+}
+
+[v-cloak]{
+  display: none;
 }

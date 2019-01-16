@@ -4,8 +4,8 @@
 
         <list :bookmarkArray="bookmarksArray">
             <template slot-scope="{ bookmark }">
-                <button @click="edit(bookmark)">修改</button>
-                <button @click="remove(bookmark)">删除</button>
+                <button @click="edit(bookmark)" title="编辑"><i class="fas fa-edit"></i></button>
+                <button @click="remove(bookmark)" title="删除"><i class="far fa-trash-alt"></i></button>
             </template>
         </list>
 
@@ -18,7 +18,7 @@
 <script>
     import { bookmarks } from '../libs/chrome/index'
     import list from '../components/list'
-    import toolBar from '../components/tool-bar'
+    import toolBar from '../components/listToolBar'
     import bookmarkEditor from '../components/bookmarkEditor'
 
     export default {

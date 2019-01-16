@@ -11,3 +11,4 @@
 export function getFavicon(input) {
     return 'chrome://favicon/' + input;
 }
+

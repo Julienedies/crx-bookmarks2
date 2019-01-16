@@ -18,12 +18,13 @@
         <!-- 上下文菜单 -->
         <div class="contextmenu">
             <slot>
-                <button @click="edit"><i class="fas fa-edit"></i></button>
-                <button @click="remove"><i class="far fa-trash-alt"></i></button>
-                <!--<button @click=""><i class="fas fa-folder-open"></i> </button>-->
+                <button @click="$emit('contextmenu', 'createSubFolder', bookmark)" v-if="!bookmark.url" title="新建子文件夹">
+                    <i class="fas fa-folder-plus"></i>
+                </button>
+                <button @click="edit" title="编辑"><i class="fas fa-edit"></i></button>
+                <button @click="remove" title="删除"><i class="far fa-trash-alt"></i></button>
             </slot>
         </div>
-
     </li>
 </template>
 

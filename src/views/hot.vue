@@ -16,7 +16,7 @@
     import { bookmarks } from '../libs/chrome/index'
     import getDb from '../libs/db'
     import list from '../components/list'
-    import toolBar from '../components/tool-bar'
+    import toolBar from '../components/listToolBar'
     import popup from '../vueex/popup/popup'
     import bookmarkEditor from '../components/bookmarkEditor'
 

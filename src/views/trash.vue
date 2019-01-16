@@ -1,7 +1,7 @@
 <template>
     <div>
         <tool-bar>
-                <button @click="clear">清空回收站</button>
+            <button @click="clear" class="flex-middle"> <span>清空回收站</span>&nbsp;&nbsp; <i class="far fa-trash-alt"></i></button>
         </tool-bar>
 
         <list :bookmarkArray="bookmarkArray">
@@ -16,7 +16,7 @@
 <script>
     import { bookmarks } from '../libs/chrome/index'
     import getDb from '../libs/db'
-    import toolBar from '../components/tool-bar'
+    import toolBar from '../components/listToolBar'
     import list from '../components/list'
 
     const db = getDb('trash')

@@ -1,6 +1,6 @@
 <template>
-    <div class="box">
-        <div class="box" style="text-align:right; padding:0.5rem;">
+    <div class="box" v-cloak>
+        <div style="text-align:right; padding:0.5rem;">
             <button class="button" @click="open">打开书签管理器</button>
         </div>
         <div class="">

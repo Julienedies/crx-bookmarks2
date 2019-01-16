@@ -6,8 +6,7 @@
             </list-item>
         </ul>
         <div v-else>
-            没有相关数据.
-            <button><i class="fas fa-redo"></i> </button>
+            没有数据.
         </div>
     </div>
 </template>

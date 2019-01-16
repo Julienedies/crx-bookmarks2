@@ -1,6 +1,5 @@
 <template>
     <nav>
-
         <div class="search-box">
             <search-bar></search-bar>
         </div>
@@ -10,8 +9,6 @@
                 <span > {{ route.name }}</span>
             </router-link>
         </div>
-
-
     </nav>
 </template>
 
@@ -40,7 +37,6 @@
         padding: 0  4*$gap;
         color: #fff;
         background: $activeColor;
-        border-bottom: solid 0px #dfdddd;
 
         >div{
             @include flex-1;
@@ -54,9 +50,17 @@
             @include flex-1;
             @extend .flex-mr;
             .nav-item{
+                position: relative;
                 padding: $gap 3*$gap;
                 font-size:1.2em;
-                /*&:before{
+/*                display: inline-block;
+                vertical-align: middle;
+                -webkit-transform: perspective(1px) translateZ(0);
+                transform: perspective(1px) translateZ(0);
+                box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+                position: relative;
+                overflow: hidden;
+                &:before{
                     content: "";
                     position: absolute;
                     z-index: -1;
@@ -77,7 +81,10 @@
                     background: #fff;
                     color: $activeColor;
                     font-weight:bold;
+                }
+                &.router-link-active, &:hover{
                     &:before{
+                        z-index: auto;
                         left:0;
                         right:0;
                     }
@@ -86,5 +93,4 @@
         }
 
     }
-
 </style>

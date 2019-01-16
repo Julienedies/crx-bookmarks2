@@ -1,6 +1,7 @@
 <template>
     <div>
-        <tool-bar :paths="paths" :sortOptions="sortOptions" :count="count"></tool-bar>
+        <list-tool-bar :paths="paths" :count="count" :sortOptions="sortOptions" @sortByChange="onSortByChange"
+                       @sortReverseChange="onSortReverseChange"></list-tool-bar>
 
         <list :bookmarkArray="bookmarkArray" @contextmenu="onContextmenu"></list>
 
@@ -13,21 +14,20 @@
 <script>
     import { bookmarks } from '../libs/chrome'
     import list from '../components/list'
-    import toolBar from '../components/tool-bar'
+    import listToolBar from '../components/listToolBar'
     import bookmarkEditor from '../components/bookmarkEditor'
 
     export default {
         name: 'node',
         components: {
             list,
-            toolBar,
+            listToolBar,
             bookmarkEditor
         },
         data () {
             return {
-                id: 1,
                 sortOptions: [
-                    {text: '选择排序方式', value: ''},
+                    {text: '选择排序方式', value: 'index'},
                     {text: '使用频率, 默认', value: 'hot'},
                     {text: 'title', value: 'title'},
                     {text: 'url', value: 'url'},
@@ -57,6 +57,10 @@
             },
             '$root.event' (newValue) {
                 this.getData()
+            },
+            'sortBy' (newVal) {
+                console.log('sortBy => ', newVal)
+                this.$sortBookmarksBy(this.bookmarkArray, newVal)
             }
         },
         methods: {
@@ -78,19 +82,31 @@
                 } while (id)
                 return paths
             },
+            onSortByChange (val) {
+                this.sortBy = val
+            },
+            onSortReverseChange (v) {
+                console.log('onSortReverseChange => ', v)
+                this.bookmarkArray.reverse()
+            },
             onContextmenu (menu, bookmark) {
+                console.log('onContextmenu =>', menu, bookmark)
                 this[menu] && this[menu](bookmark)
             },
-            edit (bookmark) {
-                this.goalBookmark = this.$clone(bookmark)
+            createSubFolder (bookmark) {
                 this.editing = true
+                this.goalBookmark = {title: '新建文件夹', parentId: bookmark.id}
+            },
+            edit (bookmark) {
+                this.editing = true
+                this.goalBookmark = this.$clone(bookmark)
             },
             remove (bookmark) {
                 bookmarks.remove(bookmark)
             },
             close () {
-                this.goalBookmark = null
                 this.editing = false
+                this.goalBookmark = null
             }
         }
     }
