@@ -7,7 +7,7 @@
                 </router-link>
             </div>
             <div class="select is-small" v-if="sortOptions">
-                <select v-model="sortBy">
+                <select v-model="sortBy" @change="$emit('sortByChange', $event.target.value)">
                     <option v-for="option of sortOptions" :value="option.value">{{option.text}}</option>
                 </select>
             </div>

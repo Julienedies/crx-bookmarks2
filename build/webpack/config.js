@@ -72,7 +72,7 @@ if (isProd) {  // 产品环境
 
     plugins.push(new MiniCssExtractPlugin({
         filename: "css/[name]_[hash].css",
-        chunkFilename: "[id].css"
+        chunkFilename: "[name]_[id].css"
     }))
 
     cssLoader = {

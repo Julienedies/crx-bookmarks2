@@ -53,7 +53,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|gif|svg|woff2?|eot|ttf)$/,
+                test: /\.(png|jpg|gif)$/,
                 use: [
                     {
                         loader: "file-loader",
@@ -61,6 +61,19 @@ module.exports = {
                             name: '[hash].[ext]',
                             outputPath: './img',
                             publicPath: config.publicPath + 'img/'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(svg|woff2?|eot|ttf)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: './font',
+                            publicPath: config.publicPath + 'font/'
                         }
                     }
                 ]
@@ -87,20 +100,20 @@ module.exports = {
         runtimeChunk: 'single',
         splitChunks: {
             chunks: 'all',  // async initial all
-            minSize: 30000,  // 30k  chunk最小30k以上, 才会分离提取
+            minSize: 3000,  // 3k  chunk最小30k以上, 才会分离提取
             minChunks: 1,    // 最少有两次重复引用, 才会分离提取
-            maxAsyncRequests: 10,
-            maxInitialRequests: 5,
+            maxAsyncRequests: 15,
+            maxInitialRequests: 15,
             automaticNameDelimiter: '~',
             name: 'common',
             cacheGroups: {
-                styles: {
+/*                styles: {
                     name: 'styles',
                     test: /\.css$/,
                     chunks: 'all',
                     enforce: true,
                     priority: 20,
-                },
+                },*/
                 vendors: {
                     name: 'vendors',
                     test: /[\\/]node_modules[\\/]/,
