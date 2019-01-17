@@ -1,17 +1,17 @@
 <template>
     <aside>
-        <tree :tree="tree"></tree>
+        <tree :tree="tree" @contextmenu="onContextmenu"></tree>
     </aside>
 </template>
 
 <script>
     import { bookmarks } from '../libs/chrome/index'
-    import Tree from './tree'
+    import tree from './tree'
 
     export default {
         name: 'asideBar',
         components: {
-            Tree,
+            tree,
         },
         data () {
             return {
@@ -21,28 +21,19 @@
         created () {
             this.getData()
         },
+        watch: {
+           '$root.event'(newVal){
+               this.getData()
+           }
+        },
         methods: {
             async getData () {
-                const tree = await bookmarks.getTree()  // 数据结构见: /doc/tree.js
-
-                function f (tree) {
-                    let len = tree.length
-                    while (len--) {
-                        let node = tree[len]
-                        if (node.children) {
-                            f(node.children)
-                        } else {
-                            tree.splice(len, 1)  // 删除具体书签
-                        }
-                    }
-                }
-
-                f(tree);
-                this.tree = tree
-
+                this.tree = await bookmarks.getTree(true)  // 数据结构见: /doc/tree.js
+            },
+            onContextmenu(menu, node){
+                console.log('asideBar onContextmenu => ', menu, node)
             }
         }
-
     }
 </script>
 
@@ -54,6 +45,6 @@
         overflow-x: hidden;
         overflow-y: scroll;
         white-space: nowrap;
+        width:20%;
     }
-
 </style>

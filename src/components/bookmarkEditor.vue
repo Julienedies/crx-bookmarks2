@@ -54,6 +54,7 @@
             },
             create () {
                 bookmarks.add(this.bookmark).then(data => {
+                    this.close()
                 })
             },
             cancel () {

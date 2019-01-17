@@ -1,12 +1,12 @@
 <template>
     <div>
         <tool-bar>
-            <button @click="clear" class="flex-middle"> <span>清空回收站</span>&nbsp;&nbsp; <i class="far fa-trash-alt"></i></button>
+            <button @click="clear" class="flex-middle" title="清空回收站"><i class="far fa-trash-alt"></i></button>
         </tool-bar>
 
         <list :bookmarkArray="bookmarkArray">
             <template slot-scope="{ bookmark }">
-                <button @click="recover(bookmark)">恢复</button>
+                <button @click="recover(bookmark)" title="恢复"><i class="fa fa-undo"></i></button>
                 <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
             </template>
         </list>
@@ -33,14 +33,14 @@
             }
         },
         mounted () {
-            this.fetchData()
+            this.getData()
             db.on('change', (args) => {
                 let StorageEvent = args[0]
-                this.fetchData()
+                this.getData()
             })
         },
         methods: {
-            async fetchData () {
+            async getData () {
                 this.bookmarkArray = await db.get().then(obj => {
                     console.log(obj)
                     return Object.values(obj)

@@ -40,10 +40,10 @@
             },
         },
         mounted () {
-            this.fetchData()
+            this.getData()
             visitDb.on('change', (args) => {
                 let StorageEvent = args[0]
-                this.fetchData()
+                this.getData()
             })
         },
         beforeDestroy () {
@@ -51,28 +51,19 @@
         watch: {
             '$root.event' (newVal) {
                 console.log('$root.event watcher => ', newVal)
-                this.fetchData()
+                this.getData()
             }
         },
         methods: {
-            async fetchData () {
+            async getData () {
                 let visitObj = await visitDb.get()
                 let idArray = Object.keys(visitObj)
                 if (idArray.length) {
-                    /* 无效数据清洗
-                    for(let id of idArray){
-                        let b = await bookmarks.get(id)
-                        if(!b){
-                            console.log(id)
-                            visitDb.remove(id)
-                        }else{
-                            this.bookmarkArray.push(b[0])
-                        }
-                    }*/
                     let bookmarkArray = await bookmarks.get(idArray)
                     bookmarkArray.forEach(bookmark => {
                         bookmark.visit = visitObj[bookmark.id]
                     })
+                    bookmarkArray.sort((a,b) => b.visit.count - a.visit.count)
                     this.bookmarkArray = bookmarkArray
                 }
             },
