@@ -4,25 +4,21 @@
                        @sortReverseChange="onSortReverseChange"></list-tool-bar>
 
         <list :bookmarkArray="bookmarkArray" @contextmenu="onContextmenu"></list>
-
-        <popup v-if="editing && goalBookmark" v-model="editing">
-            <bookmark-editor :bookmark="goalBookmark" @close="close"></bookmark-editor>
-        </popup>
     </div>
 </template>
 
 <script>
     import { bookmarks } from '../libs/chrome'
-    import list from '../components/list'
     import listToolBar from '../components/listToolBar'
-    import bookmarkEditor from '../components/bookmarkEditor'
+    import list from '../components/list'
+    import mixins from '../mixins/index'
 
     export default {
         name: 'node',
+        mixins: [mixins],
         components: {
-            list,
             listToolBar,
-            bookmarkEditor
+            list
         },
         data () {
             return {
@@ -94,19 +90,13 @@
                 this[menu] && this[menu](bookmark)
             },
             createSubFolder (bookmark) {
-                this.editing = true
-                this.goalBookmark = {title: '新建文件夹', parentId: bookmark.id}
+                this.createSubFolder(bookmark)
             },
             edit (bookmark) {
-                this.editing = true
-                this.goalBookmark = this.$clone(bookmark)
+                this.editBookmark(bookmark)
             },
             remove (bookmark) {
                 bookmarks.remove(bookmark)
-            },
-            close () {
-                this.editing = false
-                this.goalBookmark = null
             }
         }
     }

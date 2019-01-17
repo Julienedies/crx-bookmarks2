@@ -2,7 +2,7 @@
     <div>
         <button class="button" @click="download">备份配置</button>
         <label class="button" @click="upload" for="upload">恢复配置</label>
-        <button class="button" @click="download">数据清洗</button>
+        <button class="button" @click="clean">数据清洗</button>
         <input type="file" id="upload" name="upload" @change="upload" ref="file"
                style="position:absolute; left:-3000px;">
         <transition name="fade">
@@ -19,7 +19,7 @@
         name: 'setting',
         data () {
             return {
-                msg: []
+                msg: ''
             }
         },
         methods: {

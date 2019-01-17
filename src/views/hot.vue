@@ -16,17 +16,16 @@
     import getDb from '../libs/db'
     import list from '../components/list'
     import toolBar from '../components/listToolBar'
-    import bookmarkEditor from '../components/bookmarkEditor'
-    import editBookmark from '../mixins/editBookmark'
+    import mixins from '../mixins/index'
 
     const visitDb = getDb('visit')
 
     export default {
         name: 'hot',
+        mixins:[mixins],
         components: {
             toolBar,
-            list,
-            bookmarkEditor
+            list
         },
         data () {
             return {
@@ -70,7 +69,7 @@
                 bookmarks.remove(bookmark)
             },
             edit (bookmark) {
-                editBookmark(bookmark)
+                this.editBookmark(bookmark)  // 通过mixin混入editBookmark方法
             }
         }
     }

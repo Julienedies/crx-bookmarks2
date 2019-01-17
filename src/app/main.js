@@ -60,7 +60,6 @@ import {bookmarks} from '../libs/chrome/index'
 import vueex from '../vueex/index'
 Vue.use(vueex)
 
-
 console.log(process.env)
 
 window.v = new Vue({

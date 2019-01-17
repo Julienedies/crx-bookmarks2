@@ -18,28 +18,35 @@
         <!-- 上下文菜单 -->
         <div class="contextmenu">
             <slot>
-                <button @click="$emit('contextmenu', 'createSubFolder', bookmark)" v-if="!bookmark.url" title="新建子文件夹">
+                <button @click="createSubFolder(bookmark)" v-if="!bookmark.url" title="新建子文件夹">
                     <i class="fas fa-folder-plus"></i>
                 </button>
-                <button @click="edit" title="编辑"><i class="fas fa-edit"></i></button>
-                <button @click="remove" title="删除"><i class="far fa-trash-alt"></i></button>
+                <button @click="editBookmark(bookmark)" title="编辑"><i class="fas fa-edit"></i></button>
+                <button @click="remove(bookmark)" title="删除"><i class="far fa-trash-alt"></i></button>
             </slot>
         </div>
     </li>
 </template>
 
 <script>
+    import {bookmarks} from '../libs/chrome/index'
+    import mixins from '../mixins/index'
+    import editBookmark, { createSubFolder } from '../mixins/editBookmark'
     export default {
         name: 'listItem',
+        mixins: [mixins],
         props: {
             bookmark: Object
         },
         methods: {
-            edit () {
-                this.$emit('contextmenu', 'edit', this.bookmark)
+            createSubFolder(bookmark){
+                createSubFolder(bookmark)
             },
-            remove () {
-                this.$emit('contextmenu', 'remove', this.bookmark)
+            editBookmark(bookmark){
+                editBookmark(bookmark)
+            },
+            remove (bookmark) {
+                bookmarks.remove(bookmark)
             }
         }
     }
