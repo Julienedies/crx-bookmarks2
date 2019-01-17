@@ -1,6 +1,6 @@
 <template>
     <aside>
-        <tree :tree="tree" @contextmenu="onContextmenu"></tree>
+        <tree :tree="tree"></tree>
     </aside>
 </template>
 
@@ -29,9 +29,6 @@
         methods: {
             async getData () {
                 this.tree = await bookmarks.getTree(true)  // 数据结构见: /doc/tree.js
-            },
-            onContextmenu(menu, node){
-                console.log('asideBar onContextmenu => ', menu, node)
             }
         }
     }

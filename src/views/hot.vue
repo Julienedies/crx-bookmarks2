@@ -12,13 +12,12 @@
 </template>
 
 <script>
-    import Vue from 'vue'
     import { bookmarks } from '../libs/chrome/index'
     import getDb from '../libs/db'
     import list from '../components/list'
     import toolBar from '../components/listToolBar'
-    import popup from '../vueex/popup/popup'
     import bookmarkEditor from '../components/bookmarkEditor'
+    import editBookmark from '../mixins/editBookmark'
 
     const visitDb = getDb('visit')
 
@@ -71,36 +70,7 @@
                 bookmarks.remove(bookmark)
             },
             edit (bookmark) {
-
-                const vm = new Vue({
-                    components: {
-                        popup
-                    },
-                    data: {
-                        visible: true
-                    },
-                    render (h) {
-                        let child = h(bookmarkEditor, {
-                            slot: 'default', props: {
-                                bookmark: this.$clone(bookmark)
-                            },
-                            on: {
-                                'close': (...args) => {
-                                    this.visible = false
-                                }
-                            }
-                        })
-                        let popupOptions = {
-                            props: {
-                                value: this.visible
-                            },
-                        }
-                        return h(popup, popupOptions, [child])
-                    }
-                })
-                vm.$mount(document.createElement('div'))
-                document.body.appendChild(vm.$el)
-
+                editBookmark(bookmark)
             }
         }
     }

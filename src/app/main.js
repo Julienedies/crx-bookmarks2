@@ -75,8 +75,9 @@ window.v = new Vue({
     },
     mounted() {
         let that = this;
-        bookmarks.on(function (eventName) {
-            let args = [].slice.call(arguments, 0)
+        bookmarks.on(function (eventName, ...args) {
+            //let args = [].slice.call(arguments, 1)
+            console.log('111111', eventName, args)
             that.event = {name: eventName, args: args}
         });
     },

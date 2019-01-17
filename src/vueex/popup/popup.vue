@@ -1,5 +1,5 @@
 <template>
-    <div class="popup-wrap" v-show="visible">
+    <div class="popup-wrap" v-show="visible" v-if="!exit">
         <div class="mask" @click="close"></div>
         <div class="popup">
             <slot></slot>
@@ -18,6 +18,7 @@
         },
         data(){
            return {
+               exit: false,
                visible: this.value
            }
         },

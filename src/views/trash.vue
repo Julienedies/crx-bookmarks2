@@ -54,7 +54,7 @@
                 db.remove(bookmark)
             },
             clear () {
-                db.clear()
+                confirm('确认删除, 不可撤销!') && db.clear()
             }
         }
     }

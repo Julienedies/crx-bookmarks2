@@ -11,6 +11,7 @@
                         <button @click="createSubFolder(node)" title="新建子文件夹">
                             <i class="fas fa-folder-plus"></i>
                         </button>
+                        <button @click="remove(node)"><i class="far fa-trash-alt"></i></button>
                     </slot>
                 </div>
             </div>
@@ -20,6 +21,9 @@
 </template>
 
 <script>
+    import {bookmarks} from '../libs/chrome/index'
+    import editBookmark, { createSubFolder } from '../mixins/editBookmark'
+
     export default {
         name: 'tree',
         data () {
@@ -33,10 +37,13 @@
                 this.$set(node, 'extend', !node.extend)
             },
             edit (node) {
-                this.$emit('contextmenu', 'edit', node)
+                editBookmark(node)
             },
             createSubFolder (node) {
-                this.$emit('contextmenu', 'createSubFolder', node)
+                createSubFolder(node)
+            },
+            remove(node){
+                confirm('确认删除, 不可撤销!') && bookmarks.remove(node)
             }
         }
     }
