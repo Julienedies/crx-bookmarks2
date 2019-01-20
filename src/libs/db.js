@@ -28,6 +28,7 @@ class Db {
     }
 
     constructor (namespace) {
+        if(!(this instanceof Db)) return new Db(namespace)
         this.namespace = namespace
         this.separator = '.'
         // 后续优化, 重复添加了事件监听
