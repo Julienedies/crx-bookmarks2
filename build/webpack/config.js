@@ -23,6 +23,8 @@ const projectRoot = path.resolve(__dirname, '../../')
 const outputPath = path.resolve(__dirname, '../../dist')
 const context = path.resolve(__dirname, '../../src')
 
+const nodeSassIncludePaths = [path.resolve(__dirname, '../../../')]
+
 const devtool = config.devtool
 
 const output = {
@@ -37,6 +39,14 @@ const entry = {
     'app': ['./app/main.js'],
     'popup': ['./popup/main.js'],
     'background': ['./app/background.js']
+}
+
+const resolve = {
+    alias: {
+        //basic: path.resolve(__dirname, '../../../basic/'),
+        vueex: path.resolve(__dirname, '../../src/vendor/vueex/')
+    },
+    extensions: ['.js', '.vue', '.json', '.scss', '.css', '*']
 }
 
 const plugins = [
@@ -113,11 +123,13 @@ module.exports = {
     projectRoot,
     publicPath,
     context,
+    nodeSassIncludePaths,
     devtool,
     cssLoader,
     devServer,
     entry,
     output,
+    resolve,
     externals,
     plugins
 }

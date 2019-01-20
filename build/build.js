@@ -5,7 +5,7 @@
 
 const webpack = require('webpack')
 
-const config = require('./webpack/base.js')
+const config = require('./webpack/index.js')
 
 webpack(config, (err, stats) => {
     let err2 = stats.hasErrors()

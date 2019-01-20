@@ -15,10 +15,7 @@ module.exports = {
     context: config.context,  // 基础目录，绝对路径，用于从配置中解析入口起点(entry point)和 loader
     entry: config.entry,
     output: config.output,
-    resolve: {
-        alias: {},
-        extensions: ['.js', '.vue', '.json', 'scss', 'css']
-    },
+    resolve: config.resolve,
     externals: config.externals,
     devServer: config.devServer,
     module: {
@@ -89,7 +86,7 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            includePaths: ['']
+                            includePaths: config.nodeSassIncludePaths || ['']
                         }
                     }
                 ]
