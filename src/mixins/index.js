@@ -7,5 +7,10 @@ import editBookmark from './editBookmark'
 export default {
     methods: {
         editBookmark
+    },
+    watch: {
+        '$root.event'(newVal, oldVal){
+           this.getData &&  this.getData()
+        }
     }
 }

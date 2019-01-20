@@ -51,7 +51,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../basic/src/basic.scss";
+    @import "../css/basic/src/basic.scss";
 
     .tool-bar {
         @include flex-middle;

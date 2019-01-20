@@ -4,7 +4,7 @@
  */
 
 import Vue from 'vue'
-import popup from '../vueex/popup/popup'
+import { popup } from 'vueex'
 import bookmarkEditor from '../components/bookmarkEditor'
 
 let vm
@@ -37,8 +37,8 @@ const options = {
 }
 
 
-function getInstance(){
-    if(!vm){
+function getInstance () {
+    if (!vm) {
         vm = vm || new Vue(options)
         vm.$mount(document.createElement('div'))
         document.body.appendChild(vm.$el)
@@ -46,13 +46,13 @@ function getInstance(){
     return vm
 }
 
-function editBookmark(bookmark) {
+function editBookmark (bookmark) {
     vm = getInstance()
     vm.bookmark = bookmark
     vm.visible = true
 }
 
-export function createSubFolder (bookmark){
+export function createSubFolder (bookmark) {
     editBookmark({title: '新建文件夹', parentId: bookmark.id})
 }
 

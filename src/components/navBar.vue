@@ -30,7 +30,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../basic/src/basic";
+    @import "../css/basic/src/basic";
 
     nav{
         @include flex-middle;

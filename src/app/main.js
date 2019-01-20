@@ -57,7 +57,7 @@ import App from './App'
 
 import {bookmarks} from '../libs/chrome/index'
 
-import vueex from '../vueex/index'
+import vueex from 'vueex'
 Vue.use(vueex)
 
 console.log(process.env)

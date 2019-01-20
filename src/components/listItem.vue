@@ -53,7 +53,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../basic/src/basic.scss";
+    @import "../css/basic/src/basic.scss";
 
     li {
         @include flex-middle;

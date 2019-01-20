@@ -35,7 +35,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../basic/src/basic.scss";
+    @import "../css/basic/src/basic.scss";
 
     aside {
         padding: $gap2 $gap $gap 0;

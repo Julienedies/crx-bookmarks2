@@ -17,7 +17,7 @@ import './style.scss'
 import Vue from 'vue'
 import App from './App'
 
-import vueex from '../vueex/index'
+import vueex from 'vueex'
 
 Vue.use(vueex)
 

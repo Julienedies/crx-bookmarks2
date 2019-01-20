@@ -6,10 +6,12 @@
 
 <script>
     import { bookmarks } from '../libs/chrome/index'
+    import mixins from '../mixins/index'
     import list from '../components/list'
 
     export default {
         name: 'search',
+        mixins: [mixins],
         components: {
             list
         },

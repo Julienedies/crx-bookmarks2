@@ -36,7 +36,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../basic/src/basic.scss";
+    @import "../css/basic/src/basic.scss";
     
     #app{
         position:absolute;
