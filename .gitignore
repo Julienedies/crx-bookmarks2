@@ -25,9 +25,10 @@ config.json
 dist/
 
 # 临时
+src/css/basic/
 src/basic/
 src/vueex/
-src/libs/
+src/jlibs/
 src/vendor/
 assets/img/*
 !assets/img/bookmarks2.png
