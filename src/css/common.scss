@@ -1,28 +1,40 @@
 @import "basic/src/basic.scss";
 @import "basic/src/reset.scss";
 
-html, body{
-  font: 14px/2 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif!important;
-  font-family: Helvetica Neue,Verdana,Arial,Hiragino Sans GB,WenQuanYi Micro Hei,Heiti SC,STHeiti,Microsoft Yahei,SimSun,sans-serif!important;
+html, body {
+  font: 14px/2 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif !important;
+  font-family: Helvetica Neue, Verdana, Arial, Hiragino Sans GB, WenQuanYi Micro Hei, Heiti SC, STHeiti, Microsoft Yahei, SimSun, sans-serif !important;
   background: $baseColor2;
   overflow: hidden;
   height: 100%;
 }
 
-.fa, .far, .fas{
-  font-size:1.4em;
-  vertical-align: middle;
-  color:#459de3;
-  //background-color: $primaryColor3;
+.active {
+  color: #459de3;
+}
+button{
+    color:$baseColor3;
 }
 
-a{
+.fa, .far, .fas {
+  font-size: 1.4em;
+  vertical-align: middle;
   color: inherit;
-  &:hover{
+  //background-color: $primaryColor3;
+  &:active {
+
+  }
+}
+
+
+a {
+  color: inherit;
+
+  &:hover {
     color: inherit;
   }
 }
 
-[v-cloak]{
+[v-cloak] {
   display: none;
 }

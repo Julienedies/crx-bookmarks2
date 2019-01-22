@@ -3,11 +3,12 @@
         <list-tool-bar :paths="paths" :count="count" :sortOptions="sortOptions" @sortByChange="onSortByChange"
                        @sortReverseChange="onSortReverseChange"></list-tool-bar>
 
-        <list :bookmarkArray="bookmarkArray" @contextmenu="onContextmenu"></list>
+        <list :bookmarkArray="bookmarkArray" :showType="ui.list.showType"  @contextmenu="onContextmenu"></list>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     import { bookmarks } from '../libs/chrome'
     import listToolBar from '../components/listToolBar'
     import list from '../components/list'
@@ -39,6 +40,9 @@
             }
         },
         computed: {
+            ...mapState({
+                ui: 'ui'
+            }),
             count () {
                 return this.bookmarkArray.length
             }

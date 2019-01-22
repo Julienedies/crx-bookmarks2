@@ -10,9 +10,9 @@
                 <option v-for="option of sortOptions" :value="option.value">{{option.text}}</option>
             </select>
         </div>
-        <div v-if="sortOptions">
+        <div>
             <label class="checkbox">
-                &nbsp;&nbsp;<input type="checkbox" v-model="sortReverse" @change="$emit('sortReverseChange', sortReverse)">
+                &nbsp;&nbsp;<input type="checkbox" v-model="reverse">
                 排序反转
             </label>
         </div>
@@ -23,13 +23,15 @@
         </div>
         <div class="counter" v-if="count"> 共 {{ count }} 项</div>
         <div class="show-type">
-            <button><i class="fa fa-list"></i></button>
-            <button><i class="fa fa-th"></i></button>
+            <button :class="{active: ui.list.showType === 'list'}" @click="updateUi(['list.showType', 'list'])"><i class="fa fa-list"></i></button>
+            <button :class="{active: ui.list.showType === 'gird'}" @click="updateUi(['list.showType', 'gird'])"><i class="fa fa-th"></i></button>
         </div>
     </div>
 </template>
 
 <script>
+    import { mapState, mapMutations } from 'vuex'
+
     export default {
         name: 'list-tool-bar',
         props: {
@@ -40,12 +42,25 @@
         data () {
             return {
                 sortBy: '',
-                sortReverse: false
             }
         },
-        watch: {
-            'sortBy': function (newVal, oldVal) {
+        computed: {
+            ...mapState({
+                ui: 'ui'
+            }),
+            reverse: {
+                get () {
+                    return this.$store.state.ui.list.reverse
+                },
+                set (val) {
+                    this.$store.commit('updateUi', ['list.reverse', val])
+                }
             }
+        },
+        methods: {
+            ...mapMutations({
+                updateUi: 'updateUi'
+            })
         }
     }
 </script>
@@ -63,10 +78,12 @@
             @include flex-middle;
             flex: 1 1 auto;
         }
-        .select select{
-            width:100%;
+
+        .select select {
+            width: 100%;
         }
-        .show-type, .counter, .flex-shrink-right{
+
+        .show-type, .counter, .flex-shrink-right {
             flex: 0;
             padding-left: 2 * $gap;
             @include flex-right;

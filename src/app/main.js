@@ -13,14 +13,6 @@ import './style.scss'
 
 import Vue from 'vue'
 
-/*import 'element-ui/lib/theme-chalk/index.css'
-import ElementUI from 'element-ui'
-Vue.use(ElementUI)*/
-
-/*import 'vuetify/dist/vuetify.min.css'
-import Vuetify from 'vuetify'
-Vue.use(Vuetify)*/
-
 import router from '../router/index'
 import store from '../vuex/index'
 

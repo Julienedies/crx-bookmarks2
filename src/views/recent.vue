@@ -40,11 +40,7 @@
             this.getData()
         },
         mounted () {
-            let that = this;
-            bookmarks.on((...args) => {
-                console.log(args)
-                this.getData()
-            })
+
         },
         methods: {
             async getData () {

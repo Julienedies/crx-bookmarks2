@@ -12,7 +12,7 @@
         <!-- 文件夹 -->
         <router-link v-else :to="`/node/${bookmark.id}`">
             <img src="../img/folder-icon.png" class="favicon">
-            <span>{{bookmark.title}}</span>
+            <span class="">{{bookmark.title}}</span>
         </router-link>
 
         <!-- 上下文菜单 -->
@@ -53,64 +53,5 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../css/basic/src/basic.scss";
-
-    li {
-        @include flex-middle;
-        min-height: 2.6em;
-        padding: $gap/2;
-
-        &:hover {
-            background: rgba(180, 180, 180, 0.1);
-
-            .contextmenu {
-                display: inherit;
-            }
-        }
-
-        .contextmenu {
-            display: none;
-            white-space: nowrap;
-
-            button {
-                cursor: pointer;
-                color: #9abad4;
-                padding: 0 $gap2;
-                border: none;
-                font: inherit;
-                background: none;
-            }
-        }
-
-        a {
-            @extend .flex-middle;
-            flex-grow: 1;
-            padding-left: $gap;
-            white-space: nowrap;
-            overflow: hidden;
-
-            &:hover {
-                .url {
-                    display: inline;
-                }
-            }
-
-            .favicon {
-                width: 16px !important;
-                margin-right: $gap;
-            }
-
-            > span {
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .url {
-                display: none;
-                margin-left: 2em;
-                color: $baseColor3;
-            }
-        }
-    }
 
 </style>

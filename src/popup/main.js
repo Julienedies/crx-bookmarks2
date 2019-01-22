@@ -3,10 +3,10 @@
  * Created by j on 2019-01-10.
  */
 
-setTimeout(() => {
+/*setTimeout(() => {
     if(window.innerWidth < 1000)
     chrome.tabs.create({ url: './dist/app.html', selected: true })
-}, 100)
+}, 100)*/
 
 import 'babel-polyfill'
 

@@ -17,6 +17,7 @@
     import list from '../components/list'
     import toolBar from '../components/listToolBar'
     import mixins from '../mixins/index'
+    import {mapState} from 'vuex'
 
     const visitDb = getDb('visit')
 
@@ -33,18 +34,24 @@
             }
         },
         computed: {
+            ...mapState({
+               ui: 'ui'
+            }),
             count () {
                 return this.bookmarkArray.length
             },
         },
         mounted () {
             this.getData()
-            visitDb.on('change', (args) => {
+            function onChange(args){
                 let StorageEvent = args[0]
                 this.getData()
+            }
+            visitDb.on('change', onChange)
+
+            this.$once('hook:beforeDestroy', function () {
+                visitDb.off('change', onChange)
             })
-        },
-        beforeDestroy () {
         },
         watch: {
             '$root.event' (newVal) {

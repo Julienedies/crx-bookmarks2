@@ -54,7 +54,7 @@
                 db.remove(bookmark)
             },
             clear () {
-                confirm('确认删除, 不可撤销!') && db.clear()
+                confirm('确认清空回收站, 该操作不可撤销!') && db.clear()
             }
         }
     }

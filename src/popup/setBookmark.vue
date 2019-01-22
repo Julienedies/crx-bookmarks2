@@ -52,7 +52,7 @@
     import { bookmarks, tabs } from '../libs/chrome/index'
 
     export default {
-        name: 'add',
+        name: 'setBookmark',
         data () {
             return {
                 bookmark: {},

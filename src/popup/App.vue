@@ -1,13 +1,14 @@
 <template>
-    <div class="box" v-cloak>
+    <div class="box">
         <div style="text-align:right; padding:0.5rem;">
             <button class="button" @click="open">打开书签管理器</button>
         </div>
         <div class="">
             <div class="">
-                <add></add>
+                <setBookmark></setBookmark>
             </div>
             <div class="">
+                <hot></hot>
                 <recent></recent>
             </div>
         </div>
@@ -18,15 +19,17 @@
     import { bookmarks, tabs } from '../libs/chrome/index'
     import getDb from '../libs/db'
     import recent from '../views/recent'
-    import add from './add'
+    import hot from '../views/hot'
+    import setBookmark from './setBookmark'
 
     const visitDb = getDb('visit')
 
     export default {
         name: 'App',
         components: {
-            add,
-            recent
+            setBookmark,
+            recent,
+            hot
         },
         data(){
             return {
