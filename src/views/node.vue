@@ -51,11 +51,10 @@
         },
         methods: {
             async getData () {
-                this.id = this.$route.params.id || this.id
-                let array = await this.getBookmarksForNode(this.id)
-                this.reverse && array.reverse()
-                this.bookmarkArray = array
-                this.paths = await this.getPaths(this.id)
+                let id = this.$route.params.id
+                this.bookmarkArray = await this.getBookmarksForNode(id)
+                this.reverse && this.bookmarkArray.reverse()
+                this.paths = await this.getPaths(id)
             },
             async getBookmarksForNode (id) {
                 return await bookmarks.getChildren(id).then(data => data)
