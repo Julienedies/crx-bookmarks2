@@ -21,14 +21,33 @@
         created () {
             this.getData()
         },
-        watch: {
-           '$root.event'(newVal){
-               this.getData()
-           }
-        },
         methods: {
             async getData () {
-                this.tree = await bookmarks.getTree(true)  // 数据结构见: /doc/tree.js
+                let isOnlyFolder = true // 只保留文件夹
+                this.tree = await bookmarks.getTree(isOnlyFolder)  // 数据结构见: /doc/tree.js
+            }
+        },
+        watch: {
+            '$root.event'(event){
+                let {name, args} = event
+                let [id, bookmark] = args
+                let tree = this.tree
+                let x = []
+                if(name === 'onRemoved'){
+                    function f (tree) {
+                        let len = tree.length
+                        while (len--) {
+                            let node = tree[len]
+                            if (node.id === id) {
+                                tree.splice(len, 1)
+                            } else if(node.children) {
+                                f(node.children)
+                            }
+                        }
+                    }
+                    return f(this.tree)
+                }
+                this.getData()
             }
         }
     }

@@ -8,12 +8,10 @@
 <script>
     import listToolBar from '../components/listToolBar'
     import list from '../components/list'
-    import mixins from '../mixins/index'
     import { bookmarks } from '../libs/chrome/index'
 
     export default {
         name: 'search',
-        mixins: [mixins],
         components: {
             listToolBar,
             list
@@ -35,6 +33,9 @@
         watch: {
             '$route' (to, from) {
                 this.getData()
+            },
+            '$store.state.ui.list.reverse'(){
+                this.bookmarkArray.reverse()
             }
         }
     }

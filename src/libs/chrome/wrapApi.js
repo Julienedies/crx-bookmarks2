@@ -73,7 +73,7 @@ export default function wrapApi (api, wrapper = {}) {
             console.log(`addListener for ${wrapper.name}`, eventName)
             events.includes(eventName) && api[eventName].addListener(function (...args) {
                 console.log(eventName, args)
-                args.push(eventName)
+                args.unshift(eventName)
                 callback.apply(null, args)
             })
         })
