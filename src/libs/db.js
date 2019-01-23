@@ -12,24 +12,30 @@ const emitter = new EventEmitter()
 window.addEventListener('storage', (event) => {
     console.log('window.storage event', +new Date, event)
     let {key, oldValue, newValue} = event
-    let e
-    let arg
+    let e = ''
+    let arg = null
+    let obj = null
     let name = key.split(/[^\w]+/)[0]
     if (!oldValue && newValue) {
         e = 'add'
         arg = newValue
-    }
-    if (oldValue && !newValue) {
+    } else if (oldValue && !newValue) {
         e = 'remove'
         arg = oldValue
-    }
-    if (oldValue && newValue) {
+    } else if (oldValue && newValue) {
         e = 'change'
         arg = newValue
     }
+
+    try {
+        obj = JSON.parse(arg)
+    } catch (e) {
+        console.log(e)
+        obj = null
+    }
     LISTENER.forEach(o => {
         if (o.namespace === name) {
-            o.emit(e, arg, event)
+            o.emit(e, obj || arg, event)
         }
     })
 })
@@ -65,7 +71,7 @@ class Db {
     }
 
     on (eventName, listener) {
-        eventName = this.prefix(eventName)
+        eventName = this._prefix(eventName)
         if (!LISTENER.includes(this)) {
             LISTENER.push(this)
         }
@@ -74,7 +80,7 @@ class Db {
     }
 
     off (eventName, listener) {
-        eventName = this.prefix(eventName)
+        eventName = this._prefix(eventName)
         delete this._on[eventName]
         if (Object.keys(this._on).length === 0) {
             removeFormArray(this, LISTENER)
@@ -83,16 +89,20 @@ class Db {
     }
 
     emit (eventName, ...args) {
-        eventName = this.prefix(eventName)
-        args.push(eventName)
-        if (this._on[eventName]) {
+        eventName = this._prefix(eventName)
+        let glob = this._prefix('*')
+        if (this._on[glob]) {
+            args.unshift(eventName)
+            emitter.emit(glob, args)
+        } else if (this._on[eventName]) {
+            args.push(eventName)
             emitter.emit(eventName, args)
         } else {
-            console.log('Not listener for ', eventName, args)
+            console.log('Not listener for ', eventName, args, this)
         }
     }
 
-    prefix (val = '') {
+    _prefix (val = '') {
         return `${ this.namespace }${ this.separator }${ val }`
     }
 }
@@ -101,12 +111,12 @@ class Db {
 const methods = {
 
     get (record) {
-        let namespace = this.prefix()
+        let namespace = this._prefix()
         let result = {}
         let id = typeof record === 'object' ? record.id : record
 
         if (id) {
-            return JSON.parse(localStorage.getItem(this.prefix(id)))
+            return JSON.parse(localStorage.getItem(this._prefix(id)))
         } else {
             for (let i in localStorage) {
                 if (i.indexOf(namespace) === 0) {
@@ -116,24 +126,22 @@ const methods = {
             }
             return result
         }
-
     },
 
     set (record) {
         let namespace = this.namespace + '.'
         let id = record.id || Math.random().toFixed(8).replace('0.', '')
-        id = this.prefix(id)
+        id = this._prefix(id)
         localStorage.setItem(id, JSON.stringify(record))
     },
 
     remove (record) {
         let id = typeof record === 'object' ? record.id : record
-        localStorage.removeItem(this.prefix(id))
+        return localStorage.removeItem(this._prefix(id))
     },
 
     clear () {
-        let namespace = this.prefix()
-
+        let namespace = this._prefix()
         for (let i in localStorage) {
             if (i.indexOf(namespace) === 0) {
                 localStorage.removeItem(i)
@@ -141,28 +149,25 @@ const methods = {
         }
     },
 
-    sync () {
-        let result = {}
-        result[this.namespace] = this.get()
-        return storage.set(result)
-    }
-
 }
 
 // 包装一些方法到promise, 方便以后改变存储方式
-Object.keys(methods).forEach(key => {
-    Db.prototype[key] = function (...args) {
+Object.keys(methods).forEach(method => {
+    Db.prototype[method] = function (...args) {
         const that = this
-        const method = methods[key]
+        const fn = methods[method]
         return new Promise(function (resolve, reject) {
-            let result = method.apply(that, args)
-            console.log(`Db ${ that.namespace } exec db.${ key }, return => `, result)
+            console.log(`Db ${ that.namespace } exec ${ method }; return => `, result)
+            let result = fn.apply(that, args)
 
-            if (/set|clear/.test(key)) {
-                console.log(`emit ${ that.namespace } change.`);
-                that.emit('change', key, result)
+            let arg = args[0]
+            if (/remove/.test(method)) {
+                that.emit('remove', arg, result)
+            } else if (/set/.test(method)) {
+                that.emit('change', arg, result)
+            } else if (/clear/.test(method)) {
+                that.emit('clear', arg, result)
             }
-
             resolve(result)
         })
     }

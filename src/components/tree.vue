@@ -9,15 +9,15 @@
                     <slot>
                         <div class="contextmenu">
                             <div>
-                                <button @click="edit(node)" title="修改"><i class="fas fa-edit"></i>修改</button>
-                            </div>
-                            <div>
                                 <button @click="createSubFolder(node)" title="新建子文件夹">
                                     <i class="fas fa-folder-plus"></i>新建子文件夹
                                 </button>
                             </div>
                             <div>
-                                <button @click="remove(node)"><i class="far fa-trash-alt"></i>删除</button>
+                                <button @click="edit(node)" title="编辑"><i class="fas fa-edit"></i>编辑</button>
+                            </div>
+                            <div>
+                                <button @click="remove(node)"><i class="far fa-trash-alt"></i> 删除</button>
                             </div>
                         </div>
                     </slot>
@@ -34,11 +34,6 @@
 
     export default {
         name: 'tree',
-        data () {
-            return {
-                contextmenuId: null
-            }
-        },
         props: {
             tree: Array
         },
@@ -57,7 +52,6 @@
             },
             onContextmenu (e, node) {
                 e.preventDefault();
-                console.log(4444, this, e)
                 this.$set(node, 'contextmenu', e)
             }
         }
@@ -80,10 +74,15 @@
 
             i {
                 margin-right: 1rem;
+                color: $activeColor2;
             }
 
             &:hover {
-                background: $baseColor;
+                background: $activeColor2;
+
+                button, i {
+                    color: #fff;
+                }
             }
         }
     }
@@ -93,10 +92,11 @@
         transition: height 0.2s ease-in;
 
         .node-item {
-            &.selected {
-                > a {
-                    font-weight: bold;
-                    color: #0386d8;
+            &:hover {
+                background: $activeColor2;
+                color: #fff;
+                .arrow, a.router-link-active{
+                    color: #fff!important;
                 }
             }
 
@@ -121,7 +121,6 @@
                 width: 1.2em;
                 padding: $gap 0;
                 text-align: center;
-                color: $baseColor3;
                 color: #6f6f6f;
                 transform: rotate(-90deg);
                 transition: transform 0.2s ease-out;
@@ -136,15 +135,10 @@
 
                 &.router-link-exact-active.router-link-active {
                     font-weight: bold;
-                    color: #0386d8;
-                }
-
-                &:hover {
+                    color: $activeColor1;
                 }
             }
 
-            &:hover {
-            }
         }
 
         li {

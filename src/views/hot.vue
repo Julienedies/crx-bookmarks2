@@ -1,6 +1,7 @@
 <template>
     <div>
         <tool-bar :count="count"></tool-bar>
+
         <list :bookmark-array="bookmarkArray">
             <template slot-scope="{bookmark}">
                 <button @click="edit(bookmark)"><i class="fas fa-edit"></i></button>
@@ -8,6 +9,7 @@
                 <button>{{ bookmark.visit.count }}</button>
             </template>
         </list>
+
     </div>
 </template>
 
@@ -17,13 +19,13 @@
     import list from '../components/list'
     import toolBar from '../components/listToolBar'
     import mixins from '../mixins/index'
-    import {mapState} from 'vuex'
+    import { mapState } from 'vuex'
 
     const visitDb = getDb('visit')
 
     export default {
         name: 'hot',
-        mixins:[mixins],
+        mixins: [mixins],
         components: {
             toolBar,
             list
@@ -35,29 +37,25 @@
         },
         computed: {
             ...mapState({
-               ui: 'ui'
+                reverse: state => state.ui.list.reverse
             }),
             count () {
                 return this.bookmarkArray.length
             },
         },
-        mounted () {
+        created () {
             this.getData()
-            function onChange(args){
-                let StorageEvent = args[0]
+
+            let callback = (...args) => {
+                console.log('db event listener', args)
                 this.getData()
             }
-            visitDb.on('change', onChange)
+
+            visitDb.on('*', callback)
 
             this.$once('hook:beforeDestroy', function () {
-                visitDb.off('change', onChange)
+                visitDb.off('*', callback)
             })
-        },
-        watch: {
-            '$root.event' (newVal) {
-                console.log('$root.event watcher => ', newVal)
-                this.getData()
-            }
         },
         methods: {
             async getData () {
@@ -68,7 +66,8 @@
                     bookmarkArray.forEach(bookmark => {
                         bookmark.visit = visitObj[bookmark.id]
                     })
-                    bookmarkArray.sort((a,b) => b.visit.count - a.visit.count)
+                    bookmarkArray.sort((a, b) => b.visit.count - a.visit.count)
+                    this.reverse && bookmarkArray.reverse()
                     this.bookmarkArray = bookmarkArray
                 }
             },
@@ -76,9 +75,15 @@
                 bookmarks.remove(bookmark)
             },
             edit (bookmark) {
-                this.editBookmark(bookmark)  // 通过mixin混入editBookmark方法
+                this.editBookmark(bookmark)  // 通过mixin混入的editBookmark方法
             }
-        }
+        },
+        watch: {
+            '$root.event' (newVal) {
+                console.log('$root.event watcher => ', newVal)
+                this.getData()
+            }
+        },
     }
 </script>
 

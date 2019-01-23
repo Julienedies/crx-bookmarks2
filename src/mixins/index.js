@@ -9,8 +9,12 @@ export default {
         editBookmark
     },
     watch: {
-        '$root.event'(newVal, oldVal){
-           this.getData &&  this.getData()
-        }
+        '$root.event' (newVal, oldVal) {
+            console.log('mixins watch $root.event', this.name)
+            this.getData && this.getData()
+        },
+        '$store.state.ui.list.reverse' (newVal) {
+            this.bookmarkArray && this.bookmarkArray.reverse()
+        },
     }
 }

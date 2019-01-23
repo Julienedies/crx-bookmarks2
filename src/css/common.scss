@@ -9,11 +9,8 @@ html, body {
   height: 100%;
 }
 
-.active {
-  color: #459de3;
-}
-button{
-    color:$baseColor3;
+.active{
+  color: $activeColor2;
 }
 
 .fa, .far, .fas {
@@ -34,6 +31,8 @@ a {
     color: inherit;
   }
 }
+
+::selection { background:transparent; color: inherit;}
 
 [v-cloak] {
   display: none;

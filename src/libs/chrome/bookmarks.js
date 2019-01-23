@@ -3,11 +3,11 @@
  * Created by j on 2019-01-05.
  */
 
-import wrapApi from './util'
+import wrapApi from './wrapApi'
 
 const events = ['onCreated', 'onRemoved', 'onChanged', 'onMoved', 'onChildrenReordered', 'onImportBegan', 'onImportEnded']
 
-const promise = wrapApi(chrome.bookmarks)
+const promise = wrapApi(chrome.bookmarks, {name:'bookmarks'})
 
 const api = {
     on (eventName, listener) {
@@ -86,9 +86,9 @@ const api = {
 }
 
 // 调试用
-api.on(function (...args) {
+/*api.on(function (...args) {
     console.log(args[0], args)
-})
+})*/
 
 
 export default api

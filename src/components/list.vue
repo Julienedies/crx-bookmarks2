@@ -1,19 +1,16 @@
 <template>
     <div>
-        <ul v-if="bookmarkArray && bookmarkArray.length" :class="listType || ui.list.showType">
+        <ul :class="listType || ui.list.showType">
             <list-item v-for="bookmark of bookmarkArray" :bookmark="bookmark" :key="bookmark.id" @contextmenu="onContextmenu">
                 <slot :bookmark="bookmark"></slot>
             </list-item>
         </ul>
-        <div v-else>
-            没有数据.
-        </div>
     </div>
 </template>
 
 <script>
     import listItem from './listItem'
-    import {mapState} from 'vuex'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'list',
@@ -27,36 +24,26 @@
                 default: 'list'   // class: list | gird
             }
         },
-        data() {
+        data () {
             return {
                 listType: ''
             }
         },
-        computed:{
-                ...mapState({
-                    ui:'ui',
-                })
+        computed: {
+            ...mapState({
+                ui: 'ui',
+            })
         },
-        mounted(){
-            if(window.innerWidth < 900){
+        mounted () {
+            if (window.innerWidth < 900) {
                 this.listType = 'gird'
             }
         },
         methods: {
-            onContextmenu(...args) {
+            onContextmenu (...args) {
                 console.log('contextmenu', args)
                 this.$emit('contextmenu', args[0], args[1])
             }
-        },
-        watch:{
-            'bookmarkArray'(newVal, oldval){
-                if(!oldval.length && this.$store.state.ui.list.reverse){
-                    this.bookmarkArray.reverse()
-                }
-            },
-            '$store.state.ui.list.reverse'(newVal){
-                this.bookmarkArray.reverse()
-            },
         }
     }
 </script>
@@ -64,33 +51,8 @@
 <style lang="scss" scoped>
     @import "../css/basic/src/basic.scss";
 
-    ul.list {
+    /deep/ ul.list {
         padding: $gap 0;
-    }
-    /deep/ ul.gird{
-        display: flex;
-        flex-flow: row wrap;
-        //justify-content: space-between;
-        align-content:space-around;
-        >li{
-            flex: 0 0 19%;
-            margin:0 1%  1% 0;
-            height: calc(15vw);
-/*            min-height:15em;
-            max-height: 20em;*/
-            border: solid 1px $baseColor3;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            >a{
-                .favicon{
-                }
-            }
-            .url, .contextmenu{
-                display: none;
-            }
-        }
-    }
-    /deep/ ul.list{
         li {
             @include flex-middle;
             min-height: 2.6em;
@@ -111,6 +73,7 @@
                 button {
                     cursor: pointer;
                     color: #9abad4;
+                    color: $activeColor2;
                     padding: 0 $gap2;
                     border: none;
                     font: inherit;
@@ -147,6 +110,34 @@
                     color: $baseColor3;
                 }
             }
+        }
+    }
+
+    /deep/ ul.gird {
+        display: flex;
+        flex-flow: row wrap;
+        //justify-content: space-between;
+        align-content: space-around;
+
+        > li {
+            flex: 0 0 19%;
+            margin: 0 1% 1% 0;
+            height: calc(15vw);
+            /*            min-height:15em;
+                        max-height: 20em;*/
+            border: solid 1px $baseColor3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            > a {
+                .favicon {
+                }
+            }
+
+            .url, .contextmenu {
+                display: none;
+            }
+
         }
     }
 </style>

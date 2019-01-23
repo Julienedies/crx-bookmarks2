@@ -88,5 +88,13 @@
             padding-left: 2 * $gap;
             @include flex-right;
         }
+        .show-type{
+             button{
+                 color: $baseColor3;
+                 &.active{
+                     color: $activeColor2;
+                 }
+             }
+        }
     }
 </style>

@@ -1,18 +1,17 @@
 <template>
     <div>
-        <list-tool-bar :paths="paths" :count="count" :sortOptions="sortOptions" @sortByChange="onSortByChange"
-                       @sortReverseChange="onSortReverseChange"></list-tool-bar>
+        <list-tool-bar :paths="paths" :count="count" :sortOptions="sortOptions" @sortByChange="onSortByChange"></list-tool-bar>
 
-        <list :bookmarkArray="bookmarkArray" :showType="ui.list.showType"  @contextmenu="onContextmenu"></list>
+        <list :bookmarkArray="bookmarkArray" @contextmenu="onContextmenu"></list>
     </div>
 </template>
 
 <script>
-    import {mapState} from 'vuex'
-    import { bookmarks } from '../libs/chrome'
     import listToolBar from '../components/listToolBar'
     import list from '../components/list'
     import mixins from '../mixins/index'
+    import { bookmarks } from '../libs/chrome'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'node',
@@ -41,7 +40,7 @@
         },
         computed: {
             ...mapState({
-                ui: 'ui'
+                reverse: state => state.ui.list.reverse
             }),
             count () {
                 return this.bookmarkArray.length
@@ -50,23 +49,12 @@
         created () {
             this.getData()
         },
-        watch: {
-            '$route' (to, from) {
-                console.log('watch $route', to, from)
-                this.getData()
-            },
-            '$root.event' (newValue) {
-                this.getData()
-            },
-            'sortBy' (newVal) {
-                console.log('sortBy => ', newVal)
-                this.$sortBookmarksBy(this.bookmarkArray, newVal)
-            }
-        },
         methods: {
             async getData () {
                 this.id = this.$route.params.id || this.id
-                this.bookmarkArray = await this.getBookmarksForNode(this.id)
+                let array = await this.getBookmarksForNode(this.id)
+                this.reverse && array.reverse()
+                this.bookmarkArray = array
                 this.paths = await this.getPaths(this.id)
             },
             async getBookmarksForNode (id) {
@@ -85,10 +73,6 @@
             onSortByChange (val) {
                 this.sortBy = val
             },
-            onSortReverseChange (v) {
-                console.log('onSortReverseChange => ', v)
-                this.bookmarkArray.reverse()
-            },
             onContextmenu (menu, bookmark) {
                 console.log('onContextmenu =>', menu, bookmark)
                 this[menu] && this[menu](bookmark)
@@ -101,6 +85,19 @@
             },
             remove (bookmark) {
                 bookmarks.remove(bookmark)
+            }
+        },
+        watch: {
+            '$route' (to, from) {
+                console.log('watch $route', to, from)
+                this.getData()
+            },
+            '$root.event' (newValue) {
+                this.getData()
+            },
+            'sortBy' (newVal) {
+                console.log('sortBy => ', newVal)
+                this.$sortBookmarksBy(this.bookmarkArray, newVal)
             }
         }
     }

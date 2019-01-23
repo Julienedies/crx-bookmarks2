@@ -29,20 +29,19 @@
 </template>
 
 <script>
-    import {bookmarks} from '../libs/chrome/index'
-    import mixins from '../mixins/index'
+    import { bookmarks } from '../libs/chrome/index'
     import editBookmark, { createSubFolder } from '../mixins/editBookmark'
+
     export default {
         name: 'listItem',
-        mixins: [mixins],
         props: {
             bookmark: Object
         },
         methods: {
-            createSubFolder(bookmark){
+            createSubFolder (bookmark) {
                 createSubFolder(bookmark)
             },
-            editBookmark(bookmark){
+            editBookmark (bookmark) {
                 editBookmark(bookmark)
             },
             remove (bookmark) {
