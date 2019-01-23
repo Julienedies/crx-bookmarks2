@@ -9,6 +9,40 @@ import { storage } from './chrome/index'
 
 const emitter = new EventEmitter()
 
+window.addEventListener('storage', (event) => {
+    console.log('window.storage event', +new Date, event)
+    let {key, oldValue, newValue} = event
+    let e
+    let arg
+    let name = key.split(/[^\w]+/)[0]
+    if (!oldValue && newValue) {
+        e = 'add'
+        arg = newValue
+    }
+    if (oldValue && !newValue) {
+        e = 'remove'
+        arg = oldValue
+    }
+    if (oldValue && newValue) {
+        e = 'change'
+        arg = newValue
+    }
+    LISTENER.forEach(o => {
+        if (o.namespace === name) {
+            o.emit(e, arg, event)
+        }
+    })
+})
+
+const LISTENER = []
+
+function removeFormArray (value, array) {
+    let index = array.findIndex(item => item === value)
+    if (typeof index === 'number') {
+        array.splice(index, 0)
+    }
+}
+
 class Db {
     static getAll () {
         return JSON.parse(JSON.stringify(localStorage))
@@ -23,34 +57,39 @@ class Db {
         })
     }
 
-    static initListener(){
-
-    }
-
     constructor (namespace) {
-        if(!(this instanceof Db)) return new Db(namespace)
+        if (!(this instanceof Db)) return new Db(namespace)
         this.namespace = namespace
         this.separator = '.'
-        // 后续优化, 重复添加了事件监听
-        window.addEventListener('storage', (e) => {
-            console.log('window.storage event', +new Date, this, e)
-            this.emit('change', e)
-        })
+        this._on = {}
     }
 
     on (eventName, listener) {
         eventName = this.prefix(eventName)
+        if (!LISTENER.includes(this)) {
+            LISTENER.push(this)
+        }
+        this._on[eventName] = true
         emitter.on(eventName, listener)
     }
 
     off (eventName, listener) {
         eventName = this.prefix(eventName)
+        delete this._on[eventName]
+        if (Object.keys(this._on).length === 0) {
+            removeFormArray(this, LISTENER)
+        }
         emitter.removeListener(eventName, listener)
     }
 
     emit (eventName, ...args) {
         eventName = this.prefix(eventName)
-        emitter.emit(eventName, args)
+        args.push(eventName)
+        if (this._on[eventName]) {
+            emitter.emit(eventName, args)
+        } else {
+            console.log('Not listener for ', eventName, args)
+        }
     }
 
     prefix (val = '') {
@@ -119,7 +158,7 @@ Object.keys(methods).forEach(key => {
             let result = method.apply(that, args)
             console.log(`Db ${ that.namespace } exec db.${ key }, return => `, result)
 
-            if (/set|remove|clear/.test(key)) {
+            if (/set|clear/.test(key)) {
                 console.log(`emit ${ that.namespace } change.`);
                 that.emit('change', key, result)
             }
