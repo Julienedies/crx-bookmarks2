@@ -33,6 +33,9 @@
                 let [id, bookmark] = args
                 let tree = this.tree
                 let x = []
+                if(bookmark.url){
+                    return;
+                }
                 if(name === 'onRemoved'){
                     function f (tree) {
                         let len = tree.length
