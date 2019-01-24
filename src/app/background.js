@@ -44,11 +44,15 @@ const f = function(tab){
     })
 }
 
+tabs.on((...args) => {
+    console.log(args)
+})
+
 
 // 记录浏览器访问记录, 统计最常使用的书签
-tabs.on('onCreated', (tab, event)=> {
+/*tabs.on('onCreated', (tab, event)=> {
     f(tab)
-})
+})*/
 
 tabs.on('onUpdated', function (tabId, changeInfe, tab, event) {
     console.log(tab.status)
