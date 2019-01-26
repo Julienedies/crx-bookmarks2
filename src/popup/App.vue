@@ -8,8 +8,6 @@
                 <setBookmark></setBookmark>
             </div>
             <div class="">
-                <hot></hot>
-                <recent></recent>
             </div>
         </div>
     </div>
@@ -42,7 +40,7 @@
         },
         methods: {
             async getData(){
-                this.recentBookmarkArray = await bookmarks.getRecent(100)
+                //this.recentBookmarkArray = await bookmarks.getRecent(100)
             },
             open(){
                 tabs.create({ url: './dist/app.html', selected: true })

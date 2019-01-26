@@ -40,6 +40,7 @@
                             添加
                         </button>
                         <button class="button" @click="selectFolder" style="margin-left:4em;">选择文件夹</button>
+                        <button class="button" @click="addShortcut">添加快捷方式</button>
                     </div>
                 </div>
             </div>
@@ -50,6 +51,9 @@
 
 <script>
     import { bookmarks, tabs } from '../libs/chrome/index'
+    import { Db } from '../libs/db'
+
+    const shortcutDb = new Db('shortcut')
 
     export default {
         name: 'setBookmark',
@@ -82,11 +86,22 @@
             },
             selectFolder () {
 
-            }
+            },
+            addShortcut(){
+                if(this.bookmark.id){
+                    shortcutDb.set(this.bookmark).then(data => {
+                        this.$msg('添加完成!')
+                    })
+                }
+            },
         }
     }
 </script>
 
 <style lang="scss" scoped>
-
+.control{
+    button{
+        margin-right:3rem;
+    }
+}
 </style>

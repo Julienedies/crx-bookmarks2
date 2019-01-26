@@ -17,7 +17,6 @@ import router from '../router/index'
 import store from '../vuex/index'
 
 import vueex from 'vueex'
-
 Vue.use(vueex)
 
 import install from './install'
@@ -42,8 +41,7 @@ window.v = new Vue({
     mounted () {
         let that = this;
         bookmarks.on(function (eventName, ...args) {
-            //let args = [].slice.call(arguments, 1)
-            console.log('111111', eventName, args)
+            console.log('bookmarks event => ', eventName, args)
             that.event = {name: eventName, args: args}
         });
     },

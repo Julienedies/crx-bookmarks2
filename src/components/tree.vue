@@ -2,9 +2,13 @@
     <ul>
         <li v-for="node of tree" :node="node" :key="node.id">
             <div class="node-item" :class="{'extend': !node.extend, selected: node.contextmenu}" @contextmenu="onContextmenu($event, node)">
+
                 <button class="arrow" v-if="node.children && node.children.length" @click="toggle(node)"> ▼</button>
                 <button class="arrow" v-else></button>
-                <router-link :to="`/node/${node.id}`" @click="select(node)">{{node.title || '根目录'}}</router-link>
+
+                <router-link :to="`/node/${node.id}`" v-if="!selectable">{{node.title || '根目录'}}</router-link>
+                <a @click="selected(node)" v-else>{{node.title || '根目录'}}</a>
+
                 <contextmenu v-model="node.contextmenu">
                     <slot>
                         <div class="contextmenu">
@@ -35,12 +39,13 @@
     export default {
         name: 'tree',
         props: {
-            tree: Array
+            tree: Array,
+            selectable: {           // 节点是否可以选择
+                type: Boolean,
+                default: false
+            }
         },
         methods: {
-            toggle (node) {
-                this.$set(node, 'extend', !node.extend)
-            },
             edit (node) {
                 editBookmark(node)
             },
@@ -50,9 +55,15 @@
             remove (node) {
                 confirm('确认删除, 不可撤销!') && bookmarks.remove(node)
             },
+            toggle (node) {
+                this.$set(node, 'extend', !node.extend)
+            },
             onContextmenu (e, node) {
                 e.preventDefault();
                 this.$set(node, 'contextmenu', e)
+            },
+            select () {
+
             }
         }
     }
