@@ -63,6 +63,10 @@ class Db {
         })
     }
 
+    static remove (key) {
+        localStorage.removeItem(key)
+    }
+
     constructor (namespace) {
         if (!(this instanceof Db)) return new Db(namespace)
         this.namespace = namespace
@@ -128,8 +132,11 @@ const methods = {
         }
     },
 
+    has (record) {
+        return this.get(record)
+    },
+
     set (record) {
-        let namespace = this.namespace + '.'
         let id = record.id || Math.random().toFixed(8).replace('0.', '')
         id = this._prefix(id)
         localStorage.setItem(id, JSON.stringify(record))
@@ -157,8 +164,8 @@ Object.keys(methods).forEach(method => {
         const that = this
         const fn = methods[method]
         return new Promise(function (resolve, reject) {
-            console.log(`Db ${ that.namespace } exec ${ method }; return => `, result)
             let result = fn.apply(that, args)
+            console.log(`Db ${ that.namespace } exec ${ method }; args => `, args,  'return =>', result)
 
             let arg = args[0]
             if (/remove/.test(method)) {

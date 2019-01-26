@@ -9,6 +9,7 @@ import getDb from '../libs/db'
 
 const trashDb = getDb('trash')
 const visitDb = getDb('visit')
+const shortcutDb = getDb('shortcut')
 
 // 当一个书签被删除, 把它保存到db
 bookmarks.on( 'onRemoved', function(id,  changeInfo) {
@@ -25,6 +26,7 @@ bookmarks.on( 'onRemoved', function(id,  changeInfo) {
 
     // 一个书签被删除后, 需要删除其它相关数据
     visitDb.remove(id)
+    shortcutDb.remove(id)
 
 })
 

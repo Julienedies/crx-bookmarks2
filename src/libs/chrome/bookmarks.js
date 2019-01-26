@@ -7,7 +7,7 @@ import wrapApi from './wrapApi'
 
 const events = ['onCreated', 'onRemoved', 'onChanged', 'onMoved', 'onChildrenReordered', 'onImportBegan', 'onImportEnded']
 
-const promise = wrapApi(chrome.bookmarks, {name:'bookmarks'})
+const promise = wrapApi(chrome.bookmarks, {name: 'bookmarks'})
 
 const api = {
     on (eventName, listener) {
@@ -68,6 +68,7 @@ const api = {
                     }
                 }
             }
+
             isOnlyFolder && filter(tree)
             return tree
         })
@@ -76,20 +77,12 @@ const api = {
         return promise.getSubTree(id)
     },
     getRecent (size) {
-        return promise.getRecent(size || 100).then(function (r) {
-            return r
-        })
+        return promise.getRecent(size || 100)
     },
     search (query) {
         return promise.search(query)
     }
 }
-
-// 调试用
-/*api.on(function (...args) {
-    console.log(args[0], args)
-})*/
-
 
 export default api
 

@@ -18,6 +18,8 @@
         <!-- 上下文菜单 -->
         <div class="contextmenu">
             <slot>
+                <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
+                <button @click="addShortcut(bookmark)" title="加入快捷方式" v-else><i class="fas fa-link"></i></button>
                 <button @click="createSubFolder(bookmark)" v-if="!bookmark.url" title="新建子文件夹">
                     <i class="fas fa-folder-plus"></i>
                 </button>
@@ -31,6 +33,9 @@
 <script>
     import { bookmarks } from '../libs/chrome/index'
     import editBookmark, { createSubFolder } from '../mixins/editBookmark'
+    import getDb from '../libs/db'
+
+    const db = getDb('shortcut')
 
     export default {
         name: 'listItem',
@@ -46,6 +51,16 @@
             },
             remove (bookmark) {
                 bookmarks.remove(bookmark)
+            },
+            addShortcut (bookmark) {
+                db.set(bookmark)
+                //this.bookmark.shortcut = true
+                this.$set(this.bookmark, 'shortcut', true)
+            },
+            removeShortcut (bookmark) {
+                db.remove(bookmark)
+                //this.bookmark.shortcut = false
+                this.$set(this.bookmark, 'shortcut', false)
             }
         }
     }

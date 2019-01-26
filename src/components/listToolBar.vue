@@ -24,7 +24,7 @@
         <div class="counter" v-if="count"> 共 {{ count }} 项</div>
         <div class="show-type">
             <button :class="{active: ui.list.showType === 'list'}" @click="updateUi(['list.showType', 'list'])"><i class="fa fa-list"></i></button>
-            <button :class="{active: ui.list.showType === 'gird'}" @click="updateUi(['list.showType', 'gird'])"><i class="fa fa-th"></i></button>
+            <button :class="{active: ui.list.showType === 'grid'}" @click="updateUi(['list.showType', 'grid'])"><i class="fa fa-th"></i></button>
         </div>
     </div>
 </template>

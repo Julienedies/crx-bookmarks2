@@ -16,41 +16,16 @@ import Vue from 'vue'
 import router from '../router/index'
 import store from '../vuex/index'
 
-import * as filters from '../filters/index'
-import * as directives from '../directives/index'
+import vueex from 'vueex'
 
-Vue.filter('getFavicon', filters.getFavicon)
-Vue.directive('toggle', directives.toggle)
+Vue.use(vueex)
 
-Vue.prototype.$sortBookmarksBy = function sortBookmarksBy(bookmarkArray, sortBy){
-    return bookmarkArray.sort((a, b) => {
-        //console.log(a)
-        if(sortBy === 'url'){
-            let reg = /^\w+:\/\/\/?([\w.]+)/i
-            let urlA = a.url || ''
-            let urlB = b.url || ''
-            let x = urlA.match(reg) || []
-            let y = urlB.match(reg) || []
-            x = x[0] || ''
-            y = y[0] || ''
-            console.log(x, y)
-            return x === y ? 0 : x.length - y.length
-        }
-        if(sortBy === 'children'){
-            let x = a.children ? 0 : 1
-            let y = b.children ? 0 : 1
-            return x - y
-        }
-        return a[sortBy] - b[sortBy]
-    })
-}
+import install from './install'
+install(Vue)
+
+import { bookmarks } from '../libs/chrome/index'
 
 import App from './App'
-
-import {bookmarks} from '../libs/chrome/index'
-
-import vueex from 'vueex'
-Vue.use(vueex)
 
 console.log(process.env)
 
@@ -64,7 +39,7 @@ window.v = new Vue({
             args: ''
         }
     },
-    mounted() {
+    mounted () {
         let that = this;
         bookmarks.on(function (eventName, ...args) {
             //let args = [].slice.call(arguments, 1)

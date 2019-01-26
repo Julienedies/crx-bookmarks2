@@ -1,12 +1,18 @@
 <template>
     <div>
-        home view.
+        <list-tool-bar></list-tool-bar>
+        <shortcut></shortcut>
     </div>
 </template>
 
 <script>
+    import shortcut from './shortcut'
+
     export default {
-        name: "home"
+        name: 'home',
+        components: {
+            shortcut
+        }
     }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul :class="listType || ui.list.showType">
+        <ul :class="listType || showType || ui.list.showType">
             <list-item v-for="bookmark of bookmarkArray" :bookmark="bookmark" :key="bookmark.id" @contextmenu="onContextmenu">
                 <slot :bookmark="bookmark"></slot>
             </list-item>
@@ -11,6 +11,9 @@
 <script>
     import listItem from './listItem'
     import { mapState } from 'vuex'
+    import getDb from '../libs/db'
+
+    const shortcutDb = getDb('shortcut')
 
     export default {
         name: 'list',
@@ -21,7 +24,7 @@
             bookmarkArray: Array,  // 要显示的书签数组
             showType: {
                 type: String,
-                default: 'list'   // class: list | gird
+                default: ''   // class: list | gird
             }
         },
         data () {
@@ -36,7 +39,7 @@
         },
         mounted () {
             if (window.innerWidth < 900) {
-                this.listType = 'gird'
+                this.listType = 'grid'
             }
         },
         methods: {
@@ -113,7 +116,8 @@
         }
     }
 
-    /deep/ ul.gird {
+    /deep/ ul.grid {
+        padding: $gap2 0;
         display: flex;
         flex-flow: row wrap;
         //justify-content: space-between;
