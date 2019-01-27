@@ -1,7 +1,7 @@
 <template>
     <li>
         <!-- 书签 -->
-        <a v-if="bookmark.url" :href="bookmark.url" target="_blank">
+        <a v-if="bookmark.url" :Xhref="bookmark.url" target="_blank" @click="open(bookmark.url)">
             <img :src="bookmark.url | getFavicon" class="favicon">
             <span>
                 <span class="tit">{{bookmark.title}}</span>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import { bookmarks } from '../libs/chrome/index'
+    import { bookmarks, tabs } from '../libs/chrome/index'
     import editBookmark, { createSubFolder } from '../mixins/editBookmark'
     import getDb from '../libs/db'
 
@@ -61,6 +61,10 @@
                 shortcutDb.remove(bookmark)
                 //this.bookmark.shortcut = false
                 this.$set(this.bookmark, 'shortcut', false)
+            },
+            open(url){
+                tabs.create({ url, selected: true })
+                return false
             }
         }
     }
