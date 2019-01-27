@@ -7,7 +7,7 @@
                 <button class="arrow" v-else></button>
 
                 <router-link :to="`/node/${node.id}`" v-if="!selectable">{{node.title || '根目录'}}</router-link>
-                <a @click="selected(node)" v-else>{{node.title || '根目录'}}</a>
+                <a @click="select(node)" v-else>{{node.title || '根目录'}}</a>
 
                 <contextmenu v-model="node.contextmenu">
                     <slot>

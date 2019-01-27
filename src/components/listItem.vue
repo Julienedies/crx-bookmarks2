@@ -35,7 +35,7 @@
     import editBookmark, { createSubFolder } from '../mixins/editBookmark'
     import getDb from '../libs/db'
 
-    const db = getDb('shortcut')
+    const shortcutDb = getDb('shortcut')
 
     export default {
         name: 'listItem',
@@ -53,12 +53,12 @@
                 bookmarks.remove(bookmark)
             },
             addShortcut (bookmark) {
-                db.set(bookmark)
+                shortcutDb.set(bookmark)
                 //this.bookmark.shortcut = true
                 this.$set(this.bookmark, 'shortcut', true)
             },
             removeShortcut (bookmark) {
-                db.remove(bookmark)
+                shortcutDb.remove(bookmark)
                 //this.bookmark.shortcut = false
                 this.$set(this.bookmark, 'shortcut', false)
             }
