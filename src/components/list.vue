@@ -45,7 +45,7 @@
         methods: {
             onContextmenu (...args) {
                 console.log('contextmenu', args)
-                this.$emit('contextmenu', args[0], args[1])
+                this.$emit('contextmenu', args)
             }
         }
     }

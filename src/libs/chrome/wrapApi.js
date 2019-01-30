@@ -35,7 +35,7 @@ export default function wrapApi (api, wrapper = {}) {
 
                     return new Promise((resolve, reject) => {
                         let call = (data) => {
-                            console.log(`chrome API Invoking => ${prop}`, `args => ${args}`,  ' return => ', data)
+                            console.log(`chrome API Invoking => ${wrapper.name}.${prop}`, `args => ${args[0]}`,  ' return => ', data)
                             resolve(data)
                         }
                         args.push(call)
@@ -69,11 +69,13 @@ export default function wrapApi (api, wrapper = {}) {
         event = event || events  // 如果没有提供事件名, 则默认监听所有事件
         event = Array.isArray(event) ? event : [event]
 
+        let f = event.length > 1 ? 'unshift' : 'push' // 如果一次监听多个事件, 则把事件名附近到回调函数参数头部, 否则添加到末尾
+
         event.forEach(eventName => {
-            console.log(`addListener for ${wrapper.name}`, eventName)
+            console.log(`addListener for ${wrapper.name}.`, eventName)
             events.includes(eventName) && api[eventName].addListener(function (...args) {
                 console.log(eventName, args)
-                args.unshift(eventName)
+                args[f](eventName)
                 callback.apply(null, args)
             })
         })

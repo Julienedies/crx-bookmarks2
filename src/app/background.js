@@ -12,7 +12,7 @@ const visitDb = getDb('visit')
 const shortcutDb = getDb('shortcut')
 
 // 当一个书签被删除, 把它保存到db
-bookmarks.on( 'onRemoved', function(id,  changeInfo) {
+bookmarks.on('onRemoved', function (id, changeInfo, event) {
 
     let obj = {
         index: changeInfo.index,
@@ -30,14 +30,14 @@ bookmarks.on( 'onRemoved', function(id,  changeInfo) {
 
 })
 
-const f = function(tab){
-    if(!tab.url) return
+const f = function (tab) {
+    if (!tab.url) return
     bookmarks.search(tab.url).then(list => {
         list.forEach(bookmark => {
-            if(bookmark.url === tab.url){
+            if (bookmark.url === tab.url) {
                 console.log('添加新访问记录 => ', bookmark)
                 visitDb.get(bookmark.id).then(record => {
-                    record = record  || {id:bookmark.id, count: 0}
+                    record = record || {id: bookmark.id, count: 0}
                     record.count += 1
                     visitDb.set(record)
                 })
@@ -47,7 +47,7 @@ const f = function(tab){
 }
 
 tabs.on((...args) => {
-    console.log(args)
+    //console.log(args)
 })
 
 

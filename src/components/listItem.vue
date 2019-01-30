@@ -51,6 +51,7 @@
             },
             remove (bookmark) {
                 bookmarks.remove(bookmark)
+                this.$emit('contextmenu', 'remove', bookmark)
             },
             addShortcut (bookmark) {
                 shortcutDb.set(bookmark)
