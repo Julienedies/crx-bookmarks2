@@ -6,7 +6,7 @@ chrome扩展, 书签管理器, 基于vue.js开发.
 除了原生书签管理器的功能以外, 添加了标签, 常用, 最近, 回收站, 统计等功能.
 
 #### 使用
-直接下载项目, 然后通过chrome开发模式加载文件夹即可.
+直接下载项目, 然后通过 chrome开发模式; 加载已解压的扩展程序; 导入dist文件夹即可.
 
 #### 构建
 ```shell
@@ -21,7 +21,4 @@ npm run start:dev
 // build for porduction
 npm run sratr:pro
 ```
-
-然后通过chrome 加载已解压的扩展程序导入即可使用.
-
 
