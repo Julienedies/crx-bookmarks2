@@ -32,10 +32,9 @@ export default function wrapApi (api, wrapper = {}) {
             wrapper[prop] = ((prop => {
 
                 return function (...args) {
-
+                    console.log(`chrome API Invoking => ${wrapper.name}.${prop}`, `args => ${args}`)
                     return new Promise((resolve, reject) => {
                         let call = (data) => {
-                            console.log(`chrome API Invoking => ${wrapper.name}.${prop}`, `args => ${args[0]}`,  ' return => ', data)
                             resolve(data)
                         }
                         args.push(call)
@@ -55,7 +54,7 @@ export default function wrapApi (api, wrapper = {}) {
     /**
      * @todo wrap addListener for chrome api
      * @param event  {String|Array}
-     * @param callback
+     * @param callback {Function}
      */
     wrapper.on = function (event, callback) {
         if (!callback) {

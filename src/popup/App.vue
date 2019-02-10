@@ -8,16 +8,19 @@
                 <setBookmark></setBookmark>
             </div>
             <div class="">
+                <shortcut></shortcut>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { bookmarks, tabs } from '../libs/chrome/index'
-    import getDb from '../libs/db'
+    import shortcut from '../views/shortcut'
     import recent from '../views/recent'
     import hot from '../views/hot'
+
+    import { bookmarks, tabs } from '../libs/chrome/index'
+    import getDb from '../libs/db'
     import setBookmark from './setBookmark'
 
     const visitDb = getDb('visit')
@@ -26,24 +29,25 @@
         name: 'App',
         components: {
             setBookmark,
+            shortcut,
             recent,
             hot
         },
-        data(){
+        data () {
             return {
                 recentBookmarkArray: [],
                 visitBookmarkArray: []
             }
         },
-        mounted(){
+        mounted () {
             this.getData()
         },
         methods: {
-            async getData(){
+            async getData () {
                 //this.recentBookmarkArray = await bookmarks.getRecent(100)
             },
-            open(){
-                tabs.create({ url: './dist/app.html', selected: true })
+            open () {
+                tabs.create({url: './dist/app.html', selected: true})
             }
         }
     }
