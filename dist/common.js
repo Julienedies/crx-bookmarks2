@@ -985,7 +985,7 @@ exports.push([module.i, "/*!\n *  define variables\n *  Modify as needed\n */\n.
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/_css-loader@2.1.0@css-loader/dist/runtime/api.js */ "../node_modules/_css-loader@2.1.0@css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "/*!\n *  define variables\n *  Modify as needed\n */\n.__flex[data-v-5ed3214e], .flex-middle[data-v-5ed3214e], .flex-mc[data-v-5ed3214e], .flex-mj[data-v-5ed3214e], .flex-mr[data-v-5ed3214e],[data-v-5ed3214e] ul.list li a, .flex-center[data-v-5ed3214e], .flex-justify[data-v-5ed3214e], .flex-right[data-v-5ed3214e], .flex-end[data-v-5ed3214e], .flex[data-v-5ed3214e] {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n.flex-1[data-v-5ed3214e] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n  flex: 1;\n}\n.flex-middle[data-v-5ed3214e], .flex-mc[data-v-5ed3214e], .flex-mj[data-v-5ed3214e], .flex-mr[data-v-5ed3214e],[data-v-5ed3214e] ul.list li a {\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  align-items: center;\n}\n.flex-center[data-v-5ed3214e], .flex-mc[data-v-5ed3214e] {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n.flex-justify[data-v-5ed3214e], .flex-mj[data-v-5ed3214e] {\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n  justify-content: space-between;\n}\n.flex-right[data-v-5ed3214e], .flex-mr[data-v-5ed3214e] {\n  -webkit-box-pack: end;\n  -webkit-justify-content: flex-end;\n  justify-content: flex-end;\n}\n.flex-end[data-v-5ed3214e] {\n  -webkit-box-align: end;\n  -webkit-align-items: flex-end;\n  align-items: flex-end;\n}\n[data-v-5ed3214e] ul.list {\n  padding: 0.5rem 0;\n}\n[data-v-5ed3214e] ul.list li {\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n    align-items: center;\n    min-height: 2.6em;\n    padding: 0.25rem;\n}\n[data-v-5ed3214e] ul.list li:hover {\n      background: rgba(180, 180, 180, 0.1);\n}\n[data-v-5ed3214e] ul.list li:hover .contextmenu {\n        display: inherit;\n}\n[data-v-5ed3214e] ul.list li .contextmenu {\n      display: none;\n      white-space: nowrap;\n}\n[data-v-5ed3214e] ul.list li .contextmenu button {\n        cursor: pointer;\n        color: #9abad4;\n        color: #459de3;\n        padding: 0 1rem;\n        border: none;\n        font: inherit;\n        background: none;\n}\n[data-v-5ed3214e] ul.list li a {\n      flex-grow: 1;\n      padding-left: 0.5rem;\n      white-space: nowrap;\n      overflow: hidden;\n}\n[data-v-5ed3214e] ul.list li a:hover .url {\n        display: inline;\n}\n[data-v-5ed3214e] ul.list li a .favicon {\n        width: 16px !important;\n        margin-right: 0.5rem;\n}\n[data-v-5ed3214e] ul.list li a > span {\n        overflow: hidden;\n        text-overflow: ellipsis;\n}\n[data-v-5ed3214e] ul.list li a .url {\n        display: none;\n        margin-left: 2em;\n        color: #b3b3b3;\n}\n[data-v-5ed3214e] ul.grid {\n  padding: 1rem 0;\n  display: flex;\n  flex-flow: row wrap;\n  align-content: space-around;\n}\n[data-v-5ed3214e] ul.grid > li {\n    flex: 0 0 19%;\n    margin: 0 1% 1% 0;\n    height: calc(15vw);\n    /*            min-height:15em;\n                    max-height: 20em;*/\n    border: solid 1px #b3b3b3;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n[data-v-5ed3214e] ul.grid > li .url,[data-v-5ed3214e] ul.grid > li .contextmenu {\n      display: none;\n}\n", ""]);
+exports.push([module.i, "/*!\n *  define variables\n *  Modify as needed\n */\n.__flex[data-v-5ed3214e], .flex-middle[data-v-5ed3214e], .flex-mc[data-v-5ed3214e], .flex-mj[data-v-5ed3214e], .flex-mr[data-v-5ed3214e],[data-v-5ed3214e] ul.list li a, .flex-center[data-v-5ed3214e], .flex-justify[data-v-5ed3214e], .flex-right[data-v-5ed3214e], .flex-end[data-v-5ed3214e], .flex[data-v-5ed3214e] {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n.flex-1[data-v-5ed3214e] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n  flex: 1;\n}\n.flex-middle[data-v-5ed3214e], .flex-mc[data-v-5ed3214e], .flex-mj[data-v-5ed3214e], .flex-mr[data-v-5ed3214e],[data-v-5ed3214e] ul.list li a {\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  align-items: center;\n}\n.flex-center[data-v-5ed3214e], .flex-mc[data-v-5ed3214e] {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n}\n.flex-justify[data-v-5ed3214e], .flex-mj[data-v-5ed3214e] {\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n  justify-content: space-between;\n}\n.flex-right[data-v-5ed3214e], .flex-mr[data-v-5ed3214e] {\n  -webkit-box-pack: end;\n  -webkit-justify-content: flex-end;\n  justify-content: flex-end;\n}\n.flex-end[data-v-5ed3214e] {\n  -webkit-box-align: end;\n  -webkit-align-items: flex-end;\n  align-items: flex-end;\n}\n[data-v-5ed3214e] ul.list {\n  padding: 0.5rem 0;\n}\n[data-v-5ed3214e] ul.list li {\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n    align-items: center;\n    min-height: 2.6em;\n    padding: 0.25rem;\n}\n[data-v-5ed3214e] ul.list li:hover {\n      background: rgba(180, 180, 180, 0.1);\n}\n[data-v-5ed3214e] ul.list li:hover .contextmenu {\n        display: inherit;\n}\n[data-v-5ed3214e] ul.list li .contextmenu {\n      display: none;\n      white-space: nowrap;\n}\n[data-v-5ed3214e] ul.list li .contextmenu button {\n        cursor: pointer;\n        color: #9abad4;\n        color: #459de3;\n        padding: 0 1rem;\n        border: none;\n        font: inherit;\n        background: none;\n}\n[data-v-5ed3214e] ul.list li a {\n      flex-grow: 1;\n      padding-left: 0.5rem;\n      white-space: nowrap;\n      overflow: hidden;\n}\n[data-v-5ed3214e] ul.list li a:hover .url {\n        display: inline;\n}\n[data-v-5ed3214e] ul.list li a .favicon {\n        width: 16px !important;\n        margin-right: 0.5rem;\n}\n[data-v-5ed3214e] ul.list li a > span {\n        overflow: hidden;\n        text-overflow: ellipsis;\n}\n[data-v-5ed3214e] ul.list li a .url {\n        display: none;\n        margin-left: 2em;\n        color: #b3b3b3;\n}\n[data-v-5ed3214e] ul.grid {\n  padding: 1rem 0;\n  display: flex;\n  flex-flow: row wrap;\n  align-content: space-around;\n}\n[data-v-5ed3214e] ul.grid > li {\n    flex: 0 0 19%;\n    margin: 0 1% 1% 0;\n    padding: 0.5rem;\n    height: calc(15vw);\n    /*            min-height:15em;\n                    max-height: 20em;*/\n    border: solid 1px #b3b3b3;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n[data-v-5ed3214e] ul.grid > li .url,[data-v-5ed3214e] ul.grid > li .contextmenu {\n      display: none;\n}\n", ""]);
 
 
 
@@ -3860,6 +3860,131 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_15_5_1_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_15_5_1_vue_loader_lib_index_js_vue_loader_options_shortcut_vue_vue_type_template_id_7151b055_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./vuex/index.js":
+/*!***********************!*\
+  !*** ./vuex/index.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "../node_modules/_vue@2.5.22@vue/dist/vue.runtime.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "../node_modules/_vuex@3.1.0@vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/index */ "./vuex/modules/index.js");
+/*!
+ * 
+ * Created by j on 2019-01-07.
+ */
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  modules: _modules_index__WEBPACK_IMPORTED_MODULE_2__["default"]
+}));
+
+/***/ }),
+
+/***/ "./vuex/modules/config.js":
+/*!********************************!*\
+  !*** ./vuex/modules/config.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/*!
+ * Created by j on 2019-01-22.
+ */
+var state = {};
+var mutations = {};
+var getters = {};
+var actions = {};
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./vuex/modules/index.js":
+/*!*******************************!*\
+  !*** ./vuex/modules/index.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ui_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui.js */ "./vuex/modules/ui.js");
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config.js */ "./vuex/modules/config.js");
+/*!
+ * 
+ * Created by j on 2019-01-22.
+ */
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  config: _config_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  ui: _ui_js__WEBPACK_IMPORTED_MODULE_0__["default"]
+});
+
+/***/ }),
+
+/***/ "./vuex/modules/ui.js":
+/*!****************************!*\
+  !*** ./vuex/modules/ui.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/*!
+ * 
+ * Created by j on 2019-01-22.
+ */
+var state = {
+  list: {
+    reverse: false,
+    showType: 'list',
+    orderBy: 'index'
+  }
+};
+var getters = {};
+var mutations = {
+  updateUi: function updateUi(state, _ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        value = _ref2[1];
+
+    var keys = key.split('.');
+    var obj = state;
+
+    while (keys.length >= 2) {
+      obj = obj[keys.shift()];
+    }
+
+    obj[keys.shift()] = value;
+  }
+};
+var actions = {};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
 
 /***/ })
 

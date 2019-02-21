@@ -1,14 +1,20 @@
 <template>
     <div class="box">
-        <div style="text-align:right; padding:0.5rem;">
-            <button class="button" @click="open">打开书签管理器</button>
-        </div>
+
         <div class="">
             <div class="">
                 <setBookmark></setBookmark>
             </div>
+
+            <div style="text-align:right; padding:0.5rem;">
+                <button class="button" @click="c='shortcut'">shortcut</button>
+                <button class="button" @click="c='recent'">recent</button>
+                <button class="button" @click="c='hot'">hot</button>
+                <button class="button" @click="open">打开书签管理器</button>
+            </div>
+
             <div class="">
-                <shortcut></shortcut>
+                <component :is="c"></component>
             </div>
         </div>
     </div>
@@ -35,8 +41,7 @@
         },
         data () {
             return {
-                recentBookmarkArray: [],
-                visitBookmarkArray: []
+                c: 'recent'
             }
         },
         mounted () {

@@ -126,6 +126,7 @@
         > li {
             flex: 0 0 19%;
             margin: 0 1% 1% 0;
+            padding:0.5rem;
             height: calc(15vw);
             /*            min-height:15em;
                         max-height: 20em;*/
