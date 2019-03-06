@@ -41,7 +41,7 @@
         },
         data () {
             return {
-                c: 'recent'
+                c: 'shortcut'
             }
         },
         mounted () {

@@ -135,6 +135,8 @@
             text-overflow: ellipsis;
 
             > a {
+                display: block;
+                min-height: 100%;
                 .favicon {
                 }
             }
