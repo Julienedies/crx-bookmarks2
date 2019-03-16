@@ -7,8 +7,6 @@ console.log(process.env.NODE_ENV)
 
 const config = require('./config')
 
-console.log(config.entry)
-
 module.exports = {
     mode: config.mode,  // 会设置打包文件环境下的 process.env.NODE_ENV
     devtool: config.devtool,
@@ -18,6 +16,7 @@ module.exports = {
     resolve: config.resolve,
     externals: config.externals,
     devServer: config.devServer,
+    plugins: config.plugins,
     module: {
         rules: [
             {
@@ -130,7 +129,5 @@ module.exports = {
                 }
             }
         }
-    },
-    plugins: config.plugins
-
+    }
 }

@@ -11,12 +11,9 @@ const HtmlPlugin = require('html-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
-const isProd = process.env.NODE_ENV === 'production'
+const isPro = process.env.NODE_ENV === 'production'
 
-const dev = require('./dev')
-const prod = require('./prod')
-
-const config = isProd ? prod : dev
+const config = isPro ? require('./pro') : require('./dev')
 
 const publicPath = config.publicPath
 const projectRoot = path.resolve(__dirname, '../../')
@@ -25,7 +22,11 @@ const context = path.resolve(__dirname, '../../src')
 
 const nodeSassIncludePaths = [path.resolve(__dirname, '../../../')]
 
-const devtool = config.devtool
+const entry = {
+    'app': ['./app/main.js'],
+    'popup': ['./popup/main.js'],
+    'background': ['./app/background.js']
+}
 
 const output = {
     path: outputPath,
@@ -33,20 +34,6 @@ const output = {
     filename: '[name].js',
     chunkFilename: '[name].js',
     sourceMapFilename: '[file].map'
-}
-
-const entry = {
-    'app': ['./app/main.js'],
-    'popup': ['./popup/main.js'],
-    'background': ['./app/background.js']
-}
-
-const resolve = {
-    alias: {
-        //basic: path.resolve(__dirname, '../../../basic/'),
-        vueex: path.resolve(__dirname, '../../src/vendor/vueex/')
-    },
-    extensions: ['.js', '.vue', '.json', '.scss', '.css', '*']
 }
 
 const plugins = [
@@ -65,7 +52,8 @@ const plugins = [
         filename: 'background.html',
         chunks: ['runtime', 'vendors', 'common', 'background']
     }),
-
+    new webpack.DefinePlugin({}),
+    new webpack.NoEmitOnErrorsPlugin(),
     new VueLoaderPlugin(),
     new ManifestPlugin(),
     new CleanPlugin(['dist'], {
@@ -73,12 +61,12 @@ const plugins = [
     })
 ]
 
-const externals = {}
-
 let devServer = {}
 let cssLoader
 
-if (isProd) {  // 产品环境
+const devServerPort = 9083
+
+if (isPro) {
 
     plugins.push(new MiniCssExtractPlugin({
         filename: "css/[name]_[hash].css",
@@ -94,16 +82,6 @@ if (isProd) {  // 产品环境
 
 } else {
 
-    // 添加热模块替换client端脚本
-/*    for (let i in entry) {
-        let arr = entry[i]
-        arr = Array.isArray(arr) ? arr : [arr]
-        arr.push('webpack-hot-middleware/client')
-        entry[i] = arr
-    }
-
-    plugins.push(new webpack.HotModuleReplacementPlugin())*/
-
     cssLoader = {
         loader: 'style-loader',
         options: {}
@@ -112,24 +90,44 @@ if (isProd) {  // 产品环境
     devServer = {
         publicPath: publicPath,
         contentBase: outputPath,
-        hot: true
+        port: devServerPort,
+        writeToDisk: true,
+        quiet: false,
+        hot: true,
+        disableHostCheck: true
     }
+
+    // hmr
+    Object.entries(entry).forEach(([k, v]) => {
+        v = Array.isArray(v) ? v : [v]
+        //v.push(`webpack-hot-middleware/client?noInfo=true&reload=true&path=http://localhost:${ devServerPort }/__webpack_hmr`)
+        v.unshift(`webpack-dev-server/client?http://localhost:${ devServerPort }/`)
+        entry[k] = v
+    })
+    // webapck-dev-server --hot
+    plugins.push(new webpack.HotModuleReplacementPlugin())
 
 }
 
 
 module.exports = {
     mode: config.mode,
+    devtool: config.devtool,
     projectRoot,
-    publicPath,
     context,
-    nodeSassIncludePaths,
-    devtool,
-    cssLoader,
+    publicPath,
     devServer,
     entry,
     output,
-    resolve,
-    externals,
-    plugins
+    plugins,
+    cssLoader,
+    nodeSassIncludePaths,
+    resolve: {
+        alias: {
+            //basic: path.resolve(__dirname, '../../../basic/'),
+            vueex: path.resolve(context, './vendor/vueex/')
+        },
+        extensions: ['.js', '.vue', '.json', '.scss', '.css']
+    },
+    externals: {}
 }
