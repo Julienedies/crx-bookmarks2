@@ -4,10 +4,10 @@
   "description": "一个书签管理器的chrome扩展",
   "main": "null",
   "scripts": {
-    "dev": "cross-env NODE_ENV=develoment webpack --config ./build/webpack/index.js --watch",
-    "pro": "cross-env NODE_ENV=production webpack --config ./build/webpack/index.js",
-    "start:dev": "cross-env NODE_ENV=develoment node build/dev.js",
-    "build": "cross-env NODE_ENV=production node build/build.js",
+    "dev": "cross-env NODE_ENV=develoment webpack-dev-server --config ./.build/webpack/index.js --watch",
+    "pro": "cross-env NODE_ENV=production webpack --config ./.build/webpack/index.js",
+    "start": "npm run dev",
+    "build": "npm run pro",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,6 +29,8 @@
     "@fortawesome/fontawesome-free": "^5.6.3",
     "babel-polyfill": "^6.26.0",
     "bulma": "^0.7.2",
+    "d3": "^5.9.2",
+    "echarts": "^4.1.0",
     "element-ui": "^2.4.11",
     "events": "^3.0.0",
     "iview": "^3.2.1",

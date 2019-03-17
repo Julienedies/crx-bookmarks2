@@ -18,6 +18,8 @@ Thumbs.db
 # hmr
 dist/*.hot-update.*
 
+dist/
+
 # 外部类库
 bower_components/
 node_modules/

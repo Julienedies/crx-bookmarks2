@@ -5,7 +5,7 @@
         </div>
 
         <div class="nav-items">
-            <router-link class="nav-item hvr-underline-from-center" v-for="route of routes" v-if="route.name!='search'"  :to="route._path || route.path" :key="route.path">
+            <router-link class="nav-item hvr-underline-from-center" v-for="route of routes" v-if="route.name && route.name!='search'"  :to="route._path || route.path" :key="route.path">
                 <span > {{ route.name }}</span>
             </router-link>
         </div>
@@ -53,6 +53,7 @@
                 position: relative;
                 padding: $gap 3*$gap;
                 font-size:1.2em;
+                white-space: nowrap;
 /*                display: inline-block;
                 vertical-align: middle;
                 -webkit-transform: perspective(1px) translateZ(0);

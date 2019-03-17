@@ -13,6 +13,7 @@ const hot = () => import(/* webpackChunkName: "view-hot" */'../views/hot')
 const node = () => import(/* webpackChunkName: "view-node" */'../views/node')
 const setting = () => import(/* webpackChunkName: "view-setting" */'../views/setting')
 const search = () => import(/* webpackChunkName: "view-search" */'../views/search')
+const tree = () => import(/* webpackChunkName: "view-search" */'../views/tree')
 
 export default [
     {
@@ -35,6 +36,11 @@ export default [
         path: '/node/:id',
         _path: '/node/38',
         component: node
+    },
+    {
+        name: 'tree',
+        path: '/tree',
+        component: tree
     },
     {
         name: '回收站',

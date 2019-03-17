@@ -15,6 +15,7 @@
     import { downloads, bookmarks } from '../libs/chrome/index'
     import getDb, { Db } from '../libs/db'
     const visitDb = getDb('visit')
+    const shortcutDb = getDb('shortcut')
     export default {
         name: 'setting',
         data () {
@@ -25,17 +26,22 @@
         methods: {
             // 用于处理自定义数据和书签数据不匹配的情况
             async clean () {
-                let visitObj = await visitDb.get()
-                let idArray = Object.keys(visitObj)
-                for (let id of idArray) {
-                    let b = await bookmarks.get(id)
-                    this.msg = ['无效ID:']
-                    if (!b) {
-                        console.log(id)
-                        visitDb.remove(id)
-                        this.msg.push(id)
+                let that = this
+                that.msg = '已清理无效ID:'
+                async function cb(db, i) {
+                    let dbo = await db.get()
+                    let idArray = Object.keys(dbo)
+                    for (let id of idArray) {
+                        let b = await bookmarks.get(id)
+                        if (!b) {
+                            console.log(id, dbo[id])
+                            db.remove(id)
+                            that.msg += ` ${id}; `
+                        }
                     }
                 }
+
+                [visitDb, shortcutDb].forEach( cb)
             },
             download () {
                 let that = this
