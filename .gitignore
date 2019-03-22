@@ -15,22 +15,25 @@ Thumbs.db
 *.log
 
 # hmr
-dist/*.hot-update.*
+/dist/*.hot-update.*
 
 # 外部类库
 bower_components/
-node_modules
+node_modules/
 
 # ls
-src/vendor/*
-!src/vendor/bulma/sass/*
-!src/vendor/bulma/bulma.sass
+/src/vendor/bulma/*
+!/src/vendor/bulma/sass/
+!/src/vendor/bulma/bulma.sass
 
-src/css/basic/*
-!src/css/basic/src/
-!src/css/basic/_basic.scss
+/src/css/basic/*
+!/src/css/basic/src/
+!/src/css/basic/_basic.scss
 
 assets/img/*
 !assets/img/bookmarks2.png
+
+/src/vendor/vueex/
+/src/vendor/hover/
 
 
