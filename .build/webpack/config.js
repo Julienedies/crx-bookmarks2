@@ -55,7 +55,6 @@ const plugins = [
     new webpack.DefinePlugin({}),
     new webpack.NoEmitOnErrorsPlugin(),
     new VueLoaderPlugin(),
-    new ManifestPlugin(),
     new CleanPlugin(['dist'], {
         root: projectRoot
     })
