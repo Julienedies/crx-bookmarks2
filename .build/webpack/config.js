@@ -125,7 +125,8 @@ module.exports = {
     resolve: {
         alias: {
             //basic: path.resolve(__dirname, '../../../basic/'),
-            vueex: path.resolve(context, './vendor/vueex/')
+            //bulma: path.resolve(context, './vendor/bulma/'),
+            vueex: path.resolve(context, './vendor/vueex/'),
         },
         extensions: ['.js', '.vue', '.json', '.scss', '.css']
     },

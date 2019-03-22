@@ -14,24 +14,26 @@ Thumbs.db
 .tmp_*~
 *.log
 
-
 # hmr
 dist/*.hot-update.*
 
-dist/
-
 # 外部类库
 bower_components/
-node_modules/
+node_modules
 
-# 私有配置文件
-config.json
+# ls
+src/vendor/
+!src/vendor/bulma/sass/
+!src/vendor/bulma/bulma.sass
 
-# 临时
 src/css/basic/
+!src/css/basic/src/
+!src/css/basic/_basic.scss
+
+assets/img/*
+!assets/img/bookmarks2.png
+
 src/basic/
 src/vueex/
 src/jlibs/
-src/vendor/
-assets/img/*
-!assets/img/bookmarks2.png
+
