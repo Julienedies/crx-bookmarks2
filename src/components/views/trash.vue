@@ -14,10 +14,10 @@
 </template>
 
 <script>
-    import toolBar from '../components/listToolBar'
-    import list from '../components/list'
-    import { bookmarks } from '../libs/chrome/index'
-    import getDb from '../libs/db'
+    import toolBar from '../listToolBar'
+    import list from '../list'
+    import { bookmarks } from '../../libs/chrome'
+    import getDb from '../../libs/db'
     import { mapState } from 'vuex'
 
     const db = getDb('trash')

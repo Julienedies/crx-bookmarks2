@@ -6,9 +6,9 @@
 </template>
 
 <script>
-    import list from '../components/list'
-    import toolBar from '../components/listToolBar'
-    import { bookmarks } from '../libs/chrome/index'
+    import list from '../list'
+    import toolBar from '../listToolBar'
+    import { bookmarks } from '../../libs/chrome'
     import { mapState } from 'vuex'
 
     export default {

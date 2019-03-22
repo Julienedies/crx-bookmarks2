@@ -14,8 +14,8 @@
 </template>
 
 <script>
-    import navBar from '../components/navBar'
-    import AsideBar from '../components/asideBar'
+    import navBar from '../../components/navBar'
+    import AsideBar from '../../components/asideBar'
 
     export default {
         name: "App",
@@ -36,7 +36,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../css/basic/src/basic.scss";
+    @import "../../css/basic/src/basic";
     
     #app{
         position:absolute;

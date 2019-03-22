@@ -5,15 +5,16 @@
 import "core-js/modules/es6.promise";
 import "core-js/modules/es6.array.iterator";
 
-import home from '../views/home'
-import recent from '../views/recent'
-import trash from '../views/trash'
+import home from '../components/views/home'
+import recent from '../components/views/recent'
+import trash from '../components/views/trash'
 
-const hot = () => import(/* webpackChunkName: "view-hot" */'../views/hot')
-const node = () => import(/* webpackChunkName: "view-node" */'../views/node')
-const setting = () => import(/* webpackChunkName: "view-setting" */'../views/setting')
-const search = () => import(/* webpackChunkName: "view-search" */'../views/search')
-const tree = () => import(/* webpackChunkName: "view-search" */'../views/tree')
+const hot = () => import(/* webpackChunkName: "view-hot" */'../components/views/hot')
+const node = () => import(/* webpackChunkName: "view-node" */'../components/views/node')
+const setting = () => import(/* webpackChunkName: "view-setting" */'../components/views/setting')
+const search = () => import(/* webpackChunkName: "view-search" */'../components/views/search')
+const tree = () => import(/* webpackChunkName: "view-search" */'../components/views/tree')
+const treemap = () => import(/* webpackChunkName: "view-search" */'../components/views/treemap')
 
 export default [
     {
@@ -36,6 +37,11 @@ export default [
         path: '/node/:id',
         _path: '/node/38',
         component: node
+    },
+    {
+        name: 'treemap',
+        path: '/treemap',
+        component: treemap
     },
     {
         name: 'tree',

@@ -7,10 +7,10 @@
 </template>
 
 <script>
-    import listToolBar from '../components/listToolBar'
-    import list from '../components/list'
-    import mixins from '../mixins/index'
-    import { bookmarks } from '../libs/chrome'
+    import listToolBar from '../listToolBar'
+    import list from '../list'
+    import mixins from '../../mixins'
+    import { bookmarks } from '../../libs/chrome'
     import { mapState } from 'vuex'
 
     export default {

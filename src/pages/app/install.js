@@ -3,10 +3,10 @@
  * Created by j on 2019-01-26.
  */
 
-import * as filters from '../filters'
-import * as directives from '../directives'
+import * as filters from '../../filters'
+import * as directives from '../../directives'
 
-import components from '../components/index'
+import components from '../../components'
 
 export default function (Vue) {
 

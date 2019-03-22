@@ -3,9 +3,9 @@
  * Created by j on 2019-01-11.
  */
 
-import { bookmarks, tabs } from '../libs/chrome/index'
+import { bookmarks, tabs } from '../../libs/chrome'
 
-import getDb from '../libs/db'
+import getDb from '../../libs/db'
 
 const trashDb = getDb('trash')
 const visitDb = getDb('visit')

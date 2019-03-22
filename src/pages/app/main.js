@@ -6,16 +6,16 @@ import 'babel-polyfill'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 
-import 'hint.css'
-import '../vendor/bulma/bulma.sass'
-import '../vendor/hover/scss/hover.scss'
-import '../css/common.scss'
+import 'hint.css/hint.css'
+import '../../vendor/bulma/bulma.sass'
+import '../../vendor/hover/scss/hover.scss'
+import '../../css/common.scss'
 import './style.scss'
 
 import Vue from 'vue'
 
-import router from '../router/index'
-import store from '../vuex/index'
+import router from '../../router/index'
+import store from '../../vuex/index'
 
 import vueex from 'vueex'
 Vue.use(vueex)
@@ -23,7 +23,7 @@ Vue.use(vueex)
 import install from './install'
 install(Vue)
 
-import { bookmarks } from '../libs/chrome/index'
+import { bookmarks } from '../../libs/chrome/index'
 
 import App from './App'
 

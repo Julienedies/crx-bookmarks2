@@ -23,9 +23,9 @@ const context = path.resolve(__dirname, '../../src')
 const nodeSassIncludePaths = [path.resolve(__dirname, '../../../')]
 
 const entry = {
-    'app': ['./app/main.js'],
-    'popup': ['./popup/main.js'],
-    'background': ['./app/background.js']
+    'app': ['./pages/app/main.js'],
+    'popup': ['./pages/popup/main.js'],
+    'background': ['./pages/app/background.js']
 }
 
 const output = {
@@ -38,17 +38,17 @@ const output = {
 
 const plugins = [
     new HtmlPlugin({
-        template: 'app/index.html',
+        template: 'pages/app/index.html',
         filename: 'app.html',
         chunks: ['runtime', 'vendors', 'common', 'app']
     }),
     new HtmlPlugin({
-        template: 'popup/index.html',
+        template: 'pages/popup/index.html',
         filename: 'popup.html',
         chunks: ['runtime', 'vendors', 'common', 'popup']
     }),
     new HtmlPlugin({
-        template: 'app/background.html',
+        template: 'pages/app/background.html',
         filename: 'background.html',
         chunks: ['runtime', 'vendors', 'common', 'background']
     }),

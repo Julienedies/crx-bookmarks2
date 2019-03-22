@@ -43,9 +43,12 @@ const api = {
             return promise.removeTree(bookmark.id)
         }
     },
-    update (bookmark) {
-        let changes = {title: bookmark.title, url: bookmark.url}
-        return promise.update(bookmark.id, changes)
+    update ({id, title, url, parentId}) {
+        if(parentId) {
+            return this.move(id, {parentId}).then( (data) => {
+                return promise.update(id, {title, url})
+            })
+        }
     },
     move (bookmark, destination) {
         let id = typeof bookmark === 'object' ? bookmark.id : bookmark
@@ -61,7 +64,10 @@ const api = {
                 let len = tree.length
                 while (len--) {
                     let node = tree[len]
+                    node.title = node.title || '根目录'
+                    node.name = node.title
                     if (node.children) {
+                        node.value = node.children.length
                         filter(node.children)
                     } else {
                         tree.splice(len, 1)
@@ -73,8 +79,26 @@ const api = {
             return tree
         })
     },
-    getSubTree (id) {
-        return promise.getSubTree(id)
+    getSubTree (id, isOnlyFolder) {
+        return promise.getSubTree(id).then((data) => {
+            // 过滤书签树, 只保留文件夹
+            function filter (tree) {
+                let len = tree.length
+                while (len--) {
+                    let node = tree[len]
+                    node.name = node.title || 'root'
+                    if (node.children) {
+                        node.value = node.children.length
+                        filter(node.children)
+                    } else {
+                        tree.splice(len, 1)
+                    }
+                }
+            }
+
+            isOnlyFolder && filter(data)
+            return data
+        })
     },
     getRecent (size) {
         return promise.getRecent(size || 100)

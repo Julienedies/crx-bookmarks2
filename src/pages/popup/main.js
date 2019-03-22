@@ -12,13 +12,14 @@ import 'babel-polyfill'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 
-import '../vendor/bulma/bulma.sass'
-import '../css/common.scss'
+import 'hint.css/hint.css'
+import '../../vendor/bulma/bulma.sass'
+import '../../css/common.scss'
 import './style.scss'
 
 import Vue from 'vue'
 
-import store from '../vuex/index'
+import store from '../../vuex/index'
 
 import vueex from 'vueex'
 Vue.use(vueex)

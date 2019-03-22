@@ -4,7 +4,7 @@
             <input class="input" type="text" placeholder="" v-model.trim="query" @keyup.enter="search()"/>
         </div>
         <div class="control">
-            <a class="button is-info search-btn" @click="search()">
+            <a class="button is-primary search-btn" @click="search()">
                 <i class="fa fa-search"></i>
             </a>
         </div>

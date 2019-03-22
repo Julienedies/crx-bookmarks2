@@ -5,8 +5,8 @@
 </template>
 
 <script>
-    import { bookmarks } from '../libs/chrome/index'
-    import getDb from '../libs/db'
+    import { bookmarks } from '../../libs/chrome'
+    import getDb from '../../libs/db'
 
     const db = getDb('shortcut')
 

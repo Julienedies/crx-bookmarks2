@@ -32,7 +32,7 @@ export default function wrapApi (api, wrapper = {}) {
             wrapper[prop] = ((prop => {
 
                 return function (...args) {
-                    console.log(`chrome API Invoking => ${wrapper.name}.${prop}`, `args => ${args}`)
+                    console.log(`chrome API Invoking => ${wrapper.name}.${prop}`, `args =>`,  args)
                     return new Promise((resolve, reject) => {
                         let call = (data) => {
                             resolve(data)

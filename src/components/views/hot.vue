@@ -16,11 +16,11 @@
 </template>
 
 <script>
-    import { bookmarks } from '../libs/chrome/index'
-    import getDb from '../libs/db'
-    import list from '../components/list'
-    import toolBar from '../components/listToolBar'
-    import mixins from '../mixins/index'
+    import { bookmarks } from '../../libs/chrome'
+    import getDb from '../../libs/db'
+    import list from '../list'
+    import toolBar from '../listToolBar'
+    import mixins from '../../mixins'
     import { mapState } from 'vuex'
 
     const visitDb = getDb('visit')

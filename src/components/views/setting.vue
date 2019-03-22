@@ -12,8 +12,8 @@
 </template>
 
 <script>
-    import { downloads, bookmarks } from '../libs/chrome/index'
-    import getDb, { Db } from '../libs/db'
+    import { downloads, bookmarks } from '../../libs/chrome'
+    import getDb, { Db } from '../../libs/db'
     const visitDb = getDb('visit')
     const shortcutDb = getDb('shortcut')
     export default {

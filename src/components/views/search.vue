@@ -6,9 +6,9 @@
 </template>
 
 <script>
-    import listToolBar from '../components/listToolBar'
-    import list from '../components/list'
-    import { bookmarks } from '../libs/chrome/index'
+    import listToolBar from '../listToolBar'
+    import list from '../list'
+    import { bookmarks } from '../../libs/chrome'
 
     export default {
         name: 'search',
