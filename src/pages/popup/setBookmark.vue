@@ -36,9 +36,9 @@
                         <input class="input" type="text" readonly v-model="c_bookmark.folderName">
                     </div>
                     <div class="control">
-                        <button class="button is-info" @click="selectFolder">
+                        <a class="button is-info" @click="selectFolder">
                             选择文件夹
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="layer" v-show="isSelectFolder">
+        <div class="layer" :class="{show:isSelectFolder}">
             <div style="display: flex; flex-flow: column; width:100%; height: 100%;">
                 <div class="box">
                     <button class="button" @click="isSelectFolder=false">返回</button>
@@ -123,11 +123,11 @@
                     this.$msg('更新完成!')
                 })
             },
-            remove(){
-               bookmarks.remove(this.c_bookmark).then( (data) => {
-                   this.c_bookmark.id = null
-                   this.$msg('已经删除!')
-               })
+            remove () {
+                bookmarks.remove(this.c_bookmark).then((data) => {
+                    this.c_bookmark.id = null
+                    this.$msg('已经删除!')
+                })
             },
             selectFolder () {
                 this.isSelectFolder = true
@@ -150,7 +150,6 @@
                 }
             },
             setBookmark (newVal) {
-                console.log(1111, newVal, this.c_bookmark)
                 this.c_bookmark = Object.assign({}, this.c_bookmark, newVal)
             }
         },

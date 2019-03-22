@@ -16,7 +16,7 @@
                 <component :is="c"></component>
             </div>
 
-            <div class="layer" v-show="isSetBookmark">
+            <div class="layer" :class="{show:isSetBookmark}">
                 <setBookmark :bookmark="bookmark" @close="isSetBookmark=false"></setBookmark>
             </div>
 
@@ -57,8 +57,7 @@
         mounted () {
             this.getData()
         },
-        computed: {
-        },
+        computed: {},
         methods: {
             async getData () {
                 //this.recentBookmarkArray = await bookmarks.getRecent(100)
@@ -86,11 +85,18 @@
     /deep/ .layer {
         position: fixed;
         z-index: 100;
-        top: 0;
+        top: 100%;
         left: 0;
         width: 100%;
         height: 100%;
         padding: 1em;
         background: #fff;
+        transition: all 0.5s;
+        opacity: 0;
+
+        &.show {
+            top:0;
+            opacity: 1;
+        }
     }
 </style>
