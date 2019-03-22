@@ -21,9 +21,9 @@
 </template>
 
 <script>
-    import shortcut from '../views/shortcut'
-    import recent from '../views/recent'
-    import hot from '../views/hot'
+    import shortcut from '../components/views/shortcut'
+    import recent from '../components/views/recent'
+    import hot from '../components/views/hot'
 
     import { bookmarks, tabs } from '../libs/chrome/index'
     import getDb from '../libs/db'

@@ -6,6 +6,7 @@ import 'babel-polyfill'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 
+import 'hint.css'
 import '../vendor/bulma/bulma.sass'
 import '../vendor/hover/scss/hover.scss'
 import '../css/common.scss'
