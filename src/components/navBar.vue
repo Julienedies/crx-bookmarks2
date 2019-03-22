@@ -54,12 +54,13 @@
                 padding: $gap 3*$gap;
                 font-size:1.2em;
                 white-space: nowrap;
-/*                display: inline-block;
+
+                // hover style start--------------
+                display: inline-block;
                 vertical-align: middle;
                 -webkit-transform: perspective(1px) translateZ(0);
                 transform: perspective(1px) translateZ(0);
                 box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-                position: relative;
                 overflow: hidden;
                 &:before{
                     content: "";
@@ -76,8 +77,8 @@
                     transition-duration: 0.3s;
                     -webkit-transition-timing-function: ease-out;
                     transition-timing-function: ease-out;
-                }*/
-
+                }
+                // ---------------hover style end
                 &.router-link-active{
                     background: #fff;
                     color: $activeColor;
