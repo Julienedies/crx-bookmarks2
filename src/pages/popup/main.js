@@ -29,11 +29,25 @@ import install from '../app/install'
 install(Vue)
 
 import App from './App'
+import { bookmarks } from '../../libs/chrome'
 
 new Vue({
     el: '#app',
     router,
     store,
+    data: {
+        event: {
+            name: '',
+            args: ''
+        }
+    },
+    mounted () {
+        let that = this;
+        bookmarks.on(function (eventName, ...args) {
+            console.log('bookmarks event => ', eventName, args)
+            that.event = {name: eventName, args: args}
+        });
+    },
     render: (h) => h(App)
 })
 

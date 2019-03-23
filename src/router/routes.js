@@ -55,7 +55,7 @@ export default [
         component: tree
     },
     {
-        title: '目录',
+        title: '回收站',
         name: 'trash',
         path: '/trash',
         component: trash
