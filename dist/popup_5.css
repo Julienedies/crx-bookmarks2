@@ -5,15 +5,20 @@ body {
   overflow-y: scroll;
   background: #fff; }
 
+header button {
+  margin-right: 0.5rem !important; }
+  header button:last-child {
+    margin-right: 0 !important; }
+
 .box {
-  padding: 0.75rem;
+  padding: 0.5rem;
   box-shadow: none; }
 
 .control button[data-v-6c0c599a] {
   margin-right: 3rem;
 }
 
-[data-v-4669f609] .layer {
+[data-v-0ae32289] .layer {
   position: fixed;
   z-index: 100000;
   top: 100%;
@@ -25,7 +30,7 @@ body {
   transition: all 0.5s;
   opacity: 0;
 }
-[data-v-4669f609] .layer.show {
+[data-v-0ae32289] .layer.show {
     top: 0;
     opacity: 1;
 }

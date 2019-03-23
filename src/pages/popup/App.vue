@@ -1,22 +1,24 @@
 <template>
-    <div style="height: 100%;">
+    <div style="height: 100%; position: fixed; left:0; top:0; bottom:0; right:0; background: #fff; overflow-y: scroll;">
         <div class="box" style="height:100%; display: flex; flex-flow:column;">
 
-            <div class="" style="padding:0 0 12px 0; text-align:right;">
-                <span class="">
-                    <button class="button" :class="{'is-info':c==='home'}" @click="c='home'">快捷</button>
-                    <button class="button" :class="{'is-info':c==='recent'}" @click="c='recent'">最近</button>
-                    <button class="button" :class="{'is-info':c==='hot'}" @click="c='hot'">常用</button>
-                    <button class="button" :class="{'is-info':c==='tree'}" @click="c='tree'">目录</button>
-                </span>
+            <header>
+                <div style="padding:0 0 12px 0; text-align:right; display: flex; justify-content: space-between;">
+                    <div style="display: flex; justify-content: flex-start;">
+                        <button class="button" :class="{'is-info':c==='home'}" @click="c='home'">快捷</button>
+                        <button class="button" :class="{'is-info':c==='recent'}" @click="c='recent'">最近</button>
+                        <button class="button" :class="{'is-info':c==='hot'}" @click="c='hot'">常用</button>
+                        <button class="button" :class="{'is-info':c==='tree'}" @click="c='tree'">目录</button>
+                    </div>
 
-                <span class="">
-                    <button class="button" @click="isSetBookmark=1" v-if="bookmark.id">修改书签</button>
-                    <button class="button" @click="isSetBookmark=1" v-else>添加书签</button>
-                    <button class="button" @click="addShortcut" v-show="bookmark.id">添加快捷方式</button>
-                    <button class="button" @click="open">打开书签管理器</button>
-                </span>
-            </div>
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button class="button" @click="isSetBookmark=1" v-if="bookmark.id">修改书签</button>
+                        <button class="button" @click="isSetBookmark=1" v-else>添加书签</button>
+                        <button class="button" @click="addShortcut" v-show="bookmark.id">添加快捷方式</button>
+                        <button class="button" @click="open">打开书签管理器</button>
+                    </div>
+                </div>
+            </header>
 
             <div style="flex:1;">
                 <!--<component :is="c"></component>-->
@@ -79,7 +81,7 @@
                 let bookmarkArray = await bookmarks.search(tab.url)
                 console.log('#search', bookmarkArray)
                 bookmarkArray = bookmarkArray || []
-                bookmarkArray = bookmarkArray.filter( (item) => {
+                bookmarkArray = bookmarkArray.filter((item) => {
                     return item.url === tab.url
                 })
                 if (bookmarkArray && bookmarkArray.length) {
@@ -98,8 +100,8 @@
             },
         },
         watch: {
-            c (to){
-                    this.$router.push({name: to})
+            c (to) {
+                this.$router.push({name: to})
             },
             '$route' (to, from) {
                 console.log('watch $route', to, from)

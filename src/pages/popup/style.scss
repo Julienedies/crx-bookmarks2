@@ -6,7 +6,16 @@ body{
   background: #fff;
 }
 
+header{
+  button{
+    margin-right: 0.5rem!important;
+    &:last-child{
+      margin-right:0!important;
+    }
+  }
+}
+
 .box{
-  padding:0.75rem;
+  padding:0.5rem;
   box-shadow: none;
 }
