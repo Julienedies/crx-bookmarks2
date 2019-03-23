@@ -5,8 +5,8 @@
         </div>
 
         <div class="nav-items">
-            <router-link class="nav-item hvr-underline-from-center" v-for="route of routes" v-if="route.name && route.name!='search'"  :to="route._path || route.path" :key="route.path">
-                <span > {{ route.name }}</span>
+            <router-link class="nav-item hvr-underline-from-center" v-for="route of routes" v-if="route.title && route.name!='search'"  :to="route._path || route.path" :key="route.path">
+                <span > {{ route.title }}</span>
             </router-link>
         </div>
     </nav>

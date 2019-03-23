@@ -10,7 +10,7 @@
 
 <script>
     import listItem from './listItem'
-    import { mapState } from 'vuex'
+    import { mapState, mapMutations } from 'vuex'
     import getDb from '../libs/db'
 
     const shortcutDb = getDb('shortcut')
@@ -40,12 +40,21 @@
         mounted () {
             if (window.innerWidth < 900) {
                 this.listType = 'grid'
+                this.updateUi(['list.showType', 'grid'])
             }
         },
         methods: {
+            ...mapMutations({
+                updateUi: 'updateUi'
+            }),
             onContextmenu (...args) {
                 console.log('contextmenu', args)
                 this.$emit('contextmenu', args)
+            }
+        },
+        watch: {
+            'ui.list.showType'(newVal, oldVal){
+                this.listType = newVal
             }
         }
     }

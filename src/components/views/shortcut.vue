@@ -1,10 +1,13 @@
 <template>
     <div>
+        <list-tool-bar :count="count"></list-tool-bar>
         <list :bookmarkArray="bookmarkArray" @contextmenu="onContextmenu"></list>
     </div>
 </template>
 
 <script>
+    import listToolBar from '../listToolBar'
+    import mixins from '../../mixins'
     import { bookmarks } from '../../libs/chrome'
     import getDb from '../../libs/db'
 
@@ -12,9 +15,18 @@
 
     export default {
         name: 'shortcut',
+        mixins: [mixins],
+        components: {
+            listToolBar
+        },
         data () {
             return {
                 bookmarkArray: []
+            }
+        },
+        computed: {
+            count () {
+                return this.bookmarkArray.length
             }
         },
         created () {

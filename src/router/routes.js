@@ -18,47 +18,56 @@ const treemap = () => import(/* webpackChunkName: "view-search" */'../components
 
 export default [
     {
-        name: '首页',
+        title: '首页',
+        name: 'home',
         path: '/home',
         component: home
     },
     {
-        name: '常用',
+        title: '常用',
+        name: 'hot',
         path: '/hot',
         component: hot
     },
     {
-        name: '最近',
+        title: '最近',
+        name: 'recent',
         path: '/recent',
         component: recent
     },
     {
-        name: '目录',
+        title: '目录',
+        name: 'node',
         path: '/node/:id',
-        _path: '/node/38',
+        _path: '/node/1',
         component: node
     },
     {
+        title: '',
         name: 'treemap',
         path: '/treemap',
         component: treemap
     },
     {
+        title: 'tree',
         name: 'tree',
         path: '/tree',
         component: tree
     },
     {
-        name: '回收站',
+        title: '目录',
+        name: 'trash',
         path: '/trash',
         component: trash
     },
     {
-        name: '设置',
+        title: '设置',
+        name: 'setting',
         path: '/setting',
         component: setting
     },
     {
+        title: 'search',
         name: 'search',
         path: '/search/:query',
         component: search

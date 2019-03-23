@@ -98,7 +98,7 @@
             })
             .on('click', function (d) {
                 location.hash = '#/node/' + d.data.id
-                d3.event.stopPropagation()
+                //d3.event.stopPropagation()
             });
 
         $text

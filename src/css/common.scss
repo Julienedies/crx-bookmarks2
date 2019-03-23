@@ -8,10 +8,10 @@ html, body {
   overflow: hidden;
   height: 100%;
   //background: rgb(231, 235, 240);
-  color:#272727;
+  color: #272727;
 }
 
-.active{
+.active {
   color: $activeColor2;
 }
 
@@ -39,3 +39,10 @@ a {
 [v-cloak] {
   display: none;
 }
+
+body {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+

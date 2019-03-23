@@ -1,6 +1,5 @@
 <template>
     <div>
-        <list-tool-bar></list-tool-bar>
         <shortcut></shortcut>
     </div>
 </template>
@@ -11,8 +10,8 @@
     export default {
         name: 'home',
         components: {
-            shortcut
-        }
+            shortcut,
+        },
     }
 </script>
 

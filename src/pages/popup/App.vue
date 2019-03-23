@@ -1,34 +1,38 @@
 <template>
-    <div class="box">
+    <div style="height: 100%;">
+        <div class="box" style="height:100%; display: flex; flex-flow:column;">
 
-        <div class="level">
-            <div class="level-left buttons has-addons">
-                <button class="button" :class="{'is-info':c==='shortcut'}" @click="c='shortcut'">快捷</button>
-                <button class="button" :class="{'is-info':c==='recent'}" @click="c='recent'">最近</button>
-                <button class="button" :class="{'is-info':c==='hot'}" @click="c='hot'">常用</button>
+            <div class="" style="padding:0 0 12px 0; text-align:right;">
+                <span class="">
+                    <button class="button" :class="{'is-info':c==='home'}" @click="c='home'">快捷</button>
+                    <button class="button" :class="{'is-info':c==='recent'}" @click="c='recent'">最近</button>
+                    <button class="button" :class="{'is-info':c==='hot'}" @click="c='hot'">常用</button>
+                    <button class="button" :class="{'is-info':c==='tree'}" @click="c='tree'">目录</button>
+                </span>
+
+                <span class="">
+                    <button class="button" @click="isSetBookmark=1" v-if="bookmark.id">修改书签</button>
+                    <button class="button" @click="isSetBookmark=1" v-else>添加书签</button>
+                    <button class="button" @click="addShortcut" v-show="bookmark.id">添加快捷方式</button>
+                    <button class="button" @click="open">打开书签管理器</button>
+                </span>
             </div>
 
-            <div class="level-right buttons has-addons">
-                <button class="button" @click="isSetBookmark=1" v-if="bookmark.id">修改书签</button>
-                <button class="button" @click="isSetBookmark=1" v-else>添加书签</button>
-                <button class="button" @click="addShortcut" v-show="bookmark.id">添加快捷方式</button>
-                <button class="button" @click="open">打开书签管理器</button>
+            <div style="flex:1;">
+                <!--<component :is="c"></component>-->
+                <router-view></router-view>
             </div>
-        </div>
 
-        <div>
-            <component :is="c"></component>
         </div>
 
         <div class="layer" :class="{show:isSetBookmark}">
             <setBookmark :bookmark="bookmark" @close="isSetBookmark=false"></setBookmark>
         </div>
-
     </div>
 </template>
 
 <script>
-    import shortcut from '../../components/views/shortcut'
+    import home from '../../components/views/home'
     import recent from '../../components/views/recent'
     import hot from '../../components/views/hot'
 
@@ -43,13 +47,13 @@
         name: 'App',
         components: {
             setBookmark,
-            shortcut,
+            home,
             recent,
             hot
         },
         data () {
             return {
-                c: 'shortcut',
+                c: 'recent',
                 isSetBookmark: false,
                 isSelectFolder: false,
                 bookmark: {},
@@ -92,6 +96,14 @@
                     this.$msg('添加完成!')
                 })
             },
+        },
+        watch: {
+            c (to){
+                    this.$router.push({name: to})
+            },
+            '$route' (to, from) {
+                console.log('watch $route', to, from)
+            },
         }
     }
 </script>
@@ -99,7 +111,7 @@
 <style lang="scss" scoped>
     /deep/ .layer {
         position: fixed;
-        z-index: 100;
+        z-index: 100000;
         top: 100%;
         left: 0;
         width: 100%;
