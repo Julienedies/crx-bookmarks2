@@ -55,13 +55,14 @@
         },
         data () {
             return {
-                c: 'recent',
+                c: 'home',
                 isSetBookmark: false,
                 isSelectFolder: false,
                 bookmark: {},
             }
         },
         created () {
+            this.$router.push({name: this.c})
             this.getBookmarkByTab()
         },
         mounted () {
