@@ -294,7 +294,7 @@
             }
 
             &:hover {
-                z-index: 1000 !important;
+                //z-index: 1000 !important;
                 opacity: 0.9;
 
                 .return-up, .check-box {

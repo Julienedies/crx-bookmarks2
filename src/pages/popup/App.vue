@@ -74,7 +74,16 @@
                 //this.recentBookmarkArray = await bookmarks.getRecent(100)
             },
             open () {
-                tabs.create({url: './dist/app.html', selected: true})
+                tabs.query({title: '书签管理器crx'}).then((arr) => {
+                    let tab = arr && arr[0]
+                    console.info(arr)
+                    if (tab) {
+                        tabs.update(tab.id, {selected: true})
+                    } else {
+                        tabs.create({url: './dist/app.html', selected: true})
+                    }
+                })
+
             },
             async getBookmarkByTab () {
                 let tab = await tabs.getSelected()
