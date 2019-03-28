@@ -6498,43 +6498,43 @@ body {
  *  define variables
  *  Modify as needed
  */
-.__flex[data-v-f8da83aa], .flex-middle[data-v-f8da83aa], .flex-mc[data-v-f8da83aa], .flex-mj[data-v-f8da83aa], .flex-mr[data-v-f8da83aa], .flex-center[data-v-f8da83aa], .flex-justify[data-v-f8da83aa], .flex-right[data-v-f8da83aa], .flex-end[data-v-f8da83aa], .flex[data-v-f8da83aa] {
+.__flex[data-v-3bb78282], .flex-middle[data-v-3bb78282], .flex-mc[data-v-3bb78282], .flex-mj[data-v-3bb78282], .flex-mr[data-v-3bb78282], .flex-center[data-v-3bb78282], .flex-justify[data-v-3bb78282], .flex-right[data-v-3bb78282], .flex-end[data-v-3bb78282], .flex[data-v-3bb78282] {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-.flex-1[data-v-f8da83aa] {
+.flex-1[data-v-3bb78282] {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
 }
-.flex-middle[data-v-f8da83aa], .flex-mc[data-v-f8da83aa], .flex-mj[data-v-f8da83aa], .flex-mr[data-v-f8da83aa] {
+.flex-middle[data-v-3bb78282], .flex-mc[data-v-3bb78282], .flex-mj[data-v-3bb78282], .flex-mr[data-v-3bb78282] {
   -webkit-box-align: center;
   -webkit-align-items: center;
   align-items: center;
 }
-.flex-center[data-v-f8da83aa], .flex-mc[data-v-f8da83aa] {
+.flex-center[data-v-3bb78282], .flex-mc[data-v-3bb78282] {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
 }
-.flex-justify[data-v-f8da83aa], .flex-mj[data-v-f8da83aa] {
+.flex-justify[data-v-3bb78282], .flex-mj[data-v-3bb78282] {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
 }
-.flex-right[data-v-f8da83aa], .flex-mr[data-v-f8da83aa] {
+.flex-right[data-v-3bb78282], .flex-mr[data-v-3bb78282] {
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
-.flex-end[data-v-f8da83aa] {
+.flex-end[data-v-3bb78282] {
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
   align-items: flex-end;
 }
-.popup-wrap[data-v-f8da83aa] {
+.popup-wrap[data-v-3bb78282] {
   position: fixed;
   top: 0;
   left: 0;
@@ -6542,13 +6542,13 @@ body {
   bottom: 0;
   z-index: 1000;
 }
-.popup-wrap .mask[data-v-f8da83aa] {
+.popup-wrap .mask[data-v-3bb78282] {
     position: absolute;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.2);
 }
-.popup-wrap .popup[data-v-f8da83aa] {
+.popup-wrap .popup[data-v-3bb78282] {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -6898,6 +6898,13 @@ body {
 }
 [data-v-7716b9f9] ul.grid > li .url,[data-v-7716b9f9] ul.grid > li .contextmenu {
       display: none;
+}
+
+.search-btn[data-v-3b588dab] {
+  padding: 0 1rem;
+}
+.fa[data-v-3b588dab] {
+  color: inherit;
 }
 
 .treeMapWrapper[data-v-4cc06048] {

@@ -11,6 +11,10 @@
                         <button class="button" :class="{'is-info':c==='tree'}" @click="c='tree'">目录</button>
                     </div>
 
+                    <div>
+                        <search-bar></search-bar>
+                    </div>
+
                     <div style="display: flex; justify-content: flex-end;">
                         <button class="button" @click="isSetBookmark=1" v-if="bookmark.id">修改书签</button>
                         <button class="button" @click="isSetBookmark=1" v-else>添加书签</button>
@@ -37,6 +41,7 @@
     import home from '../../components/views/home'
     import recent from '../../components/views/recent'
     import hot from '../../components/views/hot'
+    import searchBar from '../../components/searchBar'
 
     import { bookmarks, tabs } from '../../libs/chrome'
     import getDb from '../../libs/db'
@@ -51,7 +56,8 @@
             setBookmark,
             home,
             recent,
-            hot
+            hot,
+            searchBar
         },
         data () {
             return {

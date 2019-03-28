@@ -12,12 +12,12 @@ let vm
 const options = {
     data: {
         visible: true,
-        exit: false,
-        bookmark: {}
+        bookmark: null
     },
     render (h) {
         let child = this.bookmark && h(bookmarkEditor, {
-            slot: 'default', props: {
+            slot: 'default',
+            props: {
                 bookmark: this.$clone(this.bookmark)
             },
             on: {
@@ -31,6 +31,17 @@ const options = {
             props: {
                 value: this.visible
             },
+            on: {
+                'cancel': () => {
+                    this.visible = false
+                    this.bookmark = null
+                },
+                'input': (val) => {
+                    this.visible = val
+                }
+            },
+            directives: [{
+            }]
         }
         return h(popup, popupOptions, [child])
     }
@@ -50,6 +61,7 @@ function editBookmark (bookmark) {
     vm = getInstance()
     vm.bookmark = bookmark
     vm.visible = true
+    console.log('edit', vm)
 }
 
 export function createSubFolder (bookmark) {
