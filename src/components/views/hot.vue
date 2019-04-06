@@ -50,7 +50,7 @@
             this.getData()
 
             let callback = (...args) => {
-                console.log('db event listener', args)
+                console.log('visitDb event listener', args)
                 this.getData()
             }
 

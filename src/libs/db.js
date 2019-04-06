@@ -33,14 +33,17 @@ window.addEventListener('storage', (event) => {
         console.log(e)
         obj = null
     }
-    LISTENER.forEach(o => {
-        if (o.namespace === name) {
-            o.emit(e, obj || arg, event)
+    LISTENER.forEach(dbInstance => {
+        if (dbInstance.namespace === name) {
+            dbInstance.emit(e, obj || arg, event)
         }
     })
 })
 
+// 存储db实例 dbInstance, 使用单例模式和事件监听管理
+// 之所以使用单例模式, 是因为单例模式事件监听触发才能正确工作
 const LISTENER = []
+const INSTANCES = []
 
 function removeFormArray (value, array) {
     let index = array.findIndex(item => item === value)
@@ -63,12 +66,24 @@ class Db {
         })
     }
 
+    static getInstance (name) {
+        for(let instance of INSTANCES) {
+            if (instance.namespace === name) {
+                return instance
+            }
+        }
+        return false
+    }
+
     static remove (key) {
         localStorage.removeItem(key)
     }
 
     constructor (namespace) {
-        if (!(this instanceof Db)) return new Db(namespace)
+        if (!(this instanceof Db)) return new Db(namespace);
+        let instance = Db.getInstance(namespace)
+        if (instance) return instance;
+        INSTANCES.push(this)
         this.namespace = namespace
         this.separator = '.'
         this._on = {}
@@ -85,7 +100,7 @@ class Db {
 
     off (eventName, listener) {
         eventName = this._prefix(eventName)
-        delete this._on[eventName]
+        //delete this._on[eventName]
         if (Object.keys(this._on).length === 0) {
             removeFormArray(this, LISTENER)
         }
@@ -165,7 +180,7 @@ Object.keys(methods).forEach(method => {
         const fn = methods[method]
         return new Promise(function (resolve, reject) {
             let result = fn.apply(that, args)
-            console.log(`Db ${ that.namespace } exec ${ method }; args => `, args,  'return =>', result)
+            console.log(`Db ${ that.namespace } exec ${ method }; args => `, args, 'return =>', result)
 
             let arg = args[0]
             if (/remove/.test(method)) {

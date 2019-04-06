@@ -33,10 +33,15 @@
             this.getData()
 
             let callback = (...args) => {
-                console.log('db event listener', args)
+                console.log('shortcutDb event listener', args)
                 this.getData()
             }
 
+            // 关于shortcutDb事件监听不起作用, 而visitDb正确工作
+            // 1是因为visitDb 是通过 storage 事件触发
+            // 同页面内 localStorage 操作不会触发 storage 事件
+            // 2 是因为listItem 里的shortDb 和 这里的shortDb 是两个实例
+            // 解决办法: 使shortcutDb变成单例模式
             shortcutDb.on('*', callback)
 
             this.$once('hook:beforeDestroy', function () {
