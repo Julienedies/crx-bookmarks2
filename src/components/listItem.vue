@@ -62,6 +62,7 @@
                 shortcutDb.remove(bookmark)
                 //this.bookmark.shortcut = false
                 this.$set(this.bookmark, 'shortcut', false)
+                this.$emit('shortcut.remove', bookmark)
             },
             open(url){
                 tabs.create({ url, selected: true })

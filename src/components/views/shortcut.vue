@@ -11,7 +11,7 @@
     import { bookmarks } from '../../libs/chrome'
     import getDb from '../../libs/db'
 
-    const db = getDb('shortcut')
+    const shortcutDb = getDb('shortcut')
 
     export default {
         name: 'shortcut',
@@ -31,10 +31,21 @@
         },
         created () {
             this.getData()
+
+            let callback = (...args) => {
+                console.log('db event listener', args)
+                this.getData()
+            }
+
+            shortcutDb.on('*', callback)
+
+            this.$once('hook:beforeDestroy', function () {
+                shortcutDb.off('*', callback)
+            })
         },
         methods: {
             async getData () {
-                let idArray = await db.get().then(data => {
+                let idArray = await shortcutDb.get().then(data => {
                     return Object.keys(data)
                 })
                 this.bookmarkArray = await bookmarks.get(idArray).then(bookmarkArray => {
