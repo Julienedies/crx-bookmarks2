@@ -153,43 +153,43 @@ nav .nav-items .nav-item.router-link-active[data-v-e9e277c2]:before, nav .nav-it
  *  define variables
  *  Modify as needed
  */
-.__flex[data-v-db428b64], .flex-middle[data-v-db428b64], .flex-mc[data-v-db428b64], .flex-mj[data-v-db428b64], .flex-mr[data-v-db428b64], .flex-center[data-v-db428b64], .flex-justify[data-v-db428b64], .flex-right[data-v-db428b64], .flex-end[data-v-db428b64], .flex[data-v-db428b64] {
+.__flex[data-v-33680be1], .flex-middle[data-v-33680be1], .flex-mc[data-v-33680be1], .flex-mj[data-v-33680be1], .flex-mr[data-v-33680be1], .flex-center[data-v-33680be1], .flex-justify[data-v-33680be1], .flex-right[data-v-33680be1], .flex-end[data-v-33680be1], .flex[data-v-33680be1] {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-.flex-1[data-v-db428b64] {
+.flex-1[data-v-33680be1] {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
 }
-.flex-middle[data-v-db428b64], .flex-mc[data-v-db428b64], .flex-mj[data-v-db428b64], .flex-mr[data-v-db428b64] {
+.flex-middle[data-v-33680be1], .flex-mc[data-v-33680be1], .flex-mj[data-v-33680be1], .flex-mr[data-v-33680be1] {
   -webkit-box-align: center;
   -webkit-align-items: center;
   align-items: center;
 }
-.flex-center[data-v-db428b64], .flex-mc[data-v-db428b64] {
+.flex-center[data-v-33680be1], .flex-mc[data-v-33680be1] {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
 }
-.flex-justify[data-v-db428b64], .flex-mj[data-v-db428b64] {
+.flex-justify[data-v-33680be1], .flex-mj[data-v-33680be1] {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
 }
-.flex-right[data-v-db428b64], .flex-mr[data-v-db428b64] {
+.flex-right[data-v-33680be1], .flex-mr[data-v-33680be1] {
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
-.flex-end[data-v-db428b64] {
+.flex-end[data-v-33680be1] {
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
   align-items: flex-end;
 }
-.contextmenu > *[data-v-db428b64] {
+.contextmenu > *[data-v-33680be1] {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -200,43 +200,43 @@ nav .nav-items .nav-item.router-link-active[data-v-e9e277c2]:before, nav .nav-it
   margin: 0.25rem 0;
   padding: 0 0.5rem;
 }
-.contextmenu > * > *[data-v-db428b64] {
+.contextmenu > * > *[data-v-33680be1] {
     flex: 1;
     text-align: left !important;
 }
-.contextmenu > * i[data-v-db428b64] {
+.contextmenu > * i[data-v-33680be1] {
     margin-right: 1rem;
     color: #459de3;
 }
-.contextmenu > *[data-v-db428b64]:hover {
+.contextmenu > *[data-v-33680be1]:hover {
     background: #459de3;
 }
-.contextmenu > *:hover button[data-v-db428b64], .contextmenu > *:hover i[data-v-db428b64] {
+.contextmenu > *:hover button[data-v-33680be1], .contextmenu > *:hover i[data-v-33680be1] {
       color: #fff;
 }
-li[data-v-db428b64] {
+li[data-v-33680be1] {
   margin-left: 0.2em;
   transition: height 0.2s ease-in;
 }
-li .node-item[data-v-db428b64]:hover {
+li .node-item[data-v-33680be1]:hover {
     background: #459de3;
     color: #fff;
 }
-li .node-item:hover .arrow[data-v-db428b64], li .node-item:hover a.router-link-active[data-v-db428b64] {
+li .node-item:hover .arrow[data-v-33680be1], li .node-item:hover a.router-link-active[data-v-33680be1] {
       color: #fff !important;
 }
-li .node-item + ul[data-v-db428b64] {
+li .node-item + ul[data-v-33680be1] {
     height: 0;
     overflow: hidden;
     transition: height 0.2s ease-in;
 }
-li .node-item.extend .arrow[data-v-db428b64] {
+li .node-item.extend .arrow[data-v-33680be1] {
     transform: rotate(0);
 }
-li .node-item.extend + ul[data-v-db428b64] {
+li .node-item.extend + ul[data-v-33680be1] {
     height: auto;
 }
-li .node-item .arrow[data-v-db428b64] {
+li .node-item .arrow[data-v-33680be1] {
     font-size: 0.8em;
     width: 1.2em;
     padding: 0.5rem 0;
@@ -245,18 +245,18 @@ li .node-item .arrow[data-v-db428b64] {
     transform: rotate(-90deg);
     transition: transform 0.2s ease-out;
 }
-li .node-item > a[data-v-db428b64] {
+li .node-item > a[data-v-33680be1] {
     display: inline-block;
     padding: 0 1em 0 2.4em;
     line-height: 2.2em;
     background: url(img/7360254d509706d9b22a3d60d852bc86.png) 0.6em 7px no-repeat transparent;
     background-size: 1.2em;
 }
-li .node-item > a.router-link-exact-active.router-link-active[data-v-db428b64] {
+li .node-item > a.router-link-exact-active.router-link-active[data-v-33680be1] {
       font-weight: bold;
       color: #0386d8;
 }
-li li[data-v-db428b64] {
+li li[data-v-33680be1] {
     margin-left: 1.8em;
     border-left: 1px dotted #b3b3b3;
 }

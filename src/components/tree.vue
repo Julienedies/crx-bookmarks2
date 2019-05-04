@@ -1,7 +1,10 @@
 <template>
     <ul>
         <li v-for="node of tree" :node="node" :key="node.id">
-            <div class="node-item" :class="{'extend': !node.extend, selected: node.contextmenu}" @contextmenu="onContextmenu($event, node)">
+            <div class="node-item"
+                 :class="{'extend': !node.extend, selected: node.contextmenu}"
+                 @contextmenu="onContextmenu($event, node)"
+                 @click="$router.push({path:`/node/${node.id}`})">
 
                 <button class="arrow" v-if="node.children && node.children.length" @click="toggle(node)"> ▼</button>
                 <button class="arrow" v-else></button>
@@ -106,8 +109,9 @@
             &:hover {
                 background: $activeColor2;
                 color: #fff;
-                .arrow, a.router-link-active{
-                    color: #fff!important;
+
+                .arrow, a.router-link-active {
+                    color: #fff !important;
                 }
             }
 
