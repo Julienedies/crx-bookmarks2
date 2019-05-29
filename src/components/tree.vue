@@ -6,7 +6,7 @@
                  @contextmenu="onContextmenu($event, node)"
                  @click="$router.push({path:`/node/${node.id}`})">
 
-                <button class="arrow" v-if="node.children && node.children.length" @click="toggle(node)"> ▼</button>
+                <button class="arrow" v-if="node.children && node.children.length" @click.stop="toggle(node)"> ▼</button>
                 <button class="arrow" v-else></button>
 
                 <router-link :to="`/node/${node.id}`" v-if="!selectable">{{node.title || '根目录'}}</router-link>
@@ -59,7 +59,8 @@
                 confirm('确认删除, 不可撤销!') && bookmarks.remove(node)
             },
             toggle (node) {
-                this.$set(node, 'extend', !node.extend)
+                this.$set(node, 'extend', !node.extend);
+
             },
             onContextmenu (e, node) {
                 e.preventDefault();

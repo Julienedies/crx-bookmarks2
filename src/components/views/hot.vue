@@ -3,13 +3,13 @@
         <tool-bar :count="count"></tool-bar>
 
         <list :bookmark-array="bookmarkArray">
-            <template slot-scope="{bookmark}">
+<!--            <template slot-scope="{bookmark}">
                 <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
                 <button @click="addShortcut(bookmark)" title="加入快捷方式" v-else><i class="fas fa-link"></i></button>
                 <button @click="edit(bookmark)"><i class="fas fa-edit"></i></button>
                 <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
                 <button>{{ bookmark.visit.count }}</button>
-            </template>
+            </template>-->
         </list>
 
     </div>

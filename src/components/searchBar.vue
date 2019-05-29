@@ -1,7 +1,7 @@
 <template>
     <div class="field has-addons" style="flex:1;">
         <div class="control" style="width:100%;">
-            <input class="input" type="text" placeholder="" v-model.trim="query" @keyup.enter="search()"/>
+            <input class="input" type="search" v-model.trim="query" @keyup.enter="search()"/>
         </div>
         <div class="control">
             <a class="button is-primary search-btn" @click="search()">
@@ -34,6 +34,14 @@
         computed: {
             // 使用对象展开运算符将此对象混入到外部对象中
             ...mapState({})
+        },
+        watch: {
+            '$route' (to, from) {
+                console.log('watch $route', to, from);
+                if(to.name === 'search') {
+                    this.query = to.params.query;
+                }
+            },
         }
     }
 </script>

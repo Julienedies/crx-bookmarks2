@@ -1,7 +1,7 @@
 <template>
     <li>
         <!-- 书签 -->
-        <a v-if="bookmark.url" :Xhref="bookmark.url" target="_blank" @click="open(bookmark.url)">
+        <a v-if="bookmark.url" :X-href="bookmark.url" target="_blank" @dblclick="open(bookmark.url)">
             <img :src="bookmark.url | getFavicon" class="favicon">
             <span>
                 <span class="tit">{{bookmark.title}}</span>
@@ -18,12 +18,14 @@
         <!-- 上下文菜单 -->
         <div class="contextmenu">
             <slot>
+                <button @click="open(bookmark.url)" title="查看链接"><i class="far fa-eye"></i></button>
+                <button @click="search(bookmark)" title="搜索相关"><i class="far fa-lightbulb"></i></button>
                 <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
                 <button @click="addShortcut(bookmark)" title="加入快捷方式" v-else><i class="fas fa-link"></i></button>
                 <button @click="createSubFolder(bookmark)" v-if="!bookmark.url" title="新建子文件夹">
                     <i class="fas fa-folder-plus"></i>
                 </button>
-                <button @click="editBookmark(bookmark)" title="编辑"><i class="fas fa-edit"></i></button>
+                <button @click="editBookmark(bookmark)" title="编辑"><i class="far fa-edit"></i></button>
                 <button @click="remove(bookmark)" title="删除"><i class="far fa-trash-alt"></i></button>
             </slot>
         </div>
@@ -67,6 +69,11 @@
             open(url){
                 tabs.create({ url, selected: true })
                 return false
+            },
+            search( bookmark ) {
+                let arr = bookmark.url.match(/^https?:\/\/([\w.]+)/) || [];
+                let query = arr[1];
+                query && this.$router.push({name: 'search', params: {query}})
             }
         }
     }
