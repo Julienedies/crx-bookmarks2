@@ -3,8 +3,8 @@
         <li v-for="node of tree" :node="node" :key="node.id">
             <div class="node-item"
                  :class="{'extend': !node.extend, selected: node.contextmenu}"
-                 @contextmenu="onContextmenu($event, node)"
-                 @click="$router.push({path:`/node/${node.id}`})">
+                 @click="show(node)"
+                 @contextmenu="onContextmenu($event, node)">
 
                 <button class="arrow" v-if="node.children && node.children.length" @click.stop="toggle(node)"> ▼</button>
                 <button class="arrow" v-else></button>
@@ -16,15 +16,15 @@
                     <slot>
                         <div class="contextmenu">
                             <div>
-                                <button @click="createSubFolder(node)" title="新建子文件夹">
-                                    <i class="fas fa-folder-plus"></i>新建子文件夹
+                                <button @click="createSubFolder(node)">
+                                    <!--<i class="fas fa-folder-plus"></i>-->新建子文件夹
                                 </button>
                             </div>
                             <div>
-                                <button @click="edit(node)" title="编辑"><i class="fas fa-edit"></i>编辑</button>
+                                <button @click="edit(node)"><!--<i class="fas fa-edit"></i>-->编辑</button>
                             </div>
                             <div>
-                                <button @click="remove(node)"><i class="far fa-trash-alt"></i> 删除</button>
+                                <button @click="remove(node)"><!--<i class="far fa-trash-alt"></i>--> 删除</button>
                             </div>
                         </div>
                     </slot>
@@ -49,6 +49,10 @@
             }
         },
         methods: {
+            show (node) {
+                if(node.contextmenu) return;
+                this.$router.push({path:`/node/${node.id}`})
+            },
             edit (node) {
                 editBookmark(node)
             },
