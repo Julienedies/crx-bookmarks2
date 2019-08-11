@@ -34,6 +34,9 @@
             '$route' (to, from) {
                 this.getData()
             },
+            '$root.event' (newValue) {
+                this.getData()
+            },
             '$store.state.ui.list.reverse'(){
                 this.bookmarkArray.reverse()
             }

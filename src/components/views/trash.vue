@@ -83,6 +83,9 @@
             'reverse' (newVal) {
                 this.bookmarkArray.reverse()
             },
+            '$root.event' (newValue) {
+                this.getData()
+            },
         }
     }
 </script>
