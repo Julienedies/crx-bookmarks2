@@ -1,9 +1,8 @@
 /**
- * 为项目生成要发布的zip，chrome market 要求；
+ * 为项目生成要发布的zip，chrome web store要求；
  * Created by j on 2019-08-17.
  */
 
-// require modules
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
@@ -12,7 +11,7 @@ const pkg = require('../package.json');
 
 const projectDir = path.resolve(__dirname, '../');
 
-let output = fs.createWriteStream(`${ projectDir }${ pkg.name }.zip`);
+let output = fs.createWriteStream(`${ projectDir }.zip`);
 let archive = archiver('zip', {
     zlib: {level: 9}
 });
