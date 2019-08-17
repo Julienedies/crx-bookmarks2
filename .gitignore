@@ -14,8 +14,8 @@ Thumbs.db
 .tmp_*~
 *.log
 
-# hmr
-/dist/*.hot-update.*
+// 构建生成
+dist/
 
 # 外部类库
 bower_components/
@@ -30,8 +30,8 @@ node_modules/
 !/src/css/basic/src/
 !/src/css/basic/_basic.scss
 
-assets/img/*
-!assets/img/bookmarks2.png
+# assets/img/*
+# !assets/img/bookmarks2.png
 
 /src/vendor/vueex/
 /src/vendor/hover/
