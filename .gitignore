@@ -16,6 +16,7 @@ Thumbs.db
 
 // 构建生成
 dist/
+*.zip
 
 # 外部类库
 bower_components/

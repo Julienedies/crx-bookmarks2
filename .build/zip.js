@@ -11,7 +11,7 @@ const pkg = require('../package.json');
 
 const projectDir = path.resolve(__dirname, '../');
 
-let output = fs.createWriteStream(`${ projectDir }.zip`);
+let output = fs.createWriteStream(`${ projectDir }/${ pkg.name }.zip`);
 let archive = archiver('zip', {
     zlib: {level: 9}
 });
