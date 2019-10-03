@@ -16,6 +16,20 @@
                 </div>
             </div>
 
+            <div class="field">
+                <label class="label">tag</label>
+                <div class="control">
+                    <input class="input" type="text" v-model="bookmark.tag">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">level</label>
+                <div class="control">
+                    <input class="input" type="number" v-model="bookmark.level">
+                </div>
+            </div>
+
             <div class="field is-grouped is-grouped-centered">
                 <p class="control">
                     <button class="button is-light" @click="cancel"> 取消</button>

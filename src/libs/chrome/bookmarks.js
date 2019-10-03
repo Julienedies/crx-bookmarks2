@@ -7,14 +7,14 @@ import wrapApi from './wrapApi'
 
 const events = ['onCreated', 'onRemoved', 'onChanged', 'onMoved', 'onChildrenReordered', 'onImportBegan', 'onImportEnded']
 
-const promise = wrapApi(chrome.bookmarks, {name: 'bookmarks'})
+const chromeBookmarksPromise = wrapApi(chrome.bookmarks, {name: 'bookmarks'})
 
 const api = {
     on (eventName, listener) {
-        return promise.on(eventName, listener)
+        return chromeBookmarksPromise.on(eventName, listener)
     },
     get (id) {
-        return promise.get(id)
+        return chromeBookmarksPromise.get(id)
     },
     add (bookmark) {
         return this.create(bookmark)
@@ -26,7 +26,7 @@ const api = {
         if (bookmark.parentId) {
             bk.parentId = bookmark.parentId
         }
-        return promise.create(bk)
+        return chromeBookmarksPromise.create(bk)
     },
     recover (bookmark) {
         let bk = {}
@@ -34,31 +34,31 @@ const api = {
         bk.url = bookmark.url
         bk.parentId = bookmark.parentId
         bk.index = bookmark.index
-        return promise.create(bk)
+        return chromeBookmarksPromise.create(bk)
     },
     remove (bookmark) {
         if (bookmark.url) {
-            return promise.remove(bookmark.id)
+            return chromeBookmarksPromise.remove(bookmark.id)
         } else {
-            return promise.removeTree(bookmark.id)
+            return chromeBookmarksPromise.removeTree(bookmark.id)
         }
     },
     update ({id, title, url, parentId}) {
         if(parentId) {
             return this.move(id, {parentId}).then( (data) => {
-                return promise.update(id, {title, url})
+                return chromeBookmarksPromise.update(id, {title, url})
             })
         }
     },
     move (bookmark, destination) {
         let id = typeof bookmark === 'object' ? bookmark.id : bookmark
-        return promise.move(id, destination)
+        return chromeBookmarksPromise.move(id, destination)
     },
     getChildren (id) {
-        return promise.getChildren(id)
+        return chromeBookmarksPromise.getChildren(id)
     },
     getTree (isOnlyFolder) {
-        return promise.getTree().then(tree => {
+        return chromeBookmarksPromise.getTree().then(tree => {
             // 过滤书签树, 只保留文件夹
             function filter (tree) {
                 let len = tree.length
@@ -80,7 +80,7 @@ const api = {
         })
     },
     getSubTree (id, isOnlyFolder) {
-        return promise.getSubTree(id).then((data) => {
+        return chromeBookmarksPromise.getSubTree(id).then((data) => {
             // 过滤书签树, 只保留文件夹
             function filter (tree) {
                 let len = tree.length
@@ -101,10 +101,10 @@ const api = {
         })
     },
     getRecent (size) {
-        return promise.getRecent(size || 100)
+        return chromeBookmarksPromise.getRecent(size || 100)
     },
     search (query) {
-        return promise.search(query)
+        return chromeBookmarksPromise.search(query)
     }
 }
 

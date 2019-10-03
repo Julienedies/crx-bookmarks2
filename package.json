@@ -39,6 +39,7 @@
     "lodash": "^4.17.11",
     "vue": "^2.5.21",
     "vue-router": "^3.0.2",
+    "vuedraggable": "^2.23.0",
     "vueex": "^0.1.4",
     "vuetify": "^1.4.0",
     "vuex": "^3.0.1"
