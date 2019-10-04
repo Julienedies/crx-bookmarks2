@@ -39,13 +39,13 @@ export default {
     },
     // 合并关联的书签数据
     async _merge (bookmarkArr, bookmarkMap) {
-        let levels = await this.getSetting('levels');
+        //let levels = await this.getSetting('levels');
         bookmarkArr.forEach((bookmark) => {
             let id = bookmark.id;
             Object.assign(bookmark, bookmarkMap[id] || {});
-            if (bookmark.level) {
+/*            if (bookmark.level) {
                 bookmark.color = levels[bookmark.level - 1].color;
-            }
+            }*/
         });
         return bookmarkArr;
     },
@@ -146,7 +146,8 @@ export default {
     getSetting (key) {
         let data = {
             levels: [1, 2, 3, 4, 5, 6, 7].map((v) => {
-                return {value: v, color: `rgba(${ 255 - v * 5 }, ${ 30 + v * 20 }, ${ 240 - v * 20 }, 1)`};
+                //return {value: v, color: `rgba(${ 255 - v * 5 }, ${ 30 + v * 20 }, ${ 240 - v * 20 }, 1)`};
+                return v;
             }),
         };
         console.log(data.levels)

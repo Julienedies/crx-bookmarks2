@@ -84,7 +84,6 @@
 
                 button {
                     cursor: pointer;
-                    color: #9abad4;
                     color: $activeColor2;
                     padding: 0 $gap2;
                     border: none;

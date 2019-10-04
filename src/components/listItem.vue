@@ -1,5 +1,5 @@
 <template>
-    <li :class="{selected: bookmark.contextmenu}" @contextmenu="onContextmenu($event, bookmark)" :style="{borderColor: bookmark.color}">
+    <li :class="{selected: bookmark.contextmenu}" @contextmenu="onContextmenu($event, bookmark)">
         <!-- 书签 -->
         <a v-if="bookmark.url" :X-href="bookmark.url" target="_blank" @dblclick="open(bookmark.url)">
             <img :src="bookmark.url | getFavicon" class="favicon">
@@ -47,7 +47,7 @@
 
 
         <!-- 上下文菜单 -->
-        <!--        <div class="contextmenu">
+                <div class="contextmenu2">
                     <slot>
                         <button @click="open(bookmark.url)" title="查看链接"><i class="far fa-eye"></i></button>
                         <button @click="search(bookmark)" title="搜索相关"><i class="far fa-lightbulb"></i></button>
@@ -59,7 +59,7 @@
                         <button @click="edit(bookmark.id)" title="编辑"><i class="far fa-edit"></i></button>
                         <button @click="remove(bookmark)" title="删除"><i class="far fa-trash-alt"></i></button>
                     </slot>
-                </div>-->
+                </div>
     </li>
 </template>
 

@@ -4,15 +4,15 @@
             <div class="columns">
                 <div class="column is-8">
                     <div class="tags">
-                        <a class="tag" v-for="(v,k,i) in tagMap" @click="getByTag(k)">
+                        <a class="tag" v-for="(v,k,i) in tagMap" :class="{'is-info':byTag===k}" @click="getByTag(k)">
                             {{ k }} {{ v.length }}
                         </a>
                     </div>
                 </div>
                 <div class="column is-4">
                     <div class="tags">
-                        <a class="tag" v-for="(v,i) in levels" :style="{color:v.color}" @click="getByLevel(v.value)">
-                            {{ v.value }}级
+                        <a class="tag" v-for="v in levels" :class="{'is-info':byLevel===v}" @click="getByLevel(v)">
+                            {{ v }}级
                         </a>
                     </div>
                 </div>
@@ -38,11 +38,15 @@
             return {
                 tagMap: [],
                 levels: [],
+                byLevel: 1,
+                byTag: '',
                 bookmarkArray: [],
             }
         },
         created () {
             this.getData();
+            this.getByLevel(this.byLevel);
+
             let callback = (...args) => {
                 console.log('jbmDb event listener', args)
                 this.getData();
@@ -65,9 +69,13 @@
                 this.levels = await bookmarkManager.getSetting('levels');
             },
             async getByTag (tag) {
+                this.byTag = tag;
+                this.byLevel = 0;
                 this.bookmarkArray = await bookmarkManager.getByTag(tag);
             },
             async getByLevel (level) {
+                this.byLevel = level;
+                this.byTag = '';
                 this.bookmarkArray = await bookmarkManager.getByLevel(level);
             },
         }

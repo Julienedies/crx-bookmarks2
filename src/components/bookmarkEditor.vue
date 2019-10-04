@@ -26,9 +26,9 @@
             <div class="field">
                 <label class="label">level</label>
                 <div class="control">
-                    <label class="radio" v-for="v in levels" :style="{color:v.color}">
-                        <input type="radio" name="level" :value="v.value" :checked="v.value===bookmark.level" v-model="bookmark.level">
-                        {{ v.value }}级
+                    <label class="radio" v-for="v in levels">
+                        <input type="radio" name="level" :value="v" :checked="v===bookmark.level" v-model="bookmark.level">
+                        {{ v }}级
                     </label>
                 </div>
             </div>
