@@ -26,7 +26,10 @@
             <div class="field">
                 <label class="label">level</label>
                 <div class="control">
-                    <input class="input" type="number" v-model="bookmark.level">
+                    <label class="radio" v-for="v in levels" :style="{color:v.color}">
+                        <input type="radio" name="level" :value="v.value" :checked="v.value===bookmark.level" v-model="bookmark.level">
+                        {{ v.value }}级
+                    </label>
                 </div>
             </div>
 
@@ -36,7 +39,7 @@
                 </p>
                 <p class="control">
                     <button class="button is-primary" @click="save" v-if="bookmark.id"> 保存</button>
-                    <button class="button is-primary" @click="create" v-else> 新建</button>
+                    <button class="button is-primary" @click="save" v-else> 新建</button>
                 </p>
                 <p class="help">
                     {{ msg }}
@@ -47,7 +50,7 @@
 </template>
 
 <script>
-    import { bookmarks } from '../libs/chrome/index'
+    import bookmarkManager from '../libs/bookmarkManager'
 
     export default {
         name: 'bookmarkEditor',
@@ -56,19 +59,21 @@
         },
         data () {
             return {
-                msg: ''
+                msg: '',
+                oldBookmark: {},
+                levels: [],
             }
+        },
+        created () {
+            this.oldBookmark = JSON.parse(JSON.stringify(this.bookmark));
+            this.getData();
         },
         methods: {
             save () {
-                bookmarks.update(this.bookmark).then(data => {
+                console.log(7777, this.bookmark , this.oldBookmark)
+                bookmarkManager.set(this.bookmark, this.oldBookmark).then(data => {
                     console.log('update', data)
-                    this.close()
-                })
-            },
-            create () {
-                bookmarks.add(this.bookmark).then(data => {
-                    this.close()
+                    this.close();
                 })
             },
             cancel () {
@@ -77,6 +82,9 @@
             close () {
                 console.log('emit close', arguments)
                 this.$emit('close')
+            },
+            async getData () {
+                this.levels = await bookmarkManager.getSetting('levels');
             }
         }
     }

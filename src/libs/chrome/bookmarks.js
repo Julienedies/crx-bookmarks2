@@ -13,8 +13,8 @@ const api = {
     on (eventName, listener) {
         return chromeBookmarksPromise.on(eventName, listener)
     },
-    get (id) {
-        return chromeBookmarksPromise.get(id)
+    get (idArray) {
+        return chromeBookmarksPromise.get(idArray)
     },
     add (bookmark) {
         return this.create(bookmark)

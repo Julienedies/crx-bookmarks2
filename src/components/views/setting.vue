@@ -3,6 +3,8 @@
         <button class="button" @click="download">备份配置</button>
         <label class="button" @click="upload" for="upload">恢复配置</label>
         <button class="button" @click="clean">数据清洗</button>
+        <button class="button" @click="ls">临时脚本</button>
+
         <input type="file" id="upload" name="upload" @change="upload" ref="file"
                style="position:absolute; left:-3000px;">
         <transition name="fade">
@@ -14,8 +16,8 @@
 <script>
     import { downloads, bookmarks } from '../../libs/chrome'
     import getDb, { Db } from '../../libs/db'
-    const visitDb = getDb('visit')
-    const shortcutDb = getDb('shortcut')
+    const jbmDb = getDb('jbm');
+
     export default {
         name: 'setting',
         data () {
@@ -24,6 +26,21 @@
             }
         },
         methods: {
+            async ls () {
+                let r = await jbmDb.get();
+                for(let i in r){
+                    let item = r[i];
+                    console.log(item)
+/*                    item.visit = item.count;
+                    delete item.title;
+                    delete item.url;
+                    delete item.dateAdded;
+                    delete item.index;
+                    delete item.folderName;*/
+                    //jbmDb.update(item);
+                }
+
+            },
             // 用于处理自定义数据和书签数据不匹配的情况
             async clean () {
                 let that = this
@@ -41,7 +58,7 @@
                     }
                 }
 
-                [visitDb, shortcutDb].forEach( cb)
+                [jbmDb].forEach(cb)
             },
             download () {
                 let that = this

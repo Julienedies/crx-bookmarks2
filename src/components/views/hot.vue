@@ -16,15 +16,13 @@
 </template>
 
 <script>
-    import { bookmarks } from '../../libs/chrome'
-    import getDb from '../../libs/db'
     import list from '../list'
     import toolBar from '../listToolBar'
     import mixins from '../../mixins'
     import { mapState } from 'vuex'
-
-    const visitDb = getDb('visit')
-    const shortcutDb = getDb('shortcut')
+    import getDb from '../../libs/db'
+    import bookmarkManager from '../../libs/bookmarkManager'
+    const jbmDb = getDb('jbm')
 
     export default {
         name: 'hot',
@@ -48,47 +46,34 @@
         },
         created () {
             this.getData()
-
             let callback = (...args) => {
-                console.log('visitDb event listener', args)
+                console.log('jbmDb event listener', args)
                 this.getData()
             }
-
-            visitDb.on('*', callback)
-
+            //jbmDb.on('*', callback)
             this.$once('hook:beforeDestroy', function () {
-                visitDb.off('*', callback)
+                //jbmDb.off('*', callback)
             })
         },
         methods: {
             async getData () {
-                let visitObj = await visitDb.get()
-                let idArray = Object.keys(visitObj)
-                if (idArray.length) {
-                    let bookmarkArray = await bookmarks.get(idArray)
-                    bookmarkArray.forEach(bookmark => {
-                        bookmark.visit = visitObj[bookmark.id]
-                    })
-                    bookmarkArray.sort((a, b) => b.visit.count - a.visit.count)
-                    this.reverse && bookmarkArray.reverse()
-                    this.bookmarkArray = bookmarkArray
-                }
+                let bookmarkArray = await bookmarkManager.getHot();
+                this.reverse && bookmarkArray.reverse();
+                this.bookmarkArray = bookmarkArray;
             },
             remove (bookmark) {
-                bookmarks.remove(bookmark)
+                bookmarkManager.remove(bookmark)
             },
             edit (bookmark) {
                 this.editBookmark(bookmark)  // 通过mixin混入的editBookmark方法
             },
             addShortcut (bookmark) {
-                shortcutDb.set(bookmark)
-                //this.bookmark.shortcut = true
-                this.$set(bookmark, 'shortcut', true)
+                //shortcutDb.set(bookmark)
+                //this.$set(bookmark, 'shortcut', true)
             },
             removeShortcut (bookmark) {
-                shortcutDb.remove(bookmark)
-                //this.bookmark.shortcut = false
-                this.$set(bookmark, 'shortcut', false)
+                //shortcutDb.remove(bookmark)
+                //this.$set(bookmark, 'shortcut', false)
             }
         },
         watch: {

@@ -8,8 +8,7 @@ import { bookmarks, tabs } from '../../libs/chrome'
 import getDb from '../../libs/db'
 
 const trashDb = getDb('trash')
-const visitDb = getDb('visit')
-const shortcutDb = getDb('shortcut')
+const jbmDb = getDb('jbm');
 
 // 当一个书签被删除, 把它保存到db
 bookmarks.on('onRemoved', function (id, changeInfo, event) {
@@ -25,8 +24,7 @@ bookmarks.on('onRemoved', function (id, changeInfo, event) {
     trashDb.set(obj)
 
     // 一个书签被删除后, 需要删除其它相关数据
-    visitDb.remove(id)
-    shortcutDb.remove(id)
+    jbmDb.remove(id)
 
 })
 
@@ -36,10 +34,10 @@ const f = function (tab) {
         list.forEach(bookmark => {
             if (bookmark.url === tab.url) {
                 console.log('添加新访问记录 => ', bookmark)
-                visitDb.get(bookmark.id).then(record => {
-                    record = record || {id: bookmark.id, count: 0}
-                    record.count += 1
-                    visitDb.set(record)
+                jbmDb.get(bookmark.id).then(record => {
+                    record = record || {id: bookmark.id, visit: 0}
+                    record.visit += 1
+                    jbmDb.set(record)
                 })
             }
         })

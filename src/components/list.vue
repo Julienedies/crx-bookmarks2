@@ -73,12 +73,12 @@
             &:hover {
                 background: rgba(180, 180, 180, 0.1);
 
-                .contextmenu {
+                .contextmenu2{
                     display: inherit;
                 }
             }
 
-            .contextmenu {
+            .contextmenu2{
                 display: none;
                 white-space: nowrap;
 
@@ -150,7 +150,7 @@
                 }
             }
 
-            .url, .contextmenu {
+            .url, .contextmenu2{
                 display: none;
             }
 

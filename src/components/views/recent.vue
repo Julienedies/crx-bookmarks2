@@ -8,7 +8,7 @@
 <script>
     import list from '../list'
     import toolBar from '../listToolBar'
-    import { bookmarks } from '../../libs/chrome'
+    import bookmarkManager  from '../../libs/bookmarkManager'
     import { mapState } from 'vuex'
 
     export default {
@@ -33,7 +33,7 @@
         },
         methods: {
             async getData () {
-                this.bookmarkArray = await bookmarks.getRecent(this.count)
+                this.bookmarkArray = await bookmarkManager.getRecent(this.count)
                 if (this.reverse) this.bookmarkArray.reverse()
             }
         },

@@ -10,8 +10,8 @@
     import mixins from '../../mixins'
     import { bookmarks } from '../../libs/chrome'
     import getDb from '../../libs/db'
-
-    const shortcutDb = getDb('shortcut')
+    import bookmarkManager from '../../libs/bookmarkManager'
+    const jbmDb = getDb('jbm');
 
     export default {
         name: 'shortcut',
@@ -33,27 +33,34 @@
             this.getData()
 
             let callback = (...args) => {
-                console.log('shortcutDb event listener', args)
+                console.log('jbmDb event listener', args)
                 this.getData()
             }
 
-            // 关于shortcutDb事件监听不起作用, 而visitDb正确工作
+            // 关于jbmDb事件监听不起作用, 而visitDb正确工作
             // 1是因为visitDb 是通过 storage 事件触发
             // 同页面内 localStorage 操作不会触发 storage 事件
             // 2 是因为listItem 里的shortDb 和 这里的shortDb 是两个实例
-            // 解决办法: 使shortcutDb变成单例模式
-            shortcutDb.on('*', callback)
+            // 解决办法: 使jbmDb变成单例模式
+            //jbmDb.on('*', callback)
 
             this.$once('hook:beforeDestroy', function () {
-                shortcutDb.off('*', callback)
-            })
+                //jbmDb.off('*', callback)
+            });
         },
         methods: {
             async getData () {
-                let idArray = await shortcutDb.get().then(data => {
-                    return Object.keys(data)
+                let idArray = await jbmDb.get().then(resultMap => {
+                    let result = [];
+                    for (let i in resultMap){
+                        let item = resultMap[i];
+                        if(item.level ===1){
+                            result.push(i);
+                        }
+                    }
+                    return result;
                 })
-                this.bookmarkArray = await bookmarks.get(idArray).then(bookmarkArray => {
+                this.bookmarkArray = await bookmarkManager.get(idArray).then(bookmarkArray => {
                     for (let bookmark of bookmarkArray) {
                         bookmark.shortcut = idArray.includes(bookmark.id)
                     }

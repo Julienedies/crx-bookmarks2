@@ -84,7 +84,7 @@
         > * {
             @include flex-middle;
             margin: 0.25rem 0;
-            padding: 0 0.5rem;
+            padding: 0 1rem;
 
             > * {
                 flex: 1;
@@ -156,6 +156,8 @@
                 &.router-link-exact-active.router-link-active {
                     font-weight: bold;
                     color: $activeColor1;
+                    background-color: $activeColor2!important;
+                    color: #fff;
                 }
             }
 

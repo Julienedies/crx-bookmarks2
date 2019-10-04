@@ -67,7 +67,7 @@ class Db {
     }
 
     static getInstance (name) {
-        for(let instance of INSTANCES) {
+        for (let instance of INSTANCES) {
             if (instance.namespace === name) {
                 return instance
             }
@@ -129,32 +129,75 @@ class Db {
 
 const methods = {
 
-    get (record) {
+    /**
+     *
+     * @param [idArr] {String|Number|Object|Array|Function}
+     * @returns {Object}
+     */
+    get (idArr) {
+        let cb;
+        let isCb = typeof idArr === 'function';
+        let isId = !Array.isArray(idArr) && (typeof idArr === 'string' || typeof idArr === 'number' || typeof idArr === 'object');
+        if (isId) {
+            if (typeof idArr === 'string' || typeof idArr === 'number') {
+                idArr = [idArr];
+            } else if (typeof idArr === 'object') {
+                idArr = [idArr.id];
+            }
+        }
+
+        if (isCb) {
+            cb = idArr;
+            idArr = undefined;
+        }
+
         let namespace = this._prefix()
         let result = {}
-        let id = typeof record === 'object' ? record.id : record
 
-        if (id) {
-            return JSON.parse(localStorage.getItem(this._prefix(id)))
+        if (idArr) {
+            idArr.forEach((id, index) => {
+                result[id] = JSON.parse(localStorage.getItem(this._prefix(id)));
+            });
         } else {
             for (let i in localStorage) {
                 if (i.indexOf(namespace) === 0) {
-                    id = i.replace(namespace, '') || this.namespace
-                    result[id] = JSON.parse(localStorage[i])
+                    let id = i.replace(namespace, '') || this.namespace;
+                    let item = JSON.parse(localStorage[i]);
+                    if (isCb) {
+                        if (cb(item, i)) {
+                            result[id] = item;
+                        }
+                    } else {
+                        result[id] = item;
+                    }
                 }
             }
-            return result
         }
+
+        return result;
+    },
+
+    async get2 (id) {
+        let result = await this.get(id);
+        return result[id];
     },
 
     has (record) {
         return this.get(record)
     },
 
-    set (record) {
-        let id = record.id || Math.random().toFixed(8).replace('0.', '')
-        id = this._prefix(id)
-        localStorage.setItem(id, JSON.stringify(record))
+    async set (record) {
+        let id = record.id || Math.random().toFixed(8).replace('0.', '');
+        let old = await this.get2(id) || {};
+        Object.assign(old, record);
+        id = this._prefix(id);
+        localStorage.setItem(id, JSON.stringify(record));
+    },
+
+    update (record) {
+        let id = record.id || Math.random().toFixed(8).replace('0.', '');
+        id = this._prefix(id);
+        localStorage.setItem(id, JSON.stringify(record));
     },
 
     remove (record) {
@@ -180,17 +223,24 @@ Object.keys(methods).forEach(method => {
         const fn = methods[method]
         return new Promise(function (resolve, reject) {
             let result = fn.apply(that, args)
-            console.log(`Db ${ that.namespace } exec ${ method }; args => `, args, 'return =>', result)
+            console.log(`Db ${ that.namespace } exec ${ method }; args => `, args);  // , 'return =>', result
 
             let arg = args[0]
             if (/remove/.test(method)) {
-                that.emit('remove', arg, result)
+                setTimeout(() => {
+                    that.emit('remove', arg, result);
+                }, 40);
             } else if (/set/.test(method)) {
-                that.emit('change', arg, result)
+                setTimeout(() => {
+                    that.emit('change', arg, result);
+                }, 40);
             } else if (/clear/.test(method)) {
-                that.emit('clear', arg, result)
+                setTimeout(() => {
+                    that.emit('clear', arg, result);
+                }, 40);
             }
-            resolve(result)
+
+            resolve(result);
         })
     }
 })
