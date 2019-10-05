@@ -1,42 +1,55 @@
 <template>
     <div>
-        <button class="button" @click="download">备份配置</button>
-        <label class="button" @click="upload" for="upload">恢复配置</label>
-        <button class="button" @click="clean">数据清洗</button>
-        <button class="button" @click="ls">临时脚本</button>
+        <div class="box">
+            <button class="button" @click="download">备份所有数据</button>
+            <label class="button" @click="upload" for="upload">恢复数据</label>
+            <button class="button" @click="clean">数据清洗: 插件异常的情况下尝试修复</button>
+            <button class="button" @click="ls">临时脚本</button>
 
-        <input type="file" id="upload" name="upload" @change="upload" ref="file"
-               style="position:absolute; left:-3000px;">
-        <transition name="fade">
-            <div class="box" v-if="msg"> {{ msg }}</div>
-        </transition>
+            <input type="file" id="upload" name="upload" @change="upload" ref="file" style="position:absolute; left:-3000px;">
+
+            <transition name="fade">
+                <div class="box" v-if="msg"> {{ msg }}</div>
+            </transition>
+        </div>
+
+        <setting-color></setting-color>
     </div>
 </template>
 
 <script>
+    import settingColor from './c/settingColor'
     import { downloads, bookmarks } from '../../libs/chrome'
     import getDb, { Db } from '../../libs/db'
+    import setting from '../../libs/setting'
+
     const jbmDb = getDb('jbm');
 
     export default {
         name: 'setting',
+        components: {
+            settingColor
+        },
         data () {
             return {
                 msg: ''
             }
         },
+        created() {
+
+        },
         methods: {
             async ls () {
                 let r = await jbmDb.get();
-                for(let i in r){
+                for (let i in r) {
                     let item = r[i];
                     console.log(item)
-/*                    item.visit = item.count;
-                    delete item.title;
-                    delete item.url;
-                    delete item.dateAdded;
-                    delete item.index;
-                    delete item.folderName;*/
+                    /*                    item.visit = item.count;
+                                        delete item.title;
+                                        delete item.url;
+                                        delete item.dateAdded;
+                                        delete item.index;
+                                        delete item.folderName;*/
                     //jbmDb.update(item);
                 }
 
@@ -45,7 +58,8 @@
             async clean () {
                 let that = this
                 that.msg = '已清理无效ID:'
-                async function cb(db, i) {
+
+                async function cb (db, i) {
                     let dbo = await db.get()
                     let idArray = Object.keys(dbo)
                     for (let id of idArray) {
@@ -53,7 +67,7 @@
                         if (!b) {
                             console.log(id, dbo[id])
                             db.remove(id)
-                            that.msg += ` ${id}; `
+                            that.msg += ` ${ id }; `
                         }
                     }
                 }

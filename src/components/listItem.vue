@@ -1,5 +1,5 @@
 <template>
-    <li :class="{selected: bookmark.contextmenu}" @contextmenu="onContextmenu($event, bookmark)">
+    <li :class="{selected: bookmark.contextmenu}" @contextmenu="onContextmenu($event, bookmark)" :style="{borderColor:$root.levelsColorMap[bookmark.level]}">
         <!-- 书签 -->
         <a v-if="bookmark.url" :X-href="bookmark.url" target="_blank" @dblclick="open(bookmark.url)">
             <img :src="bookmark.url | getFavicon" class="favicon">
@@ -45,21 +45,20 @@
             </slot>
         </contextmenu>
 
-
         <!-- 上下文菜单 -->
-                <div class="contextmenu2">
-                    <slot>
-                        <button @click="open(bookmark.url)" title="查看链接"><i class="far fa-eye"></i></button>
-                        <button @click="search(bookmark)" title="搜索相关"><i class="far fa-lightbulb"></i></button>
-                        <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
-                        <button @click="addShortcut(bookmark)" title="加入快捷方式" v-else><i class="fas fa-link"></i></button>
-                        <button @click="createSubFolder(bookmark)" v-if="!bookmark.url" title="新建子文件夹">
-                            <i class="fas fa-folder-plus"></i>
-                        </button>
-                        <button @click="edit(bookmark.id)" title="编辑"><i class="far fa-edit"></i></button>
-                        <button @click="remove(bookmark)" title="删除"><i class="far fa-trash-alt"></i></button>
-                    </slot>
-                </div>
+        <div class="contextmenu2">
+            <slot>
+                <button @click="open(bookmark.url)" title="查看链接"><i class="far fa-eye"></i></button>
+                <button @click="search(bookmark)" title="搜索相关"><i class="far fa-lightbulb"></i></button>
+                <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
+                <button @click="addShortcut(bookmark)" title="加入快捷方式" v-else><i class="fas fa-link"></i></button>
+                <button @click="createSubFolder(bookmark)" v-if="!bookmark.url" title="新建子文件夹">
+                    <i class="fas fa-folder-plus"></i>
+                </button>
+                <button @click="edit(bookmark.id)" title="编辑"><i class="far fa-edit"></i></button>
+                <button @click="remove(bookmark)" title="删除"><i class="far fa-trash-alt"></i></button>
+            </slot>
+        </div>
     </li>
 </template>
 
@@ -68,15 +67,20 @@
     import bookmarkManager from '../libs/bookmarkManager'
     import editBookmark, { createSubFolder } from '../mixins/editBookmark'
     import getDb from '../libs/db'
-
-    const shortcutDb = getDb('shortcut')
+    import setting from '../libs/setting'
 
     export default {
         name: 'listItem',
         props: {
             bookmark: Object
         },
+        created () {
+            this.getData();
+        },
         methods: {
+            async getData() {
+               //this.levelsColorMap = await setting.get('levelsColorMap');
+            },
             createSubFolder (bookmark) {
                 createSubFolder(bookmark)
             },
@@ -120,12 +124,13 @@
     @import "../css/basic/src/basic.scss";
 
     .selected, .selected > a:hover {
-        background: $activeColor2!important;
+        background: $activeColor2 !important;
         color: #fff;
     }
 
-    li{
+    li {
         border-left: solid 2px transparent;
+        border-radius: 1rem;
     }
 
     .contextmenu {

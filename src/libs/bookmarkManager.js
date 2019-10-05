@@ -5,10 +5,9 @@
 
 import { bookmarks } from './chrome'
 import getDb from './db'
+import setting from './setting'
 
 const jbmDb = getDb('jbm');
-const jCacheDb = getDb('jCache');
-const jSettingDb = getDb('jSetting')
 
 export default {
     ...bookmarks,
@@ -39,7 +38,7 @@ export default {
     },
     // 合并关联的书签数据
     async _merge (bookmarkArr, bookmarkMap) {
-        //let levels = await this.getSetting('levels');
+        //let levels = await setting.get('levels');
         bookmarkArr.forEach((bookmark) => {
             let id = bookmark.id;
             Object.assign(bookmark, bookmarkMap[id] || {});
@@ -143,14 +142,4 @@ export default {
         return result;
     },
 
-    getSetting (key) {
-        let data = {
-            levels: [1, 2, 3, 4, 5, 6, 7].map((v) => {
-                //return {value: v, color: `rgba(${ 255 - v * 5 }, ${ 30 + v * 20 }, ${ 240 - v * 20 }, 1)`};
-                return v;
-            }),
-        };
-        console.log(data.levels)
-        return key ? data[key] : data;
-    }
 }

@@ -186,6 +186,11 @@ const methods = {
         return this.get(record)
     },
 
+    /**
+     * 修改一个记录对象
+     * @param record {Object}
+     * @returns {Promise<void>}
+     */
     async set (record) {
         let id = record.id || Math.random().toFixed(8).replace('0.', '');
         let old = await this.get2(id) || {};
@@ -194,7 +199,11 @@ const methods = {
         localStorage.setItem(id, JSON.stringify(record));
     },
 
-    update (record) {
+    /**
+     * 更新一个记录对象
+     * @param record {Object}
+     */
+    async update (record) {
         let id = record.id || Math.random().toFixed(8).replace('0.', '');
         id = this._prefix(id);
         localStorage.setItem(id, JSON.stringify(record));

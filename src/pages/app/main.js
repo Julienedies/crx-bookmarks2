@@ -24,6 +24,8 @@ install(Vue)
 
 import { bookmarks } from '../../libs/chrome/index'
 
+import setting from '../../libs/setting'
+
 import App from './App'
 
 console.log(process.env)
@@ -36,7 +38,8 @@ window.v = new Vue({
         event: {
             name: '',
             args: ''
-        }
+        },
+        levelsColorMap: {}
     },
     mounted () {
         let that = this;
@@ -44,6 +47,18 @@ window.v = new Vue({
             console.log('bookmarks event => ', eventName, args)
             that.event = {name: eventName, args: args}
         });
+        let cb = (...args) => {
+            console.log('jSetDb listener', args);
+            this.getData();
+        };
+        setting.on('*', cb);
+
+        this.getData();
+    },
+    methods: {
+        async getData() {
+            this.levelsColorMap = await setting.get('levelsColorMap') || {};
+        }
     },
     render: h => h(App)
 })

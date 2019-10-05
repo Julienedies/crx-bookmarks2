@@ -21,6 +21,12 @@
                 <div class="control">
                     <input class="input" type="text" v-model="bookmark.tag">
                 </div>
+                <div class="help">
+                    <label class="checkbox" v-for="(v, i) in tags" :key="v" :for="'tag'+i">
+                        <input type="checkbox" name="tag" :id="'tag'+i" :value="v" @change="setTag" v-model="tag">
+                        {{v}} &nbsp;
+                    </label>
+                </div>
             </div>
 
             <div class="field">
@@ -50,7 +56,9 @@
 </template>
 
 <script>
+    import _ from 'lodash'
     import bookmarkManager from '../libs/bookmarkManager'
+    import setting from '../libs/setting'
 
     export default {
         name: 'bookmarkEditor',
@@ -62,6 +70,8 @@
                 msg: '',
                 oldBookmark: {},
                 levels: [],
+                tags: [],
+                tag: [],
             }
         },
         created () {
@@ -70,7 +80,7 @@
         },
         methods: {
             save () {
-                console.log(7777, this.bookmark , this.oldBookmark)
+                console.log(7777, this.bookmark, this.oldBookmark)
                 bookmarkManager.set(this.bookmark, this.oldBookmark).then(data => {
                     console.log('update', data)
                     this.close();
@@ -83,8 +93,20 @@
                 console.log('emit close', arguments)
                 this.$emit('close')
             },
+            setTag () {
+                if (this.tag.length) {
+                    let oldTag = this.bookmark.tag;
+                    let oldTags = oldTag ? oldTag.split(/\s*,\s*/img) : [];
+                    let arr = oldTags.concat(this.tag);
+                    arr = _.uniq(arr);
+                    this.bookmark.tag = arr.join(',');
+                }
+            },
             async getData () {
-                this.levels = await bookmarkManager.getSetting('levels');
+                this.levels = await setting.get('levels');
+                this.tags = await bookmarkManager.getAllTag().then((data) => {
+                    return Object.keys(data);
+                });
             }
         }
     }

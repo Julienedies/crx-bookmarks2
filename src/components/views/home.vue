@@ -23,8 +23,8 @@
 </template>
 
 <script>
-    import shortcut from './shortcut'
     import getDb from '../../libs/db'
+    import setting from '../../libs/setting'
     import bookmarkManager from '../../libs/bookmarkManager'
 
     const jbmDb = getDb('jbm');
@@ -32,7 +32,6 @@
     export default {
         name: 'home',
         components: {
-            shortcut,
         },
         data () {
             return {
@@ -66,7 +65,7 @@
         methods: {
             async getData () {
                 this.tagMap = await bookmarkManager.getAllTag();
-                this.levels = await bookmarkManager.getSetting('levels');
+                this.levels = await setting.get('levels');
             },
             async getByTag (tag) {
                 this.byTag = tag;
