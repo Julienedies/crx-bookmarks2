@@ -3,11 +3,6 @@
  * Created by j on 2019-01-10.
  */
 
-/*setTimeout(() => {
-    if(window.innerWidth < 1000)
-    chrome.tabs.create({ url: './dist/app.html', selected: true })
-}, 100)*/
-
 import 'babel-polyfill'
 
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -23,13 +18,19 @@ import router from '../../router/index'
 import store from '../../vuex/index'
 
 import vueex from 'vueex'
+
 Vue.use(vueex)
 
 import install from '../app/install'
+
 install(Vue)
 
-import App from './App'
 import { bookmarks } from '../../libs/chrome'
+
+import setting from '../../libs/setting'
+
+import App from './App'
+
 
 new Vue({
     el: '#app',
@@ -39,7 +40,8 @@ new Vue({
         event: {
             name: '',
             args: ''
-        }
+        },
+        levelsColorMap: {}
     },
     mounted () {
         let that = this;
@@ -47,6 +49,18 @@ new Vue({
             console.log('bookmarks event => ', eventName, args)
             that.event = {name: eventName, args: args}
         });
+        let cb = (...args) => {
+            console.log('jSetDb listener', args);
+            this.getData();
+        };
+        setting.on('*', cb);
+
+        this.getData();
+    },
+    methods: {
+        async getData () {
+            this.levelsColorMap = await setting.get('levelsColorMap') || {};
+        }
     },
     render: (h) => h(App)
 });

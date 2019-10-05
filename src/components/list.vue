@@ -11,9 +11,6 @@
 <script>
     import listItem from './listItem'
     import { mapState, mapMutations } from 'vuex'
-    import getDb from '../libs/db'
-
-    const shortcutDb = getDb('shortcut')
 
     export default {
         name: 'list',
@@ -53,7 +50,7 @@
             }
         },
         watch: {
-            'ui.list.showType'(newVal, oldVal){
+            'ui.list.showType' (newVal, oldVal) {
                 this.listType = newVal
             }
         }
@@ -65,6 +62,7 @@
 
     /deep/ ul.list {
         padding: $gap 0;
+
         li {
             @include flex-middle;
             min-height: 2.6em;
@@ -73,12 +71,12 @@
             &:hover {
                 background: rgba(180, 180, 180, 0.1);
 
-                .contextmenu2{
+                .contextmenu2 {
                     display: inherit;
                 }
             }
 
-            .contextmenu2{
+            .contextmenu2 {
                 display: none;
                 white-space: nowrap;
 
@@ -128,13 +126,12 @@
         padding: $gap2 0;
         display: flex;
         flex-flow: row wrap;
-        //justify-content: space-between;
         align-content: space-around;
 
         > li {
             flex: 0 0 19%;
             margin: 0 1% 1% 0;
-            padding:0.5rem;
+            padding: 0.5rem;
             height: calc(15vw);
             /*            min-height:15em;
                         max-height: 20em;*/
@@ -145,11 +142,12 @@
             > a {
                 display: block;
                 min-height: 100%;
+
                 .favicon {
                 }
             }
 
-            .url, .contextmenu2{
+            .url, .contextmenu2 {
                 display: none;
             }
 

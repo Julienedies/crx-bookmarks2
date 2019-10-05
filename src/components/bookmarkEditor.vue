@@ -1,7 +1,7 @@
 <template>
     <div class="bookmarkEditor">
         <h3>修改书签</h3>
-        <section>
+        <div>
             <div class="field">
                 <label class="label">title</label>
                 <div class="control">
@@ -39,6 +39,20 @@
                 </div>
             </div>
 
+            <div class="field">
+
+                <div class="field has-addons" @click="selectFolder">
+                    <div class="control">
+                        <a class="button is-info">
+                            选择文件夹
+                        </a>
+                    </div>
+                    <div class="control is-expanded">
+                        <input class="input" type="text" readonly v-model="bookmark.folderName">
+                    </div>
+                </div>
+            </div>
+
             <div class="field is-grouped is-grouped-centered">
                 <p class="control">
                     <button class="button is-light" @click="cancel"> 取消</button>
@@ -51,17 +65,34 @@
                     {{ msg }}
                 </p>
             </div>
-        </section>
+        </div>
+
+        <!-- 弹出层 -->
+        <div class="layer" :class="{show:isSelectFolder}">
+            <div style="display: flex; flex-flow: column; width:100%; height: 100%;">
+                <div style="text-align:right;">
+                    <button class="button is-info" @click="isSelectFolder=false">取消</button>
+                </div>
+                <div style="flex: 1;">
+                    <component :is="c" @selectFolderChange="onSelectFolderChange"></component>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script>
+    import TreeMap from '../components/views/tree'
     import _ from 'lodash'
     import bookmarkManager from '../libs/bookmarkManager'
     import setting from '../libs/setting'
 
     export default {
         name: 'bookmarkEditor',
+        components: {
+            TreeMap,
+        },
         props: {
             bookmark: Object,
         },
@@ -72,15 +103,18 @@
                 levels: [],
                 tags: [],
                 tag: [],
+                isSelectFolder: false,
+                c: null
             }
         },
         created () {
+            console.log(4444, this.bookmark)
             this.oldBookmark = JSON.parse(JSON.stringify(this.bookmark));
             this.getData();
         },
         methods: {
             save () {
-                console.log(7777, this.bookmark, this.oldBookmark)
+                console.log('bookmarkManager.set() =>', this.bookmark, this.oldBookmark)
                 bookmarkManager.set(this.bookmark, this.oldBookmark).then(data => {
                     console.log('update', data)
                     this.close();
@@ -102,6 +136,20 @@
                     this.bookmark.tag = arr.join(',');
                 }
             },
+            selectFolder () {
+                this.isSelectFolder = true;
+                this.c = 'TreeMap';
+            },
+            onSelectFolderChange (folder, path) {
+                console.info('selected folder:', folder)
+                if (typeof folder === 'object') {
+                    this.bookmark.parentId = folder.id;
+                    this.bookmark.folderName = `${ path.join(' / ') }`;
+                    this.isSelectFolder = false;
+                } else {
+
+                }
+            },
             async getData () {
                 this.levels = await setting.get('levels');
                 this.tags = await bookmarkManager.getAllTag().then((data) => {
@@ -117,5 +165,23 @@
 
     .bookmarkEditor {
         padding: $gap2;
+    }
+
+    /deep/ .layer {
+        position: fixed;
+        z-index: 100000;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: $gap;
+        background: #fff;
+        transition: all 0.5s;
+        opacity: 0;
+
+        &.show {
+            top: 0;
+            opacity: 1;
+        }
     }
 </style>

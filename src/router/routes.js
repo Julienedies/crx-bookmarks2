@@ -75,7 +75,7 @@ export default [
     {
         path: '*',
         redirect: {
-            path: '/recent'
+            path: ''
         }
     }
 

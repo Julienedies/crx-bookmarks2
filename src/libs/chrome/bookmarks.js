@@ -28,14 +28,7 @@ const api = {
         }
         return chromeBookmarksPromise.create(bk)
     },
-    recover (bookmark) {
-        let bk = {}
-        bk.title = bookmark.title
-        bk.url = bookmark.url
-        bk.parentId = bookmark.parentId
-        bk.index = bookmark.index
-        return chromeBookmarksPromise.create(bk)
-    },
+
     remove (bookmark) {
         if (bookmark.url) {
             return chromeBookmarksPromise.remove(bookmark.id)
@@ -43,11 +36,19 @@ const api = {
             return chromeBookmarksPromise.removeTree(bookmark.id)
         }
     },
+    /**
+     *
+     * @param id
+     * @param title
+     * @param url
+     * @param parentId
+     * @returns {*|PromiseLike<Object>|Promise<Object>}
+     */
     update ({id, title, url, parentId}) {
         if(parentId) {
             return this.move(id, {parentId}).then( (data) => {
                 return chromeBookmarksPromise.update(id, {title, url})
-            })
+            });
         }
     },
     move (bookmark, destination) {
@@ -107,6 +108,8 @@ const api = {
         return chromeBookmarksPromise.search(query)
     }
 }
+
+
 
 export default api
 

@@ -18,7 +18,6 @@
                     <div style="display: flex; justify-content: flex-end;">
                         <button class="button" @click="isSetBookmark=1" v-if="bookmark.id">修改书签</button>
                         <button class="button" @click="isSetBookmark=1" v-else>添加书签</button>
-                        <button class="button" @click="addShortcut" v-show="bookmark.id">添加快捷方式</button>
                         <button class="button" @click="open">打开书签管理器</button>
                     </div>
                 </div>
@@ -32,7 +31,8 @@
         </div>
 
         <div class="layer" :class="{show:isSetBookmark}">
-            <setBookmark :bookmark="bookmark" @close="isSetBookmark=false"></setBookmark>
+            <!--<setBookmark :bookmark="bookmark" @close="isSetBookmark=false"></setBookmark>-->
+            <bookmark-editor :bookmark="bookmark" @close="isSetBookmark=false"></bookmark-editor>
         </div>
     </div>
 </template>
@@ -42,10 +42,12 @@
     import recent from '../../components/views/recent'
     import hot from '../../components/views/hot'
     import searchBar from '../../components/searchBar'
+    import bookmarkEditor from '../../components/bookmarkEditor'
+    import setBookmark from './setBookmark'
 
     import { bookmarks, tabs } from '../../libs/chrome'
     import getDb from '../../libs/db'
-    import setBookmark from './setBookmark'
+    import bookmarkManager from '../../libs/bookmarkManager'
 
     const visitDb = getDb('visit')
     const shortcutDb = getDb('shortcut')
@@ -53,6 +55,7 @@
     export default {
         name: 'App',
         components: {
+            bookmarkEditor,
             setBookmark,
             home,
             recent,
@@ -61,24 +64,20 @@
         },
         data () {
             return {
-                c: 'home',
+                c: '',
                 isSetBookmark: false,
                 isSelectFolder: false,
                 bookmark: {},
             }
         },
         created () {
-            this.$router.push({name: this.c})
-            this.getBookmarkByTab()
+            this.getBookmarkByTab();
+            //this.$router.push({name: this.c})
         },
         mounted () {
-            this.getData()
         },
         computed: {},
         methods: {
-            async getData () {
-                //this.recentBookmarkArray = await bookmarks.getRecent(100)
-            },
             open () {
                 tabs.query({title: '书签管理器crx'}).then((arr) => {
                     let tab = arr && arr[0]
@@ -101,7 +100,7 @@
                     return item.url === tab.url
                 })
                 if (bookmarkArray && bookmarkArray.length) {
-                    this.bookmark = bookmarkArray[0]
+                    this.bookmark = await bookmarkManager.get(bookmarkArray[0]);
                     bookmarks.get(this.bookmark.parentId).then((data) => {
                         this.$set(this.bookmark, 'folderName', data[0].title)
                     })
@@ -109,15 +108,10 @@
                     this.bookmark = {title: tab.title, url: tab.url}
                 }
             },
-            addShortcut () {
-                shortcutDb.set(this.bookmark).then(data => {
-                    this.$msg('添加完成!')
-                })
-            },
         },
         watch: {
             c (to) {
-                this.$router.push({name: to})
+                this.$router.push({name: to});
             },
             '$route' (to, from) {
                 console.log('watch $route', to, from)

@@ -1,5 +1,8 @@
 <template>
-    <li :class="{selected: bookmark.contextmenu}" @contextmenu="onContextmenu($event, bookmark)" :style="{borderColor:$root.levelsColorMap[bookmark.level]}">
+    <li :class="{selected: bookmark.contextmenu}"
+        :style="{borderColor:$root.levelsColorMap[bookmark.level]}"
+        @contextmenu="onContextmenu($event, bookmark)">
+
         <!-- 书签 -->
         <a v-if="bookmark.url" :X-href="bookmark.url" target="_blank" @dblclick="open(bookmark.url)">
             <img :src="bookmark.url | getFavicon" class="favicon">
@@ -45,7 +48,7 @@
             </slot>
         </contextmenu>
 
-        <!-- 上下文菜单 -->
+        <!-- 隐藏菜单 -->
         <div class="contextmenu2">
             <slot>
                 <button @click="open(bookmark.url)" title="查看链接"><i class="far fa-eye"></i></button>
@@ -74,13 +77,7 @@
         props: {
             bookmark: Object
         },
-        created () {
-            this.getData();
-        },
         methods: {
-            async getData() {
-               //this.levelsColorMap = await setting.get('levelsColorMap');
-            },
             createSubFolder (bookmark) {
                 createSubFolder(bookmark)
             },
@@ -130,7 +127,6 @@
 
     li {
         border-left: solid 2px transparent;
-        border-radius: 1rem;
     }
 
     .contextmenu {

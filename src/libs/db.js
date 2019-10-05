@@ -127,7 +127,7 @@ class Db {
 }
 
 
-const methods = {
+let methods = {
 
     /**
      *
@@ -182,8 +182,8 @@ const methods = {
         return result[id];
     },
 
-    has (record) {
-        return this.get(record)
+    async has (record) {
+        return await this.get(record);
     },
 
     /**

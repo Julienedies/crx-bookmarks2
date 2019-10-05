@@ -16,11 +16,11 @@
 <script>
     import toolBar from '../listToolBar'
     import list from '../list'
-    import { bookmarks } from '../../libs/chrome'
-    import getDb from '../../libs/db'
     import { mapState } from 'vuex'
+    import bookmarkManager from '../../libs/bookmarkManager'
+    import getDb from '../../libs/db'
 
-    const db = getDb('trash')
+    const trashDb = getDb('trash');
 
     export default {
         name: 'trash',
@@ -35,56 +35,54 @@
         },
         computed: {
             ...mapState({
-                reverse:  state => state.ui.list.reverse
+                reverse: state => state.ui.list.reverse
             })
         },
         created () {
-            this.getData()
-            let callback = (args) => {
-                console.log('db event listener', args)
-                this.bookmarkArray.unshift(args[0])
-                //this.getData()
-            }
+            this.getData();
 
-            db.on('add', callback)
+            let cb = (args) => {
+                console.log('event cb: trashDb add', args);
+                this.bookmarkArray.unshift(args[0])
+            };
+
+            trashDb.on('add', cb);
 
             this.$once('hook:beforeDestroy', function () {
-                db.off('add', callback)
-            })
+                trashDb.off('add', cb)
+            });
         },
         methods: {
             async getData () {
-                this.bookmarkArray = await db.get().then(obj => {
-                    return Object.values(obj)
-                })
-                this.reverse && this.bookmarkArray.reverse()
+                this.bookmarkArray = await trashDb.get().then(data => {
+                    return Object.values(data);
+                });
+                this.reverse && this.bookmarkArray.reverse();
             },
-            recover (bookmark) {
-                bookmarks.recover(bookmark)
-                db.remove(bookmark)
-                this._remove(bookmark)
+            async recover (bookmark) {
+                let data = await bookmarkManager.recover(bookmark);
+                trashDb.remove(bookmark);
+                this._remove(bookmark);
+                this.$msg({title: '已经恢复！', msg: JSON.stringify(data)});
             },
             remove (bookmark) {
-                db.remove(bookmark)
-                this._remove(bookmark)
+                trashDb.remove(bookmark);
+                this._remove(bookmark);
+            },
+            _remove (bookmark) {
+                let index = this.bookmarkArray.findIndex((item) => item === bookmark);
+                this.bookmarkArray.splice(index, 1);
             },
             clear () {
-                if(confirm('确认清空回收站, 该操作不可撤销!')){
-                    db.clear()
-                    this.bookmarkArray = []
+                if (confirm('确认清空回收站, 该操作不可撤销!')) {
+                    this.bookmarkArray = [];
+                    trashDb.clear();
                 }
-            },
-            _remove(bookmark){
-                let index = this.bookmarkArray.findIndex((item) => item === bookmark)
-                this.bookmarkArray.splice(index, 1)
             },
         },
         watch: {
             'reverse' (newVal) {
-                this.bookmarkArray.reverse()
-            },
-            '$root.event' (newValue) {
-                this.getData()
+                this.bookmarkArray.reverse();
             },
         }
     }

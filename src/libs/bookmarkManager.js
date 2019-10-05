@@ -53,15 +53,17 @@ export default {
         let bookmarkMap = await jbmDb.get(bookmarkArr.map((v) => v.id));
         return await this._merge(bookmarkArr, bookmarkMap);
     },
+    /**
+     * 修改书签或创建书签
+     * @param bookmark {Object}
+     * @param oldBookmark {Object}
+     * @returns {Promise<any>}
+     */
     async set (bookmark, oldBookmark) {
-        let {id, parentId, url, title, index, tag, level, visit} = bookmark;
+        let {id, url, title, parentId, index, tag, level, visit} = bookmark;
         let isDistChange = id !== oldBookmark.id || url !== oldBookmark.url || title !== oldBookmark.title;
-        /*|| parentId !== parentId2 || index * 1 !== index2;*/
+        let isPositionChange = parentId !== oldBookmark.parentId || index * 1 !== oldBookmark.index;
         let isRelationChange = tag !== oldBookmark.tag || level !== oldBookmark.level || visit !== oldBookmark.visit;
-
-        if (isDistChange) {
-            console.log('--------isDistChange', bookmark, oldBookmark);
-        }
 
         let relationBookmark = {id, tag, level, visit};
         let distBookmark = {url, title};
@@ -73,7 +75,7 @@ export default {
         }
         if (id) {
             distBookmark.id = id;
-            let result = isDistChange ? await bookmarks.update(distBookmark) : bookmark;
+            let result = (isDistChange||isPositionChange) ? await bookmarks.update(distBookmark) : bookmark;
             isRelationChange && jbmDb.set(relationBookmark);
             return Object.assign(result, relationBookmark);
         } else {
@@ -82,6 +84,19 @@ export default {
             isRelationChange && jbmDb.set(relationBookmark);
             return Object.assign(result, relationBookmark);
         }
+    },
+
+    /**
+     * 从回收站恢复书签
+     * @param bookmark {Object}
+     * @returns {*}
+     */
+    async recover (bookmark) {
+        let {id, title, url, parentId, index, level, tag, visit} = bookmark;
+        let newBookmark = await bookmarks.create({title, url, parentId, index});
+        // 关联数据
+        await jbmDb.set({id: newBookmark.id, level, tag, visit});
+        return newBookmark;
     },
     /**
      * 根据标签获取对应的书签
