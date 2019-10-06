@@ -2,7 +2,7 @@ crx-bookmarks2
 ===============
 
 chrome扩展, 书签管理器, 基于vue.js开发.
-除了原生书签管理器的功能以外, 添加了标签, 快捷方式, 常用, 最近, 回收站, 统计等功能.
+除了原生书签管理器的功能以外, 添加了标签, 分级, 常用, 最近, 回收站, 统计等功能.
 
 #### 在线插件地址
 [应用商店](https://chrome.google.com/webstore/detail/bookmarks2/fohgfmagajagjhlmbabhngimanembiia)

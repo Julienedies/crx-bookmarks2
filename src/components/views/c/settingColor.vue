@@ -46,10 +46,10 @@
                     }
                 });
             },
-            save () {
+            async save () {
                 console.log(this.levelsColorMap);
-                setting.set('levelsColorMap', this.levelsColorMap);
-                //setting.set({id: 'levels', _data: [1, 2, 3, 4, 5, 6, 7]});
+                await setting.set('levelsColorMap', this.levelsColorMap);
+                this.$msg('保存成功！');
             },
         },
     }

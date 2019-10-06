@@ -85,10 +85,9 @@
                     if (tab) {
                         tabs.update(tab.id, {selected: true})
                     } else {
-                        tabs.create({url: './dist/app.html', selected: true})
+                        tabs.create({url: './dist/app.html#/recent', selected: true})
                     }
                 })
-
             },
             async getBookmarkByTab () {
                 let tab = await tabs.getSelected()

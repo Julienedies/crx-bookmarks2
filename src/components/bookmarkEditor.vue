@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="field">
+            <div class="field" v-if="bookmark.url">
                 <label class="label">tag</label>
                 <div class="control">
                     <input class="input" type="text" v-model="bookmark.tag">
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="field">
+            <div class="field" v-if="bookmark.url">
                 <label class="label">level</label>
                 <div class="control">
                     <label class="radio" v-for="v in levels">
@@ -39,17 +39,14 @@
                 </div>
             </div>
 
-            <div class="field">
-
-                <div class="field has-addons" @click="selectFolder">
-                    <div class="control">
-                        <a class="button is-info">
-                            选择文件夹
-                        </a>
-                    </div>
-                    <div class="control is-expanded">
-                        <input class="input" type="text" readonly v-model="bookmark.folderName">
-                    </div>
+            <div class="field has-addons" @click="selectFolder" v-if="bookmark.url">
+                <div class="control">
+                    <a class="button is-info">
+                        选择文件夹
+                    </a>
+                </div>
+                <div class="control is-expanded">
+                    <input class="input" type="text" readonly v-model="bookmark.folderName">
                 </div>
             </div>
 

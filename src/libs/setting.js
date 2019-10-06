@@ -19,7 +19,7 @@ export default {
 
     async get (key) {
         let resultMap = await settingDb.get();
-        //resultMap.levels = {id: 'levels', _data: [1, 2, 3, 4, 5, 6, 7]};
+        resultMap.levels = {id: 'levels', _data: [1, 2, 3, 4, 5, 6, 7]};
 
         console.log('setting.get =>', resultMap, key);
         if (key) {
