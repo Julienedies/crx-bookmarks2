@@ -4,13 +4,29 @@
             <button class="button" @click="download">备份所有数据</button>
             <label class="button" @click="upload" for="upload">恢复数据</label>
             <button class="button" @click="clean">数据清洗: 插件异常的情况下尝试修复</button>
+            <button class="button" @click="DelDuplicate">清除重复书签</button>
             <button class="button" @click="ls">临时脚本</button>
 
             <input type="file" id="upload" name="upload" @change="upload" ref="file" style="position:absolute; left:-3000px;">
 
             <transition name="fade">
-                <div class="box" v-if="msg"> {{ msg }}</div>
+                <div class="box" v-if="msg">
+                    <div style="white-space: pre;"> {{ msg }}</div>
+                </div>
             </transition>
+        </div>
+
+        <div class="box">
+            <div class="field has-addons">
+                <div class="control">
+                    <a class="button is-info">
+                        设置显示最近数量
+                    </a>
+                </div>
+                <div class="control is-expanded">
+                    <input class="input" type="number" v-model="recentCount" @change="onRecentCountChange">
+                </div>
+            </div>
         </div>
 
         <setting-color></setting-color>
@@ -21,7 +37,8 @@
     import settingColor from './c/settingColor'
     import { downloads, bookmarks } from '../../libs/chrome'
     import getDb, { Db } from '../../libs/db'
-    import setting from '../../libs/setting'
+    import settingDb from '../../libs/setting'
+    import bookmarkManager from '../../libs/bookmarkManager'
 
     const jbmDb = getDb('jbm');
 
@@ -32,11 +49,12 @@
         },
         data () {
             return {
-                msg: ''
+                msg: '',
+                recentCount: 200
             }
         },
-        created() {
-
+        created () {
+            this.getData();
         },
         methods: {
             async ls () {
@@ -102,8 +120,41 @@
                     that.msg = '恢复成功!'
                 }
                 reader.readAsText(file)
+            },
+            async DelDuplicate () {
+                this.msg = '清除\r\n';
+                let bookmarkArr = await bookmarkManager.getAllInList();
+                let resultMap = {};
+                bookmarkArr.forEach((bookmark) => {
+                    let key = bookmark.url;     //btoa(bookmark.url).substr(-19, 17);
+                    let arr = resultMap[key] = resultMap[key] || [];
+                    arr.push(bookmark);
+                });
+
+                for (let i in resultMap) {
+                    let arr = resultMap[i];
+                    if (arr.length > 1) {
+                        console.log(arr);
+                        let arr2 = arr.slice(1);
+                        arr2.forEach((item, i) => {
+                            bookmarkManager.remove(item);
+                            this.msg += ` ${ item.id }:${ item.title }\r\n`;
+                        });
+                    }
+                }
+
+                this.msg += '可以在回收站查看清理的重复书签.';
+            },
+            async getData () {
+                this.recentCount = await settingDb.get('recentCount') || this.recentCount;
+            },
+            async onRecentCountChange () {
+                let result = await settingDb.set('recentCount', Number(this.recentCount));
+                this.$msg('已经更新！');
+                console.log(result);
             }
-        }
+        },
+
     }
 </script>
 

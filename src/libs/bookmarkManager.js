@@ -36,6 +36,24 @@ export default {
 
         return isId ? bookmarkArr[0] : bookmarkArr;
     },
+    async getAllInList(){
+        let tree = await bookmarks.getTree();
+
+        function each (tree, result = []) {
+            let len = tree.length
+            while (len--) {
+                let node = tree[len]
+                if (node.children) {
+                    each(node.children, result)
+                } else {
+                    result.push(node);
+                }
+            }
+            return result;
+        }
+
+        return each(tree);
+    },
     // 合并关联的书签数据
     async _merge (bookmarkArr, bookmarkMap) {
         //let levels = await setting.get('levels');

@@ -115,6 +115,7 @@
                 bookmarkManager.set(this.bookmark, this.oldBookmark).then(data => {
                     console.log('update', data)
                     this.close();
+                    this.$msg('保存成功!');
                 })
             },
             cancel () {

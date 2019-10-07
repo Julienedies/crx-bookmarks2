@@ -8,8 +8,9 @@
 <script>
     import list from '../list'
     import toolBar from '../listToolBar'
-    import bookmarkManager  from '../../libs/bookmarkManager'
     import { mapState } from 'vuex'
+    import bookmarkManager  from '../../libs/bookmarkManager'
+    import setting from '../../libs/setting'
 
     export default {
         name: 'recent',
@@ -19,7 +20,7 @@
         },
         data () {
             return {
-                count: 200,          // 最近书签数量限制
+                count: 300,          // 最近书签数量限制
                 bookmarkArray: []   // 书签Array,
             }
         },
@@ -33,8 +34,9 @@
         },
         methods: {
             async getData () {
+                this.count = await setting.get('recentCount') || this.count;
                 this.bookmarkArray = await bookmarkManager.getRecent(this.count)
-                if (this.reverse) this.bookmarkArray.reverse()
+                if (this.reverse) this.bookmarkArray.reverse();
             }
         },
         watch: {
