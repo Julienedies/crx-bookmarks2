@@ -57,7 +57,8 @@ window.v = new Vue({
     },
     methods: {
         async getData() {
-            this.levelsColorMap = await setting.get('levelsColorMap') || {};
+            this.settingMap = await setting.get();
+            this.levelsColorMap = this.settingMap['levelsColorMap'] || {};
         }
     },
     render: h => h(App)

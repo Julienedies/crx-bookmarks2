@@ -5,7 +5,11 @@
         </tool-bar>
 
         <list :bookmarkArray="bookmarkArray">
-            <template slot-scope="{ bookmark }">
+            <template slot-scope="{ bookmark }" slot="default">
+                <button @click="recover(bookmark)" title="恢复"><i class="fa fa-undo"></i></button>
+                <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
+            </template>
+            <template slot-scope="{ bookmark }" slot="bb">
                 <button @click="recover(bookmark)" title="恢复"><i class="fa fa-undo"></i></button>
                 <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
             </template>

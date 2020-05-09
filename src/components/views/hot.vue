@@ -3,15 +3,14 @@
         <tool-bar :count="count"></tool-bar>
 
         <list :bookmark-array="bookmarkArray">
-<!--            <template slot-scope="{bookmark}">
-                <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
-                <button @click="addShortcut(bookmark)" title="加入快捷方式" v-else><i class="fas fa-link"></i></button>
-                <button @click="edit(bookmark)"><i class="fas fa-edit"></i></button>
-                <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>
-                <button>{{ bookmark.visit.count }}</button>
-            </template>-->
+            <template slot-scope="{ bookmark }" slot="addition">
+                <i> {{ bookmark.visit }}</i>
+            </template>
         </list>
-
+        <!--                <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
+                        <button @click="addShortcut(bookmark)" title="加入快捷方式" v-else><i class="fas fa-link"></i></button>
+                        <button @click="edit(bookmark)"><i class="fas fa-edit"></i></button>
+                        <button @click="remove(bookmark)"><i class="far fa-trash-alt"></i></button>-->
     </div>
 </template>
 
@@ -22,6 +21,7 @@
     import { mapState } from 'vuex'
     import getDb from '../../libs/db'
     import bookmarkManager from '../../libs/bookmarkManager'
+
     const jbmDb = getDb('jbm')
 
     export default {
@@ -57,9 +57,10 @@
         },
         methods: {
             async getData () {
-                let bookmarkArray = await bookmarkManager.getHot();
+                let bookmarkArray = await bookmarkManager.getHot(100);
                 this.reverse && bookmarkArray.reverse();
                 this.bookmarkArray = bookmarkArray;
+                console.log(11,bookmarkArray[0]);
             },
             remove (bookmark) {
                 bookmarkManager.remove(bookmark)

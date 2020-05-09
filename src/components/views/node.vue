@@ -10,8 +10,10 @@
     import listToolBar from '../listToolBar'
     import list from '../list'
     import mixins from '../../mixins'
-    import { bookmarks } from '../../libs/chrome'
     import { mapState } from 'vuex'
+
+    import { bookmarks } from '../../libs/chrome'
+    import bookmarkManager from '../../libs/bookmarkManager'
 
     export default {
         name: 'node',
@@ -52,12 +54,9 @@
         methods: {
             async getData () {
                 let id = this.$route.params.id
-                this.bookmarkArray = await this.getBookmarksForNode(id)
+                this.bookmarkArray = await bookmarkManager.getChildren(id);
                 this.reverse && this.bookmarkArray.reverse()
                 this.paths = await this.getPaths(id)
-            },
-            async getBookmarksForNode (id) {
-                return await bookmarks.getChildren(id).then(data => data)
             },
             async getPaths (id) {
                 const paths = []

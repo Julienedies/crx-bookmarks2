@@ -55,16 +55,16 @@ export default [
         component: tree
     },
     {
-        title: '回收站',
-        name: 'trash',
-        path: '/trash',
-        component: trash
-    },
-    {
         title: '设置',
         name: 'setting',
         path: '/setting',
         component: setting
+    },
+    {
+        title: '回收站',
+        name: 'trash',
+        path: '/trash',
+        component: trash
     },
     {
         title: 'search',

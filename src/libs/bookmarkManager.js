@@ -36,6 +36,17 @@ export default {
 
         return isId ? bookmarkArr[0] : bookmarkArr;
     },
+    async getChildren (id) {
+        let bookmarkArr = await bookmarks.getChildren(id) || [];
+        let idArr = bookmarkArr.map((v) => v.id);
+        let bookmarkMap = await jbmDb.get(idArr);
+        bookmarkArr = await this._merge(bookmarkArr, bookmarkMap);
+        return bookmarkArr;
+    },
+    /**
+     * 获取整个书签树，转换到一个数组
+     * @returns {Promise<Array>}
+     */
     async getAllInList(){
         let tree = await bookmarks.getTree();
 

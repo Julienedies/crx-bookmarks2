@@ -26,7 +26,12 @@ export default {
             let data = resultMap[key] || {};
             return data._data;
         } else {
-            return resultMap;
+            let settingMap = {};
+            for(let i in resultMap){
+                let item = resultMap[i];
+                settingMap[i] = item._data;
+            }
+            return settingMap;
         }
     },
 

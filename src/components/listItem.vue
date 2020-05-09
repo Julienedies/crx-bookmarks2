@@ -1,6 +1,6 @@
 <template>
     <li :class="{selected: bookmark.contextmenu}"
-        :style="{borderColor:$root.levelsColorMap[bookmark.level]}"
+        :style="setStyle"
         @contextmenu="onContextmenu($event, bookmark)">
 
         <!-- 书签 -->
@@ -9,6 +9,7 @@
             <span>
                 <span class="tit">{{bookmark.title}}</span>
                 <span class="url">{{bookmark.url}}</span>
+                <slot name="addition"></slot>
             </span>
         </a>
 
@@ -19,7 +20,7 @@
         </router-link>
 
         <contextmenu v-model="bookmark.contextmenu">
-            <slot>
+            <slot name="default">
                 <div class="contextmenu">
                     <div>
                         <button @click="open(bookmark.url)" title="查看链接">
@@ -50,7 +51,7 @@
 
         <!-- 隐藏菜单 -->
         <div class="contextmenu2">
-            <slot>
+            <slot name="default">
                 <button @click="open(bookmark.url)" title="查看链接"><i class="far fa-eye"></i></button>
                 <button @click="search(bookmark)" title="搜索相关"><i class="far fa-lightbulb"></i></button>
                 <button @click="removeShortcut(bookmark)" title="移除快捷方式" v-if="bookmark.shortcut"><i class="fas fa-unlink"></i></button>
@@ -71,11 +72,44 @@
     import editBookmark, { createSubFolder } from '../mixins/editBookmark'
     import getDb from '../libs/db'
     import setting from '../libs/setting'
+    import { mapState } from 'vuex'
+    import settingDb from '../libs/setting'
 
     export default {
         name: 'listItem',
         props: {
-            bookmark: Object
+            bookmark: Object,
+        },
+        data () {
+            return {
+                styleObj: {}
+            }
+        },
+        created () {
+            if (this.ui.list.showType === 'grid') {
+                let size = this.$root.settingMap['gridSize'] || 5;
+                let count = 100 - size;
+                let w = count / size;
+                let h = count / size;
+                w = `0 0 ${ w }%`;
+                h = `calc(${ h }vw)`;
+                this.styleObj.flex = w;
+                this.styleObj.height = h;
+            }
+        },
+        computed: {
+            ...mapState({
+                ui: 'ui'
+            }),
+            setStyle () {
+                let styleObj = this.styleObj;
+                let level = this.bookmark.level;
+                if (level) {
+                    let color = this.$root.levelsColorMap[level];
+                    styleObj.backgroundColor = this.$hex2Rgb(color, 0.3);
+                }
+                return styleObj;
+            },
         },
         methods: {
             createSubFolder (bookmark) {

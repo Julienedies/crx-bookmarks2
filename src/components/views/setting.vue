@@ -20,11 +20,24 @@
             <div class="field has-addons">
                 <div class="control">
                     <a class="button is-info">
-                        设置显示最近数量
+                        设置显示最近数量，回车确认
                     </a>
                 </div>
                 <div class="control is-expanded">
                     <input class="input" type="number" v-model="recentCount" @change="onRecentCountChange">
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="field has-addons">
+                <div class="control">
+                    <a class="button is-info">
+                        设置grid数量多少，回车确认
+                    </a>
+                </div>
+                <div class="control is-expanded">
+                    <input class="input" type="number" v-model="gridSize" @change="onGridSizeChange">
                 </div>
             </div>
         </div>
@@ -50,7 +63,8 @@
         data () {
             return {
                 msg: '',
-                recentCount: 200
+                recentCount: 200,
+                gridSize: 5
             }
         },
         created () {
@@ -90,7 +104,7 @@
                     }
                 }
 
-                [jbmDb].forEach(cb)
+                [jbmDb].forEach(cb);
             },
             download () {
                 let that = this
@@ -121,8 +135,9 @@
                 }
                 reader.readAsText(file)
             },
+            // 清理重复的书签
             async DelDuplicate () {
-                this.msg = '清除\r\n';
+                this.msg = '清除';
                 let bookmarkArr = await bookmarkManager.getAllInList();
                 let resultMap = {};
                 bookmarkArr.forEach((bookmark) => {
@@ -131,6 +146,8 @@
                     arr.push(bookmark);
                 });
 
+                let resultStr = '';
+                let resultCount = 0;
                 for (let i in resultMap) {
                     let arr = resultMap[i];
                     if (arr.length > 1) {
@@ -138,18 +155,31 @@
                         let arr2 = arr.slice(1);
                         arr2.forEach((item, i) => {
                             bookmarkManager.remove(item);
-                            this.msg += ` ${ item.id }:${ item.title }\r\n`;
+                            resultStr += ` ${ item.id }:${ item.title }\r\n`;
+                            resultCount += 1;
                         });
                     }
                 }
-
-                this.msg += '可以在回收站查看清理的重复书签.';
+                this.msg += `${resultCount}项.`;
+                if(resultCount){
+                    this.msg += '\r\n';
+                    this.msg += resultStr;
+                    this.msg += '可以在回收站查看清理的重复书签.';
+                }else{
+                    this.msg = '无重复书签.';
+                }
             },
             async getData () {
                 this.recentCount = await settingDb.get('recentCount') || this.recentCount;
+                this.gridSize = await settingDb.get('gridSize') || this.gridSize;
             },
             async onRecentCountChange () {
                 let result = await settingDb.set('recentCount', Number(this.recentCount));
+                this.$msg('已经更新！');
+                console.log(result);
+            },
+            async onGridSizeChange () {
+                let result = await settingDb.set('gridSize', Number(this.gridSize));
                 this.$msg('已经更新！');
                 console.log(result);
             }
