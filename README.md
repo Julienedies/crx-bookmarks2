@@ -12,7 +12,7 @@ chrome扩展, 书签管理器, 基于vue.js开发.
 
 #### 构建
 ```shell
-git clone https://github.com/julieneides/crx-bookmarks2.git
+git clone https://github.com/julienedies/crx-bookmarks2.git
 cd crx-bookmarks2
 // 安装依赖
 npm i
