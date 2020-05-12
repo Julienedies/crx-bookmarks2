@@ -11,6 +11,8 @@ const HtmlPlugin = require('html-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
+const pkg = require('../../package.json')
+
 const isPro = process.env.NODE_ENV === 'production'
 
 const config = isPro ? require('./pro') : require('./dev')
@@ -37,6 +39,16 @@ const output = {
 }
 
 const plugins = [
+    new webpack.DefinePlugin({
+        'VERSION': `'V${ pkg.version }'`,
+        'TIMESTAMP': JSON.stringify((new Date).toLocaleString())
+    }),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new VueLoaderPlugin(),
+    new CleanPlugin(['dist'], {
+        root: projectRoot
+    }),
+
     new HtmlPlugin({
         template: 'pages/app/index.html',
         filename: 'app.html',
@@ -52,12 +64,6 @@ const plugins = [
         filename: 'background.html',
         chunks: ['runtime', 'vendors', 'common', 'background']
     }),
-    new webpack.DefinePlugin({}),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new VueLoaderPlugin(),
-    new CleanPlugin(['dist'], {
-        root: projectRoot
-    })
 ]
 
 let devServer = {}

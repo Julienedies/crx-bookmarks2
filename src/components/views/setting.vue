@@ -43,6 +43,11 @@
         </div>
 
         <setting-color></setting-color>
+
+        <div class="box">
+            <p>当前版本 {{ $root.version }}; 最后构建于 {{ $root.timestamp }}.</p>
+            <p><a href="https://github.com/Julienedies/crx-bookmarks2/issues" target="_blank">反馈问题</a> </p>
+        </div>
     </div>
 </template>
 

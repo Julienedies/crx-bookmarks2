@@ -17,9 +17,11 @@ import router from '../../router/index'
 import store from '../../vuex/index'
 
 import vueex from 'vueex'
+
 Vue.use(vueex)
 
 import install from './install'
+
 install(Vue)
 
 import { bookmarks } from '../../libs/chrome/index'
@@ -28,13 +30,15 @@ import setting from '../../libs/setting'
 
 import App from './App'
 
-console.log(process.env)
+console.log(process.env, VERSION, TIMESTAMP)
 
 window.v = new Vue({
     el: '#app',
     router,
     store,
     data: {
+        version: VERSION,
+        timestamp: TIMESTAMP,
         event: {
             name: '',
             args: ''
@@ -56,7 +60,7 @@ window.v = new Vue({
         this.getData();
     },
     methods: {
-        async getData() {
+        async getData () {
             this.settingMap = await setting.get();
             this.levelsColorMap = this.settingMap['levelsColorMap'] || {};
         }
