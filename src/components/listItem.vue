@@ -86,16 +86,7 @@
             }
         },
         created () {
-            if (this.ui.list.showType === 'grid') {
-                let size = this.$root.settingMap['gridSize'] || 5;
-                let count = 100 - size;
-                let w = count / size;
-                let h = count / size;
-                w = `0 0 ${ w }%`;
-                h = `calc(${ h }vw)`;
-                this.styleObj.flex = w;
-                this.styleObj.height = h;
-            }
+            this._setStyle();
         },
         computed: {
             ...mapState({
@@ -147,6 +138,23 @@
                 e.preventDefault();
                 this.$set(bookmark, 'contextmenu', e)
             },
+            _setStyle () {
+                if (this.ui.list.showType === 'grid') {
+                    let size = this.$root.settingMap['gridSize'] || 5;
+                    let count = 100 - size;
+                    let w = count / size;
+                    let h = count / size;
+                    w = `0 0 ${ w }%`;
+                    h = `calc(${ h }vw)`;
+                    this.styleObj.flex = w;
+                    this.styleObj.height = h;
+                }
+            }
+        },
+        watch: {
+            'ui.list.showType' (newVal, oldVal) {
+                this._setStyle();
+            }
         }
     }
 </script>
