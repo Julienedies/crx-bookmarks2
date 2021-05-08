@@ -36,7 +36,7 @@
     "events": "^3.0.0",
     "hint.css": "^2.5.1",
     "iview": "^3.2.1",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "vue": "^2.5.21",
     "vue-router": "^3.0.2",
     "vuedraggable": "^2.23.0",
