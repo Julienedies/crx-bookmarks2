@@ -67,6 +67,7 @@
             @include flex-middle;
             height: auto!important;
             min-height: 2.6em;
+            margin:0 0 1px 0;
             padding: $gap/2;
 
             &:hover {
