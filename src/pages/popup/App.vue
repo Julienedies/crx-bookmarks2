@@ -64,7 +64,7 @@
         },
         data () {
             return {
-                c: '',
+                c: 'home',
                 isSetBookmark: false,
                 isSelectFolder: false,
                 bookmark: {},
@@ -72,7 +72,7 @@
         },
         created () {
             this.getBookmarkByTab();
-            //this.$router.push({name: this.c})
+            this.$router.push({name: this.c})
         },
         mounted () {
         },
