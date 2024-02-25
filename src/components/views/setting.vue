@@ -112,12 +112,19 @@
                 [jbmDb].forEach(cb);
             },
             download () {
+                let formatDate = function () {
+                    let d = new Date;
+                    return d.toLocaleDateString().split('/').map((v) => {
+                        return v.length > 1 ? v : '0' + v;
+                    }).join('-');
+                };
+
                 let that = this
                 let data = Db.getAll()
-                let str = JSON.stringify(data)
+                let str = JSON.stringify(data, null, '\t');
                 let url = window.URL.createObjectURL(new Blob([str], {type: 'text/plain;charset=utf-8'}));
                 downloads.download({
-                    filename: 'bookmarks2-bak.json',
+                    filename: `crx-bookmarks2-bak-${ formatDate() }.json`,
                     url: url
                 }).then(data => {
                     console.log(data)
