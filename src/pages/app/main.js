@@ -28,7 +28,7 @@ import { bookmarks } from '../../libs/chrome/index'
 
 import setting from '../../libs/setting'
 
-import App from './App'
+import App from './App.vue'
 
 console.log(process.env, VERSION, TIMESTAMP)
 

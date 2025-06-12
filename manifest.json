@@ -1,39 +1,50 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "bookmarks2",
   "description": "A chrome extension for managing bookmarks.",
-  "version": "0.1.5",
+  "version": "0.1.53",
   "options_page": "dist/app.html",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
   "permissions": [
-  	"tabs",
+    "favicon",
+    "tabs",
     "activeTab",
-  	"contextMenus",
-  	"downloads",  
-  	"storage",
-  	"bookmarks",
-  	"chrome://favicon/",
-    "\u003Call_urls\u003E",
+    "contextMenus",
+    "downloads",
+    "storage",
+    "bookmarks"
+  ],
+  
+  "host_permissions": [
+    "chrome://favicon/",
+    "<all_urls>",
     "http://*/*",
     "https://*/*",
     "file:///*/*"
   ],
   
   "background": {
-    "page": "dist/background.html"
+    "service_worker": "dist/background.js",
+    "type": "module"
   },
   
-   "icons": {
-          "16": "assets/img/bookmarks3.png",
-          "48": "assets/img/bookmarks3.png",
-          "128": "assets/img/bookmarks3.png"
+  "icons": {
+    "16": "assets/img/bookmarks3.png",
+    "48": "assets/img/bookmarks3.png",
+    "128": "assets/img/bookmarks3.png"
   },
   
-  "browser_action": {
+  "action": {
     "default_icon": "assets/img/bookmarks3.png",
     "default_popup": "dist/popup.html",
     "default_title": "书签管理器"
-  }
+  },
+
+   "web_accessible_resources": [
+    {
+      "resources": ["favicon.png"],
+      "matches": ["chrome://favicon/*"]
+    }
+  ]
 }
