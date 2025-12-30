@@ -8,9 +8,35 @@
  * @param input {String} 书签的url
  * @returns {String}  icon src
  */
-export function getFavicon (input) {
-    return 'chrome://favicon/' + input;
+// export function getFavicon (input) {
+//     //return 'chrome://favicon/' + input;
+    
+//     return `display:inline-block; background-image: image-set(url(&quot;chrome://favicon2/?size=16&amp;scaleFactor=1x&amp;pageUrl=${encodeURIComponent(input)}&amp;allowGoogleServerFallback=0&quot;) 1x, url(&quot;chrome://favicon2/?size=16&amp;scaleFactor=2x&amp;pageUrl=${encodeURIComponent(input)}&amp;allowGoogleServerFallback=0&quot;) 2x
+//   );`
+    
+// }
+
+export function getFavicon (url) {
+    const urlObj = new URL(url);
+    // 拼接根目录的favicon.ico地址（核心逻辑）
+    return `${urlObj.protocol}//${urlObj.hostname}/favicon.ico`;
 }
+
+// export function getFavicon3(url, size = 16) {
+//     const encodedUrl = encodeURIComponent(url);
+//     return `
+//         display: inline-block;
+//         width: ${size}px;
+//         height: ${size}px;
+//         background-image: image-set(
+//             url("chrome://favicon2/?size=${size}&scaleFactor=1x&pageUrl=${encodedUrl}&allowGoogleServerFallback=0") 1x,
+//             url("chrome://favicon2/?size=${size}&scaleFactor=2x&pageUrl=${encodedUrl}&allowGoogleServerFallback=0") 2x
+//         );
+//         background-size: contain;
+//         background-repeat: no-repeat;
+//         background-position: center;
+//     `.replace(/\s+/g, ' ').trim(); // 压缩空白
+// }
 
 export function hex2Rgb (color, opacity) {
     color = color.toLowerCase();

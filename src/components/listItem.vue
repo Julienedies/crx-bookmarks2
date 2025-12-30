@@ -6,6 +6,7 @@
         <!-- 书签 -->
         <a v-if="bookmark.url" :X-href="bookmark.url" target="_blank" @dblclick="open(bookmark.url)">
             <img :src="bookmark.url | getFavicon" class="favicon">
+            <!-- <div class="icon" :style="bookmark.url | getFavicon"></div> -->
             <span>
                 <span class="tit">{{bookmark.title}}</span>
                 <span class="url">{{bookmark.url}}</span>

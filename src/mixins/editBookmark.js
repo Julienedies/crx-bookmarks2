@@ -5,7 +5,7 @@
 
 import Vue from 'vue'
 import { popup } from 'vueex'
-import bookmarkEditor from '../components/bookmarkEditor'
+import bookmarkEditor from '../components/bookmarkEditor.vue'
 
 let vm
 
